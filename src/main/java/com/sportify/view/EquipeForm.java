@@ -43,7 +43,6 @@ public class EquipeForm extends JFrame {
     private void criarEquipe() {
         String nome = nomeField.getText();
 
-        // Chamar o controlador para criar a equipe com o nome fornecido
         equipeController.criarEquipe(nome);
 
         JOptionPane.showMessageDialog(this, "Equipe criada com sucesso!");

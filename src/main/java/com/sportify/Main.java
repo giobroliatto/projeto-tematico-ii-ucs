@@ -20,10 +20,7 @@ public class Main {
         // Criar uma sessão do Hibernate
         Session session = sessionFactory.openSession();
 
-        // Criar uma instância do EquipeController
         EquipeController equipeController = new EquipeController(session);
-
-        // Criar uma instância do EventoController
         EventoController eventoController = new EventoController(session);
 
         // Iniciar o menu principal e passar os controladores

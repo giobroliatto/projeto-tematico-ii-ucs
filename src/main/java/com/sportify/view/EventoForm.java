@@ -1,7 +1,11 @@
 package com.sportify.view;
 
 import javax.swing.*;
+
+import com.sportify.controller.EquipeController;
 import com.sportify.controller.EventoController;
+import com.sportify.dao.EquipeDAO;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,9 +20,11 @@ public class EventoForm extends JFrame {
     private JTextField esporteField;
     private JButton criarEventoButton;
     private EventoController eventoController;
+    private EquipeController equipeController;
 
-    public EventoForm(EventoController eventoController) {
+    public EventoForm(EventoController eventoController, EquipeController equipeController) {
         this.eventoController = eventoController;
+        this.equipeController = equipeController;
 
         setTitle("Criar Evento");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,12 +34,16 @@ public class EventoForm extends JFrame {
 
         JLabel nomeLabel = new JLabel("Nome do Evento:");
         nomeField = new JTextField();
+        nomeField.setText("Evento de Exemplo");
         JLabel localLabel = new JLabel("Local do Evento:");
         localField = new JTextField();
+        localField.setText("Local de Exemplo");
         JLabel dataInicioLabel = new JLabel("Data de Início (dd/MM/yyyy):");
         dataInicioField = new JTextField();
+        dataInicioField.setText("01/01/2023");
         JLabel esporteLabel = new JLabel("Esporte:");
         esporteField = new JTextField();
+        esporteField.setText("Esporte de Exemplo");
         criarEventoButton = new JButton("Criar Evento");
 
         panel.add(nomeLabel);
@@ -65,16 +75,19 @@ public class EventoForm extends JFrame {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date dataInicio = dateFormat.parse(dataInicioStr);
 
-            // Chamar o controlador para criar o evento com os dados fornecidos
-            eventoController.criarEvento(nome, local, dataInicio, esporte);
+            long eventoId = eventoController.criarEvento(nome, local, dataInicio, esporte);
 
-            JOptionPane.showMessageDialog(this, "Evento criado com sucesso!");
-            nomeField.setText("");
-            localField.setText("");
-            dataInicioField.setText("");
-            esporteField.setText("");
+            int escolha = JOptionPane.showConfirmDialog(this, "Evento criado com sucesso! Deseja vincular equipes ao evento?", "Vincular Equipes", JOptionPane.YES_NO_OPTION);
+            if (escolha == JOptionPane.YES_OPTION) {
+                VinculoEquipesForm vinculoEquipesForm = new VinculoEquipesForm(eventoController, equipeController, eventoId);
+                vinculoEquipesForm.setVisible(true);
+            } else {
+                dispose();
+            }
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(this, "Formato de data inválido. Use dd/MM/yyyy.");
         }
     }
+
+
 }

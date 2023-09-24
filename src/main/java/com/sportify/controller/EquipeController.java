@@ -4,6 +4,8 @@ import com.sportify.dao.EquipeDAO;
 import com.sportify.model.Equipe;
 import org.hibernate.Session;
 
+import java.util.List;
+
 public class EquipeController {
     private EquipeDAO equipeDAO;
 
@@ -12,11 +14,21 @@ public class EquipeController {
     }
 
     public void criarEquipe(String nome) {
-        // Criar uma instância de Equipe com o nome fornecido
         Equipe equipe = new Equipe();
         equipe.setNome(nome);
 
-        // Usar o EquipeDAO para salvar a equipe no banco de dados
         equipeDAO.salvarEquipe(equipe);
+    }
+    
+    public List<Equipe> getEquipes() {
+        return equipeDAO.getEquipes();
+    }
+
+    public List<Equipe> getEquipesByIds(List<Long> ids) {
+        return equipeDAO.getEquipesByIds(ids);
+    }
+    
+    public Long getPeloNome(String nome) {
+        return equipeDAO.getIdDaEquipePeloNome(nome);
     }
 }

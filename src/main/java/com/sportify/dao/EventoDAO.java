@@ -11,9 +11,20 @@ public class EventoDAO {
         this.session = session;
     }
 
-    public void salvarEvento(Evento evento) {
+    public long salvarEvento(Evento evento) {
         session.beginTransaction();
-        session.save(evento);
+        long eventoId = (long) session.save(evento);
+        session.getTransaction().commit();
+        return eventoId;
+    }
+
+    public Evento getEvento(long id) {
+        return session.get(Evento.class, id);
+    }
+
+    public void atualizarEvento(Evento evento) {
+        session.beginTransaction();
+        session.update(evento);
         session.getTransaction().commit();
     }
 }

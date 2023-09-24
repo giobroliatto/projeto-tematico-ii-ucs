@@ -9,10 +9,10 @@
 	    <dependency>
 	        <groupId>org.hibernate</groupId>
 	        <artifactId>hibernate-core</artifactId>
-	        <version>5.6.5.Final</version> <!-- Verifique a versão mais recente no site oficial do Hibernate -->
+	        <version>5.6.5.Final</version>
 	    </dependency>
 	
-	    <!-- Driver JDBC para o banco de dados que você está usando (exemplo: PostgreSQL) -->
+	    <!-- Driver JDBC para o banco de dados (PostgreSQL) -->
 	    <dependency>
 	        <groupId>org.postgresql</groupId>
 	        <artifactId>postgresql</artifactId>

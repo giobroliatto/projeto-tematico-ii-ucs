@@ -13,12 +13,21 @@ public class Equipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    
+    private Long eventoId;
+   
 	public String getNome() {
 		return nome;
 	}
 	
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Long getEventoId() {
+		return eventoId;
+	}
+
+	public void setEventoId(Long eventoId) {
+		this.eventoId = eventoId;
 	}
 }

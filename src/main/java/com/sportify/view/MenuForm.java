@@ -27,7 +27,6 @@ public class MenuForm extends JFrame {
 
         cadastrarEquipeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Abrir a tela de cadastro de equipe (EquipeForm) com o controlador de equipe
                 EquipeForm equipeForm = new EquipeForm(equipeController);
                 equipeForm.setVisible(true);
             }
@@ -35,16 +34,11 @@ public class MenuForm extends JFrame {
 
         cadastrarEventoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Abrir a tela de cadastro de evento (EventoForm) com o controlador de evento
-                EventoForm eventoForm = new EventoForm(eventoController);
+                EventoForm eventoForm = new EventoForm(eventoController, equipeController);
                 eventoForm.setVisible(true);
             }
         });
 
         add(panel);
-    }
-
-    public static void main(String[] args) {
-        // A criação do menu principal é tratada no Main
     }
 }

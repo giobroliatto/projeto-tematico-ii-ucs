@@ -9,10 +9,10 @@
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">super</property>
 
-        <!-- Dialeto do banco de dados (no caso do PostgreSQL) -->
+        <!-- Dialeto do banco de dados (PostgreSQL) -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
-        <!-- Mapeamento das suas classes de entidade -->
+        <!-- Mapeamento das classes de entidade -->
         <mapping class="com.sportify.model.Equipe" />
         <mapping class="com.sportify.model.Evento"/>
 
