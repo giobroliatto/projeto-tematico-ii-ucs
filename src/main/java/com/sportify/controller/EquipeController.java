@@ -13,22 +13,30 @@ public class EquipeController {
         equipeDAO = new EquipeDAO(session);
     }
 
-    public void criarEquipe(String nome) {
+    public void createEquipe(String nome) {
         Equipe equipe = new Equipe();
         equipe.setNome(nome);
-
-        equipeDAO.salvarEquipe(equipe);
+        equipeDAO.saveEquipe(equipe);
     }
     
     public List<Equipe> getEquipes() {
         return equipeDAO.getEquipes();
     }
-
-    public List<Equipe> getEquipesByIds(List<Long> ids) {
-        return equipeDAO.getEquipesByIds(ids);
-    }
     
-    public Long getPeloNome(String nome) {
-        return equipeDAO.getIdDaEquipePeloNome(nome);
+    public Long getIdByNome(String nome) {
+        return equipeDAO.getIdByNome(nome);
+    }
+
+    public String validateNomeEquipe(String nome) {
+        if (nome == null || nome.isEmpty()) {
+            return "O nome da equipe não pode estar vazio.";
+        }
+
+        Long id = getIdByNome(nome);
+        if (id != null) {
+            return "Equipe '" + nome + "' já cadastrada.";
+        }
+
+        return null;
     }
 }

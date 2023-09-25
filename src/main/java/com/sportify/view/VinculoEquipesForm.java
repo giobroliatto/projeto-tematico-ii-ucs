@@ -12,10 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VinculoEquipesForm extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
     private JList<String> equipeList;
     private DefaultListModel<String> equipeListModel;
     private JButton confirmarButton;
-    private JButton cancelarButton;
     private EventoController eventoController;
     private EquipeController equipeController; 
     private long eventoId;
@@ -31,7 +32,7 @@ public class VinculoEquipesForm extends JFrame {
 
         JPanel panel = new JPanel(new BorderLayout());
 
-        List<Equipe> equipes = obterListaDeEquipes();
+        List<Equipe> equipes = getEquipesList();
 
         equipeListModel = new DefaultListModel<>();
         for (Equipe equipe : equipes) {
@@ -43,32 +44,26 @@ public class VinculoEquipesForm extends JFrame {
         JScrollPane listScrollPane = new JScrollPane(equipeList);
 
         confirmarButton = new JButton("Confirmar");
-        cancelarButton = new JButton("Cancelar");
 
         confirmarButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                vincularEquipesAoEvento();
+                linkEquipesToEvento();
             }
         });
 
-        cancelarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
 
         panel.add(listScrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(confirmarButton);
-        buttonPanel.add(cancelarButton);
 
         panel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(panel);
+        setLocationRelativeTo(null);
     }
 
-    private List<Equipe> obterListaDeEquipes() {
+    private List<Equipe> getEquipesList() {
     	EquipeController equipeController = this.equipeController;
     	
         List<Equipe> equipes = equipeController.getEquipes();
@@ -81,7 +76,7 @@ public class VinculoEquipesForm extends JFrame {
         return equipes;
     }
 
-    private void vincularEquipesAoEvento() {
+    private void linkEquipesToEvento() {
         int[] selectedIndices = equipeList.getSelectedIndices();
         
         if (selectedIndices.length < 2) {
@@ -93,13 +88,13 @@ public class VinculoEquipesForm extends JFrame {
             for (int index : selectedIndices) {
                 String equipeNome = equipeListModel.getElementAt(index);
 
-                long id = equipeController.getPeloNome(equipeNome);
+                long id = equipeController.getIdByNome(equipeNome);
                 idsEquipesSelecionadas.add(id);
             }
 
-            eventoController.vincularEquipesAoEvento(this.eventoId, idsEquipesSelecionadas);
+            eventoController.linkEquipesToEvento(this.eventoId, idsEquipesSelecionadas);
 
-            JOptionPane.showMessageDialog(this, "Equipes vinculadas ao evento com sucesso!");
+            JOptionPane.showMessageDialog(this, "Evento criado com sucesso!");
             dispose();
         }
     }

@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import com.sportify.controller.EquipeController;
 import com.sportify.controller.EventoController;
-import com.sportify.dao.EquipeDAO;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,58 +13,90 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EventoForm extends JFrame {
+
+    private static final long serialVersionUID = 1L;
     private JTextField nomeField;
     private JTextField localField;
     private JTextField dataInicioField;
     private JTextField esporteField;
     private JButton criarEventoButton;
+    private JButton retornarMenuButton;
     private EventoController eventoController;
     private EquipeController equipeController;
+    private MenuForm menuForm;
 
-    public EventoForm(EventoController eventoController, EquipeController equipeController) {
+    public EventoForm(EventoController eventoController, EquipeController equipeController, MenuForm menuForm) {
         this.eventoController = eventoController;
         this.equipeController = equipeController;
+        this.menuForm = menuForm;
 
-        setTitle("Criar Evento");
+        setTitle("Cadastrar evento");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 200);
+        setSize(400, 350);
 
-        JPanel panel = new JPanel(new GridLayout(5, 2));
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JLabel nomeLabel = new JLabel("Nome do Evento:");
-        nomeField = new JTextField();
-        nomeField.setText("Evento de Exemplo");
-        JLabel localLabel = new JLabel("Local do Evento:");
-        localField = new JTextField();
-        localField.setText("Local de Exemplo");
-        JLabel dataInicioLabel = new JLabel("Data de Início (dd/MM/yyyy):");
-        dataInicioField = new JTextField();
-        dataInicioField.setText("01/01/2023");
-        JLabel esporteLabel = new JLabel("Esporte:");
-        esporteField = new JTextField();
-        esporteField.setText("Esporte de Exemplo");
+        // Título
+        JLabel titleLabel = new JLabel("Cadastro de Evento");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(titleLabel);
+        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Espaçamento
+
+        // Campos de Evento
+        nomeField = createInputField(panel, "Nome do evento:");
+        localField = createInputField(panel, "Local do evento:");
+        dataInicioField = createInputField(panel, "Data de início:");
+        esporteField = createInputField(panel, "Esporte:");
+
+        // Botão Criar Evento
         criarEventoButton = new JButton("Criar Evento");
-
-        panel.add(nomeLabel);
-        panel.add(nomeField);
-        panel.add(localLabel);
-        panel.add(localField);
-        panel.add(dataInicioLabel);
-        panel.add(dataInicioField);
-        panel.add(esporteLabel);
-        panel.add(esporteField);
+        criarEventoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(criarEventoButton);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento
+
+        // Botão Retornar ao Menu
+        retornarMenuButton = new JButton("Retornar ao Menu");
+        retornarMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(retornarMenuButton);
 
         criarEventoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                criarEvento();
+                createEvento();
+            }
+        });
+
+        retornarMenuButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                returnToMenu();
             }
         });
 
         add(panel);
+        setLocationRelativeTo(null);
     }
 
-    private void criarEvento() {
+    private JTextField createInputField(JPanel panel, String labelText) {
+        JLabel label = new JLabel(labelText);
+        JTextField textField = new JTextField();
+
+        // Define o tamanho preferencial dos campos de entrada
+        textField.setColumns(20); // Ajuste o tamanho desejado aqui
+
+        JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Alinhe os campos à direita
+
+        inputPanel.add(label);
+        inputPanel.add(textField);
+
+        panel.add(inputPanel);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento entre os campos
+
+        return textField;
+    }
+
+    private void createEvento() {
         String nome = nomeField.getText();
         String local = localField.getText();
         String dataInicioStr = dataInicioField.getText();
@@ -75,19 +106,31 @@ public class EventoForm extends JFrame {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date dataInicio = dateFormat.parse(dataInicioStr);
 
-            long eventoId = eventoController.criarEvento(nome, local, dataInicio, esporte);
+            String mensagemErro = eventoController.validateEvento(nome, local, dataInicio, esporte);
 
-            int escolha = JOptionPane.showConfirmDialog(this, "Evento criado com sucesso! Deseja vincular equipes ao evento?", "Vincular Equipes", JOptionPane.YES_NO_OPTION);
-            if (escolha == JOptionPane.YES_OPTION) {
+            if (mensagemErro != null) {
+                JOptionPane.showMessageDialog(this, mensagemErro);
+            } else {
+                long eventoId = eventoController.createEvento(nome, local, dataInicio, esporte);
+
+                nomeField.setText("");
+                localField.setText("");
+                dataInicioField.setText("");
+                esporteField.setText("");
+
+                JOptionPane.showMessageDialog(this, "Selecione as equipes que participarão deste evento.");
+
                 VinculoEquipesForm vinculoEquipesForm = new VinculoEquipesForm(eventoController, equipeController, eventoId);
                 vinculoEquipesForm.setVisible(true);
-            } else {
-                dispose();
             }
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Formato de data inválido. Use dd/MM/yyyy.");
+            JOptionPane.showMessageDialog(this, "Formato de data inválido. Use dd/mm/aaaa.");
         }
     }
 
+    private void returnToMenu() {
+        menuForm.setVisible(true);
+        dispose();
+    }
 
 }

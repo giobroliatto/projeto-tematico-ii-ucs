@@ -10,20 +10,16 @@ import com.sportify.view.MenuForm;
 
 public class Main {
     public static void main(String[] args) {
-        // Configurar o Hibernate a partir do arquivo hibernate.cfg.xml
         Configuration configuration = new Configuration();
         configuration.configure("hibernate.cfg.xml");
 
-        // Criar a fábrica de sessões do Hibernate
         SessionFactory sessionFactory = configuration.buildSessionFactory();
 
-        // Criar uma sessão do Hibernate
         Session session = sessionFactory.openSession();
 
         EquipeController equipeController = new EquipeController(session);
         EventoController eventoController = new EventoController(session);
 
-        // Iniciar o menu principal e passar os controladores
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 MenuForm menuForm = new MenuForm(equipeController, eventoController);

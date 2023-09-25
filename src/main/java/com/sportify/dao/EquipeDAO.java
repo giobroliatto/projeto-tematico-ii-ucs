@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import com.sportify.model.Equipe;
-import com.sportify.model.Evento;
 
 import java.util.List;
 
@@ -15,13 +14,13 @@ public class EquipeDAO {
         this.session = session;
     }
 
-    public void salvarEquipe(Equipe equipe) {
+    public void saveEquipe(Equipe equipe) {
         session.beginTransaction();
         session.save(equipe);
         session.getTransaction().commit();
     }
     
-    public void atualizarEquipe(Equipe equipe) {
+    public void updateEquipe(Equipe equipe) {
         session.beginTransaction();
         session.update(equipe);
         session.getTransaction().commit();
@@ -38,7 +37,7 @@ public class EquipeDAO {
         return query.list();
     }
     
-    public Long getIdDaEquipePeloNome(String nome) {
+    public Long getIdByNome(String nome) {
         Query<Long> query = session.createQuery("SELECT id FROM Equipe WHERE nome = :nome", Long.class);
         query.setParameter("nome", nome);
         return query.uniqueResult();
