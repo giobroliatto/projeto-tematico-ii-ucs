@@ -1,29 +1,25 @@
 package com.sportify.controller;
 
 import com.sportify.dao.EventoDAO;
-import com.sportify.dao.EquipeDAO;
 import com.sportify.model.Evento;
-import com.sportify.model.Equipe;
 
 import java.util.Date;
-import java.util.List;
 
 import org.hibernate.Session;
 
 public class EventoController {
     private EventoDAO eventoDAO;
-    private EquipeDAO equipeDAO;
 
     public EventoController(Session session) {
         eventoDAO = new EventoDAO(session);
-        equipeDAO = new EquipeDAO(session);
     }
 
-    public long createEvento(String nome, String local, Date dataInicio, String esporte) {
+    public long createEvento(String nome, String local, Date dataInicio, Date dataFim, String esporte) {
         Evento evento = new Evento();
         evento.setNome(nome);
         evento.setLocal(local);
         evento.setDataInicio(dataInicio);
+        evento.setDataFim(dataFim);
         evento.setEsporte(esporte);
 
         return eventoDAO.saveEvento(evento);
@@ -32,21 +28,16 @@ public class EventoController {
     public Long getIdByNome(String nome) {
         return eventoDAO.getIdByNome(nome);
     }
-
-    public void linkEquipesToEvento(long eventoId, List<Long> equipeIds) {
-        Evento evento = eventoDAO.getEvento(eventoId);
-
-        if (evento != null) {
-            List<Equipe> equipesSelecionadas = equipeDAO.getEquipesByIds(equipeIds);
-
-            for (Equipe equipe : equipesSelecionadas) {
-                equipe.setEventoId(eventoId);
-                equipeDAO.updateEquipe(equipe);
-            }
-        }
+    
+    public Date getDataInicioById(long id) {
+    	return eventoDAO.getDataInicioById(id);
     }
-
-    public String validateEvento(String nome, String local, Date dataInicio, String esporte) {
+    
+    public Date getDataFimById(long id) {
+    	return eventoDAO.getDataFimById(id);
+    }
+    
+    public String validateEvento(String nome, String local, Date dataInicio, Date dataFim, String esporte) {
         if (nome == null || nome.isEmpty()) {
             return "O nome do evento não pode estar vazio.";
         }
@@ -59,8 +50,16 @@ public class EventoController {
             return "A data de início do evento não pode estar vazia.";
         }
 
+        if (dataFim == null) {
+            return "A data final do evento não pode estar vazia.";
+        }
+
         if (esporte == null || esporte.isEmpty()) {
             return "O esporte do evento não pode estar vazio.";
+        }
+
+        if (dataFim.before(dataInicio)) {
+            return "A data final não pode ser anterior à data de início.";
         }
         
         Long id = getIdByNome(nome);
@@ -70,4 +69,5 @@ public class EventoController {
 
         return null;
     }
+
 }

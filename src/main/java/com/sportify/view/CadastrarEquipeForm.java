@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EquipeForm extends JFrame {
+public class CadastrarEquipeForm extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JTextField nomeField;
@@ -17,7 +17,7 @@ public class EquipeForm extends JFrame {
     private EquipeController equipeController;
     private MenuForm menuForm;
 
-    public EquipeForm(EquipeController equipeController, MenuForm menuForm) {
+    public CadastrarEquipeForm(EquipeController equipeController, MenuForm menuForm) {
         this.equipeController = equipeController;
         this.menuForm = menuForm;
 

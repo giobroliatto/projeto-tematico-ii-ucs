@@ -1,0 +1,18 @@
+# Arquivos e diretórios Maven
+target/
+.mvn/
+
+# Arquivos de compilação Java
+*.class
+
+# Arquivos de construção e configuração do Eclipse
+.project
+.settings/
+.classpath
+
+# Arquivos de log
+*.log
+
+# Arquivos de configuração específicos do sistema
+.DS_Store
+Thumbs.db

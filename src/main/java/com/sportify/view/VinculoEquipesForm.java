@@ -1,6 +1,7 @@
 package com.sportify.view;
 
 import com.sportify.controller.EquipeController;
+import com.sportify.controller.EquipeEventoController;
 import com.sportify.controller.EventoController;
 import com.sportify.model.Equipe;
 
@@ -8,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class VinculoEquipesForm extends JFrame {
@@ -17,13 +18,15 @@ public class VinculoEquipesForm extends JFrame {
     private JList<String> equipeList;
     private DefaultListModel<String> equipeListModel;
     private JButton confirmarButton;
-    private EventoController eventoController;
     private EquipeController equipeController; 
+    private EventoController eventoController;
+    private EquipeEventoController equipeEventoController;
     private long eventoId;
 
-    public VinculoEquipesForm(EventoController eventoController, EquipeController equipeController, long eventoId) {
+    public VinculoEquipesForm(EventoController eventoController, EquipeController equipeController, EquipeEventoController equipeEventoController, long eventoId) {
         this.eventoController = eventoController;
         this.equipeController = equipeController;
+        this.equipeEventoController = equipeEventoController;
         this.eventoId = eventoId;
 
         setTitle("Vincular Equipes ao Evento");
@@ -84,15 +87,15 @@ public class VinculoEquipesForm extends JFrame {
         } else if (selectedIndices.length % 2 != 0) {
             JOptionPane.showMessageDialog(this, "Selecione um número par de equipes para vincular ao evento.");
         } else {
-            List<Long> idsEquipesSelecionadas = new ArrayList<>();
             for (int index : selectedIndices) {
                 String equipeNome = equipeListModel.getElementAt(index);
 
                 long id = equipeController.getIdByNome(equipeNome);
-                idsEquipesSelecionadas.add(id);
+                Date dataInicioEvento = eventoController.getDataInicioById(this.eventoId);
+                Date dataFimEvento = eventoController.getDataFimById(this.eventoId);
+                
+                equipeEventoController.createEquipeEvento(id, this.eventoId, dataInicioEvento, dataFimEvento);
             }
-
-            eventoController.linkEquipesToEvento(this.eventoId, idsEquipesSelecionadas);
 
             JOptionPane.showMessageDialog(this, "Evento criado com sucesso!");
             dispose();

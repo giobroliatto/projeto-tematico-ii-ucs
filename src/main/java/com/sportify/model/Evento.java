@@ -16,6 +16,7 @@ public class Evento {
     private String nome;
     private String local;
     private Date dataInicio;
+    private Date dataFim;
     private String esporte;
 
     public Long getId() {
@@ -48,6 +49,14 @@ public class Evento {
 
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
+    }
+    
+    public Date getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
     }
 
     public String getEsporte() {

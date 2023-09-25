@@ -1,6 +1,7 @@
 package com.sportify.view;
 
 import com.sportify.controller.EquipeController;
+import com.sportify.controller.EquipeEventoController;
 import com.sportify.controller.EventoController;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ public class MenuForm extends JFrame {
     private JButton listarEquipesButton;
     private JButton listarEventosButton;
 
-    public MenuForm(EquipeController equipeController, EventoController eventoController) {
+    public MenuForm(EquipeController equipeController, EventoController eventoController, EquipeEventoController equipeEventoController) {
         setTitle("SPORTIFY");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(350, 350);
@@ -67,7 +68,7 @@ public class MenuForm extends JFrame {
 
         cadastrarEquipeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                EquipeForm equipeForm = new EquipeForm(equipeController, MenuForm.this);
+                CadastrarEquipeForm equipeForm = new CadastrarEquipeForm(equipeController, MenuForm.this);
                 setVisible(false);
                 equipeForm.setVisible(true);
             }
@@ -75,7 +76,7 @@ public class MenuForm extends JFrame {
 
         cadastrarEventoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                EventoForm eventoForm = new EventoForm(eventoController, equipeController, MenuForm.this);
+                CadastrarEventoForm eventoForm = new CadastrarEventoForm(eventoController, equipeController, equipeEventoController, MenuForm.this);
                 setVisible(false);
                 eventoForm.setVisible(true);
             }

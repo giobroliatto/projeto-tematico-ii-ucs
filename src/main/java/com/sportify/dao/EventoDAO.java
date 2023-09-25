@@ -1,5 +1,7 @@
 package com.sportify.dao;
 
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -32,6 +34,18 @@ public class EventoDAO {
     public Long getIdByNome(String nome) {
         Query<Long> query = session.createQuery("SELECT id FROM Evento WHERE nome = :nome", Long.class);
         query.setParameter("nome", nome);
+        return query.uniqueResult();
+    }
+    
+    public Date getDataInicioById(long id) {
+        Query<Date> query = session.createQuery("SELECT dataInicio FROM Evento WHERE id = :id", Date.class);
+        query.setParameter("id", id);
+        return query.uniqueResult();
+    }
+
+    public Date getDataFimById(long id) {
+        Query<Date> query = session.createQuery("SELECT dataFim FROM Evento WHERE id = :id", Date.class);
+        query.setParameter("id", id);
         return query.uniqueResult();
     }
 }

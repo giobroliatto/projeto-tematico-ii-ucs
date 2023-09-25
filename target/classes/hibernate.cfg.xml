@@ -15,6 +15,7 @@
         <!-- Mapeamento das classes de entidade -->
         <mapping class="com.sportify.model.Equipe" />
         <mapping class="com.sportify.model.Evento"/>
+        <mapping class="com.sportify.model.EquipeEvento"/>
 
     </session-factory>
 

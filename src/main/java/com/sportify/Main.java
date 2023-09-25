@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.sportify.controller.EquipeController;
+import com.sportify.controller.EquipeEventoController;
 import com.sportify.controller.EventoController;
 import com.sportify.view.MenuForm;
 
@@ -19,10 +20,11 @@ public class Main {
 
         EquipeController equipeController = new EquipeController(session);
         EventoController eventoController = new EventoController(session);
+        EquipeEventoController equipeEventoController = new EquipeEventoController(session);
 
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                MenuForm menuForm = new MenuForm(equipeController, eventoController);
+                MenuForm menuForm = new MenuForm(equipeController, eventoController, equipeEventoController);
                 menuForm.setVisible(true);
             }
         });
