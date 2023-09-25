@@ -16,3 +16,5 @@ target/
 # Arquivos de configuração específicos do sistema
 .DS_Store
 Thumbs.db
+
+.metadata
