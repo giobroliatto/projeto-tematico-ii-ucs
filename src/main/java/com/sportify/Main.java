@@ -12,21 +12,18 @@ import com.sportify.view.MenuForm;
 public class Main {
     public static void main(String[] args) {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        
+        Session session = sessionFactory.openSession();
+        EquipeController equipeController = new EquipeController(session);
+        EventoController eventoController = new EventoController(session);
+        EquipeEventoController equipeEventoController = new EquipeEventoController(session);
 
-        try (Session session = sessionFactory.openSession()) {
-            EquipeController equipeController = new EquipeController(session);
-            EventoController eventoController = new EventoController(session);
-            EquipeEventoController equipeEventoController = new EquipeEventoController(session);
-
-            javax.swing.SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    MenuForm menuForm = new MenuForm(equipeController, eventoController, equipeEventoController);
-                    menuForm.setVisible(true);
-                }
-            });
-            
-             session.close();
-             sessionFactory.close();
-        }
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                MenuForm menuForm = new MenuForm(equipeController, eventoController, equipeEventoController);
+                menuForm.setVisible(true);
+            }
+        });
     }
 }
+
