@@ -23,7 +23,12 @@ public class VinculoEquipesForm extends JFrame {
     private EquipeEventoController equipeEventoController;
     private long eventoId;
 
-    public VinculoEquipesForm(EventoController eventoController, EquipeController equipeController, EquipeEventoController equipeEventoController, long eventoId) {
+    public VinculoEquipesForm(
+    		EventoController eventoController, 
+    		EquipeController equipeController, 
+    		EquipeEventoController equipeEventoController,
+    		long eventoId) 
+    {
         this.eventoController = eventoController;
         this.equipeController = equipeController;
         this.equipeEventoController = equipeEventoController;
@@ -69,7 +74,10 @@ public class VinculoEquipesForm extends JFrame {
     private List<Equipe> getEquipesList() {
     	EquipeController equipeController = this.equipeController;
     	
-        List<Equipe> equipes = equipeController.getEquipes();
+        Date dataInicioNovoEvento = eventoController.getDataInicioById(this.eventoId);
+        Date dataFimNovoEvento = eventoController.getDataFimById(this.eventoId);
+    	
+        List<Equipe> equipes = equipeController.getEquipesDisponiveis(dataInicioNovoEvento, dataFimNovoEvento);
         DefaultListModel<String> equipeListModel = new DefaultListModel<>();
 
         for (Equipe equipe : equipes) {

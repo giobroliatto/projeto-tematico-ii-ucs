@@ -4,6 +4,7 @@ import com.sportify.dao.EquipeDAO;
 import com.sportify.model.Equipe;
 import org.hibernate.Session;
 
+import java.util.Date;
 import java.util.List;
 
 public class EquipeController {
@@ -21,6 +22,10 @@ public class EquipeController {
     
     public List<Equipe> getEquipes() {
         return equipeDAO.getEquipes();
+    }
+    
+    public List<Equipe> getEquipesDisponiveis(Date dataInicioNovoEvento, Date dataFimNovoEvento) {
+    	return equipeDAO.getEquipesDisponiveis(dataInicioNovoEvento, dataFimNovoEvento);
     }
     
     public Long getIdByNome(String nome) {

@@ -5,6 +5,7 @@ import org.hibernate.query.Query;
 
 import com.sportify.model.Equipe;
 
+import java.util.Date;
 import java.util.List;
 
 public class EquipeDAO {
@@ -34,6 +35,23 @@ public class EquipeDAO {
     public List<Equipe> getEquipesByIds(List<Long> ids) {
         Query<Equipe> query = session.createQuery("FROM Equipe WHERE id IN (:ids)", Equipe.class);
         query.setParameterList("ids", ids);
+        return query.list();
+    }
+    
+    public List<Equipe> getEquipesDisponiveis(Date dataInicioNovoEvento, Date dataFimNovoEvento) {
+        String hql = "SELECT e FROM Equipe e " +
+                     "LEFT JOIN EquipeEvento ee ON e.id = ee.equipeid " +
+                     "LEFT JOIN Evento ev ON ee.eventoid = ev.id " +
+                     "WHERE " +
+                     "(ee.id IS NULL) OR " +
+                     "(ee.id IS NOT NULL AND " +
+                     "(ev.dataInicio > :dataFimNovoEvento OR ev.dataFim < :dataInicioNovoEvento)) " +
+                     "ORDER BY e.nome ASC";
+
+        Query<Equipe> query = session.createQuery(hql, Equipe.class);
+        query.setParameter("dataInicioNovoEvento", dataInicioNovoEvento);
+        query.setParameter("dataFimNovoEvento", dataFimNovoEvento);
+
         return query.list();
     }
     
