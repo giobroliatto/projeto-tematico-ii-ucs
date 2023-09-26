@@ -22,17 +22,20 @@ public class VinculoEquipesForm extends JFrame {
     private EventoController eventoController;
     private EquipeEventoController equipeEventoController;
     private long eventoId;
+    private int quantidadeEquipes;
 
     public VinculoEquipesForm(
     		EventoController eventoController, 
     		EquipeController equipeController, 
     		EquipeEventoController equipeEventoController,
-    		long eventoId) 
+    		long eventoId,
+    		int quantidadeEquipes) 
     {
         this.eventoController = eventoController;
         this.equipeController = equipeController;
         this.equipeEventoController = equipeEventoController;
         this.eventoId = eventoId;
+        this.quantidadeEquipes = quantidadeEquipes;
 
         setTitle("Vincular Equipes ao Evento");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -90,10 +93,8 @@ public class VinculoEquipesForm extends JFrame {
     private void linkEquipesToEvento() {
         int[] selectedIndices = equipeList.getSelectedIndices();
         
-        if (selectedIndices.length < 2) {
-            JOptionPane.showMessageDialog(this, "Selecione pelo menos duas equipes para vincular ao evento.");
-        } else if (selectedIndices.length % 2 != 0) {
-            JOptionPane.showMessageDialog(this, "Selecione um número par de equipes para vincular ao evento.");
+        if (selectedIndices.length != quantidadeEquipes) {
+            JOptionPane.showMessageDialog(this, "Selecione exatamente " + quantidadeEquipes + " equipes");
         } else {
             for (int index : selectedIndices) {
                 String equipeNome = equipeListModel.getElementAt(index);

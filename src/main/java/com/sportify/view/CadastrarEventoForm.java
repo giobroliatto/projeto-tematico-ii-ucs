@@ -1,11 +1,9 @@
 package com.sportify.view;
 
 import javax.swing.*;
-
 import com.sportify.controller.EquipeController;
 import com.sportify.controller.EquipeEventoController;
 import com.sportify.controller.EventoController;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +19,7 @@ public class CadastrarEventoForm extends JFrame {
     private JTextField dataInicioField;
     private JTextField dataFimField;
     private JTextField esporteField;
+    private JComboBox<Integer> quantidadeEquipesComboBox;
     private JButton criarEventoButton;
     private JButton retornarMenuButton;
     private EventoController eventoController;
@@ -36,7 +35,7 @@ public class CadastrarEventoForm extends JFrame {
 
         setTitle("Cadastro de Evento");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 390);
+        setSize(400, 450);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -55,6 +54,15 @@ public class CadastrarEventoForm extends JFrame {
         dataInicioField = createInputField(panel, "Data de início:");
         dataFimField = createInputField(panel, "Data de término:");
         esporteField = createInputField(panel, "Esporte:");
+
+        // ComboBox para quantidade de equipes
+        JLabel quantidadeEquipesLabel = new JLabel("Quantidade de equipes:");
+        quantidadeEquipesComboBox = new JComboBox<>(new Integer[]{2, 4, 8, 16});
+        JPanel quantidadeEquipesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        quantidadeEquipesPanel.add(quantidadeEquipesLabel);
+        quantidadeEquipesPanel.add(quantidadeEquipesComboBox);
+        panel.add(quantidadeEquipesPanel);
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         // Botão Criar Evento
         criarEventoButton = new JButton("Selecionar equipes");
@@ -107,6 +115,7 @@ public class CadastrarEventoForm extends JFrame {
         String dataInicioStr = dataInicioField.getText();
         String dataFimStr = dataFimField.getText();
         String esporte = esporteField.getText();
+        int quantidadeEquipes = (Integer) quantidadeEquipesComboBox.getSelectedItem(); // Obtém a quantidade de equipes selecionada
 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -128,7 +137,7 @@ public class CadastrarEventoForm extends JFrame {
 
                 JOptionPane.showMessageDialog(this, "Selecione as equipes que participarão deste evento.");
 
-                VinculoEquipesForm vinculoEquipesForm = new VinculoEquipesForm(eventoController, equipeController, equipeEventoController, eventoId);
+                VinculoEquipesForm vinculoEquipesForm = new VinculoEquipesForm(eventoController, equipeController, equipeEventoController, eventoId, quantidadeEquipes);
                 vinculoEquipesForm.setVisible(true);
             }
         } catch (ParseException ex) {
@@ -140,5 +149,4 @@ public class CadastrarEventoForm extends JFrame {
         menuForm.setVisible(true);
         dispose();
     }
-
 }

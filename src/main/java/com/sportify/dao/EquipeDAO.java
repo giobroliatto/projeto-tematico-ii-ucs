@@ -39,7 +39,7 @@ public class EquipeDAO {
     }
     
     public List<Equipe> getEquipesDisponiveis(Date dataInicioNovoEvento, Date dataFimNovoEvento) {
-        String hql = "SELECT e FROM Equipe e " +
+        String hql = "SELECT DISTINCT e FROM Equipe e " +
                      "LEFT JOIN EquipeEvento ee ON e.id = ee.equipeid " +
                      "LEFT JOIN Evento ev ON ee.eventoid = ev.id " +
                      "WHERE " +
