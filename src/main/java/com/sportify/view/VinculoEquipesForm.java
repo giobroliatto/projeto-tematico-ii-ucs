@@ -21,20 +21,20 @@ public class VinculoEquipesForm extends JFrame {
     private EquipeController equipeController; 
     private EventoController eventoController;
     private EquipeEventoController equipeEventoController;
-    private long eventoId;
+    private long idEvento;
     private int quantidadeEquipes;
 
     public VinculoEquipesForm(
     		EventoController eventoController, 
     		EquipeController equipeController, 
     		EquipeEventoController equipeEventoController,
-    		long eventoId,
+    		long idEvento,
     		int quantidadeEquipes) 
     {
         this.eventoController = eventoController;
         this.equipeController = equipeController;
         this.equipeEventoController = equipeEventoController;
-        this.eventoId = eventoId;
+        this.idEvento = idEvento;
         this.quantidadeEquipes = quantidadeEquipes;
 
         setTitle("Vincular Equipes ao Evento");
@@ -77,8 +77,8 @@ public class VinculoEquipesForm extends JFrame {
     private List<Equipe> getEquipesList() {
     	EquipeController equipeController = this.equipeController;
     	
-        Date dataInicioNovoEvento = eventoController.getDataInicioById(this.eventoId);
-        Date dataFimNovoEvento = eventoController.getDataFimById(this.eventoId);
+        Date dataInicioNovoEvento = eventoController.getDataInicioById(this.idEvento);
+        Date dataFimNovoEvento = eventoController.getDataFimById(this.idEvento);
     	
         List<Equipe> equipes = equipeController.getEquipesDisponiveis(dataInicioNovoEvento, dataFimNovoEvento);
         DefaultListModel<String> equipeListModel = new DefaultListModel<>();
@@ -100,10 +100,10 @@ public class VinculoEquipesForm extends JFrame {
                 String equipeNome = equipeListModel.getElementAt(index);
 
                 long id = equipeController.getIdByNome(equipeNome);
-                Date dataInicioEvento = eventoController.getDataInicioById(this.eventoId);
-                Date dataFimEvento = eventoController.getDataFimById(this.eventoId);
+                Date dataInicioEvento = eventoController.getDataInicioById(this.idEvento);
+                Date dataFimEvento = eventoController.getDataFimById(this.idEvento);
                 
-                equipeEventoController.createEquipeEvento(id, this.eventoId, dataInicioEvento, dataFimEvento);
+                equipeEventoController.createEquipeEvento(id, this.idEvento, dataInicioEvento, dataFimEvento);
             }
 
             JOptionPane.showMessageDialog(this, "Evento criado com sucesso!");

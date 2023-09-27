@@ -127,7 +127,7 @@ public class CadastrarEventoForm extends JFrame {
             if (mensagemErro != null) {
                 JOptionPane.showMessageDialog(this, mensagemErro);
             } else {
-                long eventoId = eventoController.createEvento(nome, local, dataInicio, dataFim, esporte);
+                long idEvento = eventoController.createEvento(nome, local, dataInicio, dataFim, esporte);
 
                 nomeField.setText("");
                 localField.setText("");
@@ -137,7 +137,7 @@ public class CadastrarEventoForm extends JFrame {
 
                 JOptionPane.showMessageDialog(this, "Selecione as equipes que participarão deste evento.");
 
-                VinculoEquipesForm vinculoEquipesForm = new VinculoEquipesForm(eventoController, equipeController, equipeEventoController, eventoId, quantidadeEquipes);
+                VinculoEquipesForm vinculoEquipesForm = new VinculoEquipesForm(eventoController, equipeController, equipeEventoController, idEvento, quantidadeEquipes);
                 vinculoEquipesForm.setVisible(true);
             }
         } catch (ParseException ex) {

@@ -1,32 +1,55 @@
-CREATE TABLE eventos (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    local VARCHAR(255),
-    datainicio DATE,
-	datafim DATE,
-    esporte VARCHAR(255)
-);
-
 CREATE TABLE equipes (
     id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE eventos (
+    id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
+    local VARCHAR(100),
+    dataInicio DATE,
+	dataFim DATE,
+    esporte VARCHAR(50)
 );
 
 CREATE TABLE equipes_eventos (
     id SERIAL PRIMARY KEY,
-    equipeid INT,
-    eventoid INT,
-    datainicio DATE,
-    datafim DATE,
-    FOREIGN KEY (equipeid) REFERENCES equipes(id),
-    FOREIGN KEY (eventoid) REFERENCES eventos(id)
+    idEquipe INT,
+    idEvento INT,
+    dataInicio DATE,
+    dataFim DATE,
+    FOREIGN KEY (idEquipe) REFERENCES equipes(id),
+    FOREIGN KEY (idEvento) REFERENCES eventos(id)
 );
 
+CREATE TABLE chaves (
+    id SERIAL PRIMARY KEY,
+    idEvento INT NOT NULL,
+    idPartidasOitavas INT[] DEFAULT '{}'::INT[],
+    idPartidasQuartas INT[] DEFAULT '{}'::INT[],
+    idPartidasSemi INT[] DEFAULT '{}'::INT[],
+    idPartidaFinal INT,
+	FOREIGN KEY (idEvento) REFERENCES eventos(id)
+);
 
-INSERT INTO eventos (nome, local, datainicio, datafim, esporte) VALUES
-    ('Evento de Futebol', 'Estádio A', '2023-10-01', '2023-11-01', 'Futebol'),
-    ('Evento de Basquete', 'Ginásio B', '2023-11-15', '2023-12-15', 'Basquete'),
-    ('Evento de Tênis', 'Clube de Tênis C', '2023-12-20', '2023-12-31', 'Tênis');
+CREATE TABLE resultados (
+    id SERIAL PRIMARY KEY,
+    placarEquipeA INT,
+    placarEquipeB INT,
+    idEquipeVencedora INT
+);
+
+CREATE TABLE partidas (
+    id SERIAL PRIMARY KEY,
+    idResultado INT,
+    idEvento INT,
+    idEquipeA INT,
+    idEquipeB INT,
+    FOREIGN KEY (idResultado) REFERENCES resultados(id),
+    FOREIGN KEY (idEvento) REFERENCES eventos(id),
+    FOREIGN KEY (idEquipeA) REFERENCES equipes(id),
+    FOREIGN KEY (idEquipeB) REFERENCES equipes(id)
+);
 
 INSERT INTO equipes (nome) VALUES
     ('Equipe A'),
@@ -36,9 +59,8 @@ INSERT INTO equipes (nome) VALUES
     ('Equipe E'),
     ('Equipe F');
 
+select * from eventos;
 
-select * from eventos
+select * from equipes;
 
-select * from equipes
-
-select * from equipes_eventos
+select * from equipes_eventos;

@@ -14,10 +14,10 @@ public class EquipeEventoController {
     	equipeEventoDAO = new EquipeEventoDAO(session);
     }
 
-    public void createEquipeEvento(long equipeid, long eventoid, Date dataInicio, Date dataFim) {
+    public void createEquipeEvento(long idEquipe, long idEvento, Date dataInicio, Date dataFim) {
         EquipeEvento equipeEvento = new EquipeEvento();
-        equipeEvento.setEquipeId(equipeid);
-        equipeEvento.setEventoId(eventoid);
+        equipeEvento.setEquipeId(idEquipe);
+        equipeEvento.setEventoId(idEvento);
         equipeEvento.setDataInicio(dataInicio);
         equipeEvento.setDataFim(dataFim);
 

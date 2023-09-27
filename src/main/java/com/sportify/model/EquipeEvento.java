@@ -14,26 +14,26 @@ public class EquipeEvento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long equipeid;
-    private Long eventoid;
+    private Long idEquipe;
+    private Long idEvento;
 
     private Date dataInicio;
     private Date dataFim;
 
 	public Long getEquipeId() {
-		return equipeid;
+		return idEquipe;
 	}
 
-	public void setEquipeId(Long equipeid) {
-		this.equipeid = equipeid;
+	public void setEquipeId(Long idEquipe) {
+		this.idEquipe = idEquipe;
 	}
 
 	public Long getEventoId() {
-		return eventoid;
+		return idEvento;
 	}
 
-	public void setEventoId(Long eventoid) {
-		this.eventoid = eventoid;
+	public void setEventoId(Long idEvento) {
+		this.idEvento = idEvento;
 	}
 
     public Date getDataInicio() {
