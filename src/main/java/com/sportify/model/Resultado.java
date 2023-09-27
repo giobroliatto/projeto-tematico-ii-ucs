@@ -15,7 +15,7 @@ public class Resultado {
 	
     private int placarEquipeA;
     private int placarEquipeB;
-    private int idEquipeVencedora;
+    private Long idEquipeVencedora;
 
     public Long getId() {
         return id;
@@ -38,10 +38,10 @@ public class Resultado {
         this.placarEquipeB = placarEquipeB;
     }
 
-    public int getIdEquipeVencedora() {
+    public Long getIdEquipeVencedora() {
         return idEquipeVencedora;
     }
-    public void setIdEquipeVencedora(int idEquipeVencedora) {
+    public void setIdEquipeVencedora(Long idEquipeVencedora) {
         this.idEquipeVencedora = idEquipeVencedora;
     }
 }

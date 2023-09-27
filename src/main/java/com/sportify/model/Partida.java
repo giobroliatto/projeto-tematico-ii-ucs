@@ -13,10 +13,10 @@ public class Partida {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private int idResultado;
-    private int idEvento;
-    private int idEquipeA;
-    private int idEquipeB;
+    private Long idResultado;
+    private Long idEvento;
+    private Long idEquipeA;
+    private Long idEquipeB;
     
     public Long getId() {
         return id;
@@ -25,31 +25,31 @@ public class Partida {
         this.id = id;
     }
 
-    public int getIdResultado() {
+    public Long getIdResultado() {
         return idResultado;
     }
-    public void setIdResultado(int idResultado) {
+    public void setIdResultado(Long idResultado) {
         this.idResultado = idResultado;
     }
 
-    public int getIdEvento() {
+    public Long getIdEvento() {
         return idEvento;
     }
-    public void setIdEvento(int idEvento) {
+    public void setIdEvento(Long idEvento) {
         this.idEvento = idEvento;
     }
 
-    public int getIdEquipeA() {
+    public Long getIdEquipeA() {
         return idEquipeA;
     }
-    public void setIdEquipeA(int idEquipeA) {
+    public void setIdEquipeA(Long idEquipeA) {
         this.idEquipeA = idEquipeA;
     }
 
-    public int getIdEquipeB() {
+    public Long getIdEquipeB() {
         return idEquipeB;
     }
-    public void setIdEquipeB(int idEquipeB) {
+    public void setIdEquipeB(Long idEquipeB) {
         this.idEquipeB = idEquipeB;
     }
 }

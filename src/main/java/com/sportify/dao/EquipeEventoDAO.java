@@ -1,7 +1,10 @@
 package com.sportify.dao;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import com.sportify.model.EquipeEvento;
+
+import java.util.List;
 
 public class EquipeEventoDAO {
     private Session session;
@@ -31,4 +34,12 @@ public class EquipeEventoDAO {
     public EquipeEvento getEquipeEventoById(Long id) {
         return session.get(EquipeEvento.class, id);
     }
+
+    public List<Long> getIdEquipesByIdEvento(Long idEvento) {
+        Query<Long> query = session.createQuery(
+            "SELECT ee.idEquipe FROM EquipeEvento ee WHERE ee.idEvento = :idEvento", Long.class);
+        query.setParameter("eventoId", idEvento);
+        return query.list();
+    }
+
 }

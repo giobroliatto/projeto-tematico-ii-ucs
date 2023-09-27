@@ -14,7 +14,7 @@ public class Chave {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private int idEvento;
+    private Long idEvento;
     
     private List<Long> idPartidasOitavas; 
     private List<Long> idPartidasQuartas;
@@ -29,10 +29,10 @@ public class Chave {
         this.id = id;
     }
 
-    public int getIdEvento() {
+    public Long getIdEvento() {
         return idEvento;
     }
-    public void setIdEvento(int idEvento) {
+    public void setIdEvento(Long idEvento) {
         this.idEvento = idEvento;
     }
 
