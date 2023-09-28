@@ -38,7 +38,7 @@ public class EquipeEventoDAO {
     public List<Long> getIdEquipesByIdEvento(Long idEvento) {
         Query<Long> query = session.createQuery(
             "SELECT ee.idEquipe FROM EquipeEvento ee WHERE ee.idEvento = :idEvento", Long.class);
-        query.setParameter("eventoId", idEvento);
+        query.setParameter("idEvento", idEvento);
         return query.list();
     }
 

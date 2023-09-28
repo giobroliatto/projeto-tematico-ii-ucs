@@ -16,11 +16,15 @@ public class MenuForm extends JFrame {
     private JButton cadastrarEventoButton;
     private JButton listarEquipesButton;
     private JButton listarEventosButton;
+    
+    // REMOVER: Adicionar input e botão
+    private JTextField idEventoInput;
+    private JButton gerarChaveButton;
 
     public MenuForm(EquipeController equipeController, EventoController eventoController, EquipeEventoController equipeEventoController) {
         setTitle("SPORTIFY");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(350, 350);
+        setSize(350, 380);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -66,6 +70,18 @@ public class MenuForm extends JFrame {
         listarEventosButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(listarEventosButton);
 
+        // REMOVER: Adicionar input e botão
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+        idEventoInput = new JTextField(10); // Defina o tamanho desejado
+        gerarChaveButton = new JButton("Gerar Chave"); // Botão para gerar a chave
+        
+        JPanel gerarChavePanel = new JPanel();
+        gerarChavePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        gerarChavePanel.add(idEventoInput);
+        gerarChavePanel.add(gerarChaveButton);
+        panel.add(gerarChavePanel);
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento
+
         cadastrarEquipeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CadastrarEquipeForm equipeForm = new CadastrarEquipeForm(equipeController, MenuForm.this);
@@ -91,6 +107,19 @@ public class MenuForm extends JFrame {
         listarEventosButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // TO DO lógica para listar eventos
+            }
+        });
+        
+        // REMOVER: Adicionar ação para o botão de gerar chave
+        gerarChaveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Obtenha o ID do evento a partir do input
+                Long idEvento = Long.valueOf(idEventoInput.getText());
+                
+                // Chame o método para gerar a chave
+                equipeEventoController.gerarChave(idEvento);
+                
+                // Adicione aqui qualquer ação adicional após gerar a chave
             }
         });
 

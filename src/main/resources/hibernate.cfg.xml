@@ -16,6 +16,9 @@
         <mapping class="com.sportify.model.Equipe" />
         <mapping class="com.sportify.model.Evento"/>
         <mapping class="com.sportify.model.EquipeEvento"/>
+        <mapping class="com.sportify.model.Partida"/>
+        <mapping class="com.sportify.model.Chave"/>
+        <mapping class="com.sportify.model.Resultado"/>
 
     </session-factory>
 

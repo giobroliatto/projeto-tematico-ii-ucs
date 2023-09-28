@@ -70,37 +70,27 @@ public class EquipeEventoController {
         Chave chave = new Chave();
         chave.setIdEvento(idEvento);
 
-        List<Long> idPartidasOitavas = new ArrayList<>();
-        List<Long> idPartidasQuartas = new ArrayList<>();
-        List<Long> idPartidasSemi = new ArrayList<>();
-        Long idPartidaFinal = null;
-
         int numPartidas = pairs.size();
         if (numPartidas == 1) {
-            idPartidaFinal = createPartida(pairs.get(0), idEvento);
+            chave.setIdPartidaFinal(createPartida(pairs.get(0), idEvento));
         } else if (numPartidas == 2) {
-            idPartidasSemi.add(createPartida(pairs.get(0), idEvento));
-            idPartidasSemi.add(createPartida(pairs.get(1), idEvento));
+            chave.setIdPartida1Semi(createPartida(pairs.get(0), idEvento));
+            chave.setIdPartida2Semi(createPartida(pairs.get(1), idEvento));
         } else if (numPartidas == 4) {
-        	idPartidasQuartas.add(createPartida(pairs.get(0), idEvento));
-        	idPartidasQuartas.add(createPartida(pairs.get(1), idEvento));
-        	idPartidasQuartas.add(createPartida(pairs.get(2), idEvento));
-        	idPartidasQuartas.add(createPartida(pairs.get(3), idEvento));
+        	chave.setIdPartida1Quartas(createPartida(pairs.get(0), idEvento));
+        	chave.setIdPartida2Quartas(createPartida(pairs.get(1), idEvento));
+        	chave.setIdPartida3Quartas(createPartida(pairs.get(2), idEvento));
+        	chave.setIdPartida4Quartas(createPartida(pairs.get(3), idEvento));
         } else if (numPartidas == 8) {
-            idPartidasOitavas.add(createPartida(pairs.get(0), idEvento));
-            idPartidasOitavas.add(createPartida(pairs.get(1), idEvento));
-            idPartidasOitavas.add(createPartida(pairs.get(2), idEvento));
-            idPartidasOitavas.add(createPartida(pairs.get(3), idEvento));
-            idPartidasOitavas.add(createPartida(pairs.get(4), idEvento));
-            idPartidasOitavas.add(createPartida(pairs.get(5), idEvento));
-            idPartidasOitavas.add(createPartida(pairs.get(6), idEvento));
-            idPartidasOitavas.add(createPartida(pairs.get(7), idEvento));
+            chave.setIdPartida1Oitavas(createPartida(pairs.get(0), idEvento));
+            chave.setIdPartida2Oitavas(createPartida(pairs.get(1), idEvento));
+            chave.setIdPartida3Oitavas(createPartida(pairs.get(2), idEvento));
+            chave.setIdPartida4Oitavas(createPartida(pairs.get(3), idEvento));
+            chave.setIdPartida5Oitavas(createPartida(pairs.get(4), idEvento));
+            chave.setIdPartida6Oitavas(createPartida(pairs.get(5), idEvento));
+            chave.setIdPartida7Oitavas(createPartida(pairs.get(6), idEvento));
+            chave.setIdPartida8Oitavas(createPartida(pairs.get(7), idEvento));
         }
-
-        chave.setIdPartidasOitavas(idPartidasOitavas);
-        chave.setIdPartidasQuartas(idPartidasQuartas);
-        chave.setIdPartidasSemi(idPartidasSemi);
-        chave.setIdPartidaFinal(idPartidaFinal);
 
         chaveDAO.saveChave(chave);
     }

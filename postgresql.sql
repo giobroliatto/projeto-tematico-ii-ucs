@@ -25,9 +25,20 @@ CREATE TABLE equipes_eventos (
 CREATE TABLE chaves (
     id SERIAL PRIMARY KEY,
     idEvento INT NOT NULL,
-    idPartidasOitavas INT[] DEFAULT '{}'::INT[],
-    idPartidasQuartas INT[] DEFAULT '{}'::INT[],
-    idPartidasSemi INT[] DEFAULT '{}'::INT[],
+    idPartida1Oitavas INT,
+    idPartida2Oitavas INT,
+    idPartida3Oitavas INT,
+    idPartida4Oitavas INT,
+    idPartida5Oitavas INT,
+    idPartida6Oitavas INT,
+    idPartida7Oitavas INT,
+    idPartida8Oitavas INT,
+    idPartida1Quartas INT,
+    idPartida2Quartas INT,
+    idPartida3Quartas INT,
+    idPartida4Quartas INT,
+    idPartida1Semi INT,
+    idPartida2Semi INT,
     idPartidaFinal INT,
 	FOREIGN KEY (idEvento) REFERENCES eventos(id)
 );
@@ -57,10 +68,24 @@ INSERT INTO equipes (nome) VALUES
     ('Equipe C'),
     ('Equipe D'),
     ('Equipe E'),
-    ('Equipe F');
+    ('Equipe F'),
+    ('Equipe G'),
+    ('Equipe H'),
+    ('Equipe I'),
+    ('Equipe J'),
+    ('Equipe K'),
+    ('Equipe L'),
+    ('Equipe M'),
+    ('Equipe N'),
+    ('Equipe O'),
+    ('Equipe P');
 
 select * from eventos;
 
 select * from equipes;
 
 select * from equipes_eventos;
+
+select * from partidas;
+
+select * from chaves;
