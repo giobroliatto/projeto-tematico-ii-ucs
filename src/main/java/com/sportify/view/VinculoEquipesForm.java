@@ -94,7 +94,7 @@ public class VinculoEquipesForm extends JFrame {
         int[] selectedIndices = equipeList.getSelectedIndices();
         
         if (selectedIndices.length != quantidadeEquipes) {
-            JOptionPane.showMessageDialog(this, "Selecione exatamente " + quantidadeEquipes + " equipes");
+            JOptionPane.showMessageDialog(this, "Selecione exatamente " + quantidadeEquipes + " equipes. Você selecionou " + selectedIndices.length + " equipes");
         } else {
             for (int index : selectedIndices) {
                 String equipeNome = equipeListModel.getElementAt(index);

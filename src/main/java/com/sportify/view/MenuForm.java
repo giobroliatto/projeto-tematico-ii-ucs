@@ -1,5 +1,6 @@
 package com.sportify.view;
 
+import com.sportify.controller.ChaveController;
 import com.sportify.controller.EquipeController;
 import com.sportify.controller.EquipeEventoController;
 import com.sportify.controller.EventoController;
@@ -21,7 +22,11 @@ public class MenuForm extends JFrame {
     private JTextField idEventoInput;
     private JButton gerarChaveButton;
 
-    public MenuForm(EquipeController equipeController, EventoController eventoController, EquipeEventoController equipeEventoController) {
+    public MenuForm(
+    		EquipeController equipeController, 
+    		EventoController eventoController, 
+    		EquipeEventoController equipeEventoController, 
+    		ChaveController chaveController) {
         setTitle("SPORTIFY");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(350, 380);
@@ -72,8 +77,8 @@ public class MenuForm extends JFrame {
 
         // REMOVER: Adicionar input e botão
         panel.add(Box.createRigidArea(new Dimension(0, 20)));
-        idEventoInput = new JTextField(10); // Defina o tamanho desejado
-        gerarChaveButton = new JButton("Gerar Chave"); // Botão para gerar a chave
+        idEventoInput = new JTextField(10);
+        gerarChaveButton = new JButton("Gerar chave");
         
         JPanel gerarChavePanel = new JPanel();
         gerarChavePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -113,13 +118,11 @@ public class MenuForm extends JFrame {
         // REMOVER: Adicionar ação para o botão de gerar chave
         gerarChaveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Obtenha o ID do evento a partir do input
                 Long idEvento = Long.valueOf(idEventoInput.getText());
                 
-                // Chame o método para gerar a chave
-                equipeEventoController.gerarChave(idEvento);
-                
-                // Adicione aqui qualquer ação adicional após gerar a chave
+                chaveController.createChave(idEvento);
+                JOptionPane.showMessageDialog(null, "Partidas e chave gerados com sucesso");
+                idEventoInput.setText("");
             }
         });
 

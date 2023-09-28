@@ -3,6 +3,7 @@ package com.sportify;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.sportify.controller.ChaveController;
 import com.sportify.controller.EquipeController;
 import com.sportify.controller.EquipeEventoController;
 import com.sportify.controller.EventoController;
@@ -17,10 +18,11 @@ public class Main {
         EquipeController equipeController = new EquipeController(session);
         EventoController eventoController = new EventoController(session);
         EquipeEventoController equipeEventoController = new EquipeEventoController(session);
+        ChaveController chaveController = new ChaveController(session);
 
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                MenuForm menuForm = new MenuForm(equipeController, eventoController, equipeEventoController);
+                MenuForm menuForm = new MenuForm(equipeController, eventoController, equipeEventoController, chaveController);
                 menuForm.setVisible(true);
             }
         });
