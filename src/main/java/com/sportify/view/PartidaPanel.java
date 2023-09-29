@@ -13,7 +13,7 @@ public class PartidaPanel extends JPanel {
     private JLabel placarALabel;
     private JLabel placarBLabel;
 
-    public PartidaPanel(String equipeA, String equipeB) {
+    public PartidaPanel(String equipeA, String equipeB, boolean partidaFinal) {
         equipeALabel = new JLabel(equipeA);
         equipeBLabel = new JLabel(equipeB);
         placarALabel = new JLabel("0");
@@ -23,25 +23,35 @@ public class PartidaPanel extends JPanel {
         GridBagConstraints constraints = new GridBagConstraints();
 
         constraints.insets = new Insets(0, 10, 0, 10);
+        
+        if (partidaFinal) {
+            add(equipeALabel, constraints);
+            constraints.gridx = 1;
+            add(placarALabel, constraints);
+            constraints.gridx = 2;
+            add(placarBLabel, constraints);
+            constraints.gridx = 3;
+            add(equipeBLabel, constraints);
+        } else {
+        	 constraints.gridx = 0;
+             constraints.gridy = 0;
+             constraints.anchor = GridBagConstraints.CENTER;
+             add(equipeALabel, constraints);
 
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.anchor = GridBagConstraints.CENTER;
-        add(equipeALabel, constraints);
+             constraints.gridx = 2;
+             constraints.gridy = 0;
+             add(equipeBLabel, constraints);
 
-        constraints.gridx = 2;
-        constraints.gridy = 0;
-        add(equipeBLabel, constraints);
+             constraints.gridx = 0;
+             constraints.gridy = 1;
+             constraints.insets = new Insets(5, 0, 0, 10);
+             add(placarALabel, constraints);
 
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.insets = new Insets(5, 0, 0, 10);
-        add(placarALabel, constraints);
-
-        constraints.gridx = 2;
-        constraints.gridy = 1;
-        constraints.insets = new Insets(5, 10, 0, 0);
-        add(placarBLabel, constraints);
+             constraints.gridx = 2;
+             constraints.gridy = 1;
+             constraints.insets = new Insets(5, 10, 0, 0);
+             add(placarBLabel, constraints);
+        }
 
         int padding = 10;
         Border paddingBorder = BorderFactory.createEmptyBorder(padding, padding, padding, padding);
