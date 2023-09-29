@@ -6,6 +6,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.Border;
 
+import com.sportify.controller.PartidaController;
+
 public class PartidaPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private JLabel equipeALabel;
@@ -13,7 +15,7 @@ public class PartidaPanel extends JPanel {
     private JLabel placarALabel;
     private JLabel placarBLabel;
 
-    public PartidaPanel(String equipeA, String equipeB, boolean partidaFinal) {
+    public PartidaPanel(String equipeA, String equipeB, Long idPartida, boolean partidaFinal, PartidaController partidaController) {
         equipeALabel = new JLabel(equipeA);
         equipeBLabel = new JLabel(equipeB);
         placarALabel = new JLabel("0");
@@ -66,15 +68,14 @@ public class PartidaPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 // Lógica a ser executada quando o painel for clicado
                 // Por exemplo, abrir detalhes da partida
-                abrirDetalhesDaPartida();
+                abrirDetalhesPartida(equipeA, equipeB);
             }
         });
     }
 
     // Método para abrir detalhes da partida
-    private void abrirDetalhesDaPartida() {
-        // Implemente a lógica para abrir os detalhes da partida aqui
-        // Por exemplo, exibir uma janela de diálogo com os detalhes da partida
-        JOptionPane.showMessageDialog(this, "Detalhes da partida: Equipe A vs. Equipe B");
+    private void abrirDetalhesPartida(String equipeA, String equipeB) {
+    	RegistrarResultadoForm registrarResultadoForm = new RegistrarResultadoForm(equipeA, equipeB);
+    	registrarResultadoForm.setVisible(true);
     }
 }
