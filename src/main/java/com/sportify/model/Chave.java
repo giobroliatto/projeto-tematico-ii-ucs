@@ -34,8 +34,6 @@ public class Chave {
     
     private Long idPartidaFinal;
 
-    // Getters e Setters
-
     public Long getId() {
         return id;
     }

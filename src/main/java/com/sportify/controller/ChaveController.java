@@ -65,4 +65,12 @@ public class ChaveController {
 
         chaveDAO.saveChave(chave);
     }
+    
+    public String validateChaveByIdEvento(Long idEvento) {
+        if (chaveDAO.getIdChaveByIdEvento(idEvento) != null) {
+            return "Chave já gerada para este evento";
+        }
+
+        return null;
+    }
 }
