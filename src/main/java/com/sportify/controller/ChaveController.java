@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 import com.sportify.dao.ChaveDAO;
+import com.sportify.dto.IdPartidasDTO;
 import com.sportify.model.Chave;
 
 public class ChaveController {
@@ -70,7 +71,10 @@ public class ChaveController {
         if (chaveDAO.getIdChaveByIdEvento(idEvento) != null) {
             return "Chave já gerada para este evento";
         }
-
         return null;
+    }
+    
+    public IdPartidasDTO getIdPartidasByIdEvento(Long idEvento) {
+        return chaveDAO.getIdPartidasByIdEvento(idEvento);
     }
 }

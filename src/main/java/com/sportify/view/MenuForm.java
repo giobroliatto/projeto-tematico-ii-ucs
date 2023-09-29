@@ -4,6 +4,7 @@ import com.sportify.controller.ChaveController;
 import com.sportify.controller.EquipeController;
 import com.sportify.controller.EquipeEventoController;
 import com.sportify.controller.EventoController;
+import com.sportify.controller.PartidaController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,7 @@ public class MenuForm extends JFrame {
     		EquipeController equipeController, 
     		EventoController eventoController, 
     		EquipeEventoController equipeEventoController, 
+    		PartidaController partidaController,
     		ChaveController chaveController) {
         setTitle("SPORTIFY");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -148,19 +150,17 @@ public class MenuForm extends JFrame {
         // REMOVER: Adicionar ação para o botão de ver chave
         verChaveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                Long idEvento = Long.valueOf(idEventoInput.getText());
+                Long idEvento = Long.valueOf(idEventoInput2.getText());
 //                String mensagemErro = chaveController.validateChaveByIdEvento(idEvento);
-                
-                ChaveForm chaveForm = new ChaveForm();
-                chaveForm.setVisible(true);
-                
+ 
 //                if (mensagemErro != null) {
 //                    JOptionPane.showMessageDialog(null, mensagemErro);
 //                } else {
-//	                chaveController.createChave(idEvento);
-//	                JOptionPane.showMessageDialog(null, "Partidas e chave gerados com sucesso");
-//	                idEventoInput.setText("");
+//
 //                }
+                
+                ChaveForm chaveForm = new ChaveForm(idEvento, partidaController, chaveController);
+                chaveForm.setVisible(true);
             }
         });
 

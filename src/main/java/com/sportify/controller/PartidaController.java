@@ -28,4 +28,12 @@ public class PartidaController {
 
         return partida.getId();
     }
+    
+    public String getNomeEquipeAByIdPartida(Long idPartida) {
+        return partidaDAO.getNomeEquipeAByIdPartida(idPartida);
+    }
+
+    public String getNomeEquipeBByIdPartida(Long idPartida) {
+        return partidaDAO.getNomeEquipeBByIdPartida(idPartida);
+    }
 }
