@@ -81,28 +81,38 @@ public class ChaveForm extends JFrame {
         PartidaPanel partidaOitavas7 = new PartidaPanel(equipeAOitavas7, equipeBOitavas7);
         PartidaPanel partidaOitavas8 = new PartidaPanel(equipeAOitavas8, equipeBOitavas8);
 
+//        painelInvisivel1.setBackground(new Color(0, 0, 0, 0));
+
         JPanel fase1Panel = new JPanel(new GridLayout(1, 4));
         fase1Panel.add(partidaOitavas1);
         fase1Panel.add(partidaOitavas2);
         fase1Panel.add(partidaOitavas3);
         fase1Panel.add(partidaOitavas4);
 
-        JPanel fase2Panel = new JPanel(new GridLayout(1, 2));
+        JPanel fase2Panel = new JPanel(new GridLayout(1, 4));
+        fase2Panel.add(new JPanel());
         fase2Panel.add(partidaQuartas1);
         fase2Panel.add(partidaQuartas2);
+        fase2Panel.add(new JPanel());
 
-        JPanel fase3Panel = new JPanel(new GridLayout(1, 1));
+        JPanel fase3Panel = new JPanel(new GridLayout(1, 3));
+        fase3Panel.add(new JPanel());
         fase3Panel.add(partidaSemi1);
+        fase3Panel.add(new JPanel());
 
         JPanel fase4Panel = new JPanel(new GridLayout(1, 1));
         fase4Panel.add(partidaFinal);
 
-        JPanel fase3Panel2 = new JPanel(new GridLayout(1, 2));
+        JPanel fase3Panel2 = new JPanel(new GridLayout(1, 3));
+        fase3Panel2.add(new JPanel());
         fase3Panel2.add(partidaSemi2);
+        fase3Panel2.add(new JPanel());
 
-        JPanel fase2Panel2 = new JPanel(new GridLayout(1, 2));
+        JPanel fase2Panel2 = new JPanel(new GridLayout(1, 4));
+        fase2Panel2.add(new JPanel());
         fase2Panel2.add(partidaQuartas3);
         fase2Panel2.add(partidaQuartas4);
+        fase2Panel2.add(new JPanel());
         
         JPanel fase1Panel2 = new JPanel(new GridLayout(1, 4));
         fase1Panel2.add(partidaOitavas5);
@@ -118,7 +128,7 @@ public class ChaveForm extends JFrame {
         chavesPanel.add(fase3Panel2);
         chavesPanel.add(fase2Panel2);
         chavesPanel.add(fase1Panel2);
-
+ 
         add(chavesPanel);
 
         setLocationRelativeTo(null);

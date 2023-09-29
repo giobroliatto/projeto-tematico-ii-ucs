@@ -2,6 +2,8 @@ package com.sportify.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.border.Border;
 
 public class PartidaPanel extends JPanel {
@@ -10,14 +12,12 @@ public class PartidaPanel extends JPanel {
     private JLabel equipeBLabel;
     private JLabel placarALabel;
     private JLabel placarBLabel;
-    private JButton detalhesButton;
 
     public PartidaPanel(String equipeA, String equipeB) {
         equipeALabel = new JLabel(equipeA);
         equipeBLabel = new JLabel(equipeB);
         placarALabel = new JLabel("0");
         placarBLabel = new JLabel("0");
-        detalhesButton = new JButton("Detalhes");
 
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -43,13 +43,28 @@ public class PartidaPanel extends JPanel {
         constraints.insets = new Insets(5, 10, 0, 0);
         add(placarBLabel, constraints);
 
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.gridwidth = 3; 
-        constraints.insets = new Insets(10, 0, 0, 0);
-        add(detalhesButton, constraints);
+        int padding = 10;
+        Border paddingBorder = BorderFactory.createEmptyBorder(padding, padding, padding, padding);
+        Border lineBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+        Border compoundBorder = BorderFactory.createCompoundBorder(paddingBorder, lineBorder);
 
-        Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-        setBorder(border);
+        setBorder(compoundBorder);
+
+        // Adicione um ouvinte de clique ao painel
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Lógica a ser executada quando o painel for clicado
+                // Por exemplo, abrir detalhes da partida
+                abrirDetalhesDaPartida();
+            }
+        });
+    }
+
+    // Método para abrir detalhes da partida
+    private void abrirDetalhesDaPartida() {
+        // Implemente a lógica para abrir os detalhes da partida aqui
+        // Por exemplo, exibir uma janela de diálogo com os detalhes da partida
+        JOptionPane.showMessageDialog(this, "Detalhes da partida: Equipe A vs. Equipe B");
     }
 }
