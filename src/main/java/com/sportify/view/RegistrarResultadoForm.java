@@ -1,6 +1,9 @@
 package com.sportify.view;
 
 import javax.swing.*;
+
+import com.sportify.controller.PartidaController;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +12,7 @@ public class RegistrarResultadoForm extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public RegistrarResultadoForm(String equipeA, String equipeB) {
+    public RegistrarResultadoForm(String equipeA, String equipeB, Long idPartida, PartidaController partidaController) {
         setTitle("Registrar Resultado");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 250);
@@ -97,6 +100,7 @@ public class RegistrarResultadoForm extends JFrame {
                 int resposta = JOptionPane.showConfirmDialog(RegistrarResultadoForm.this, mensagem, "Confirmação de Resultado", JOptionPane.YES_NO_OPTION);
 
                 if (resposta == JOptionPane.YES_OPTION) {
+                	partidaController.atualizarPlacar(idPartida, Integer.parseInt(placarEquipeAText), Integer.parseInt(placarEquipeBText));
                     JOptionPane.showMessageDialog(RegistrarResultadoForm.this, "Resultado confirmado!");
                     placarEquipeA.setText("");
                     placarEquipeB.setText("");

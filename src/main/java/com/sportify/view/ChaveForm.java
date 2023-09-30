@@ -16,7 +16,7 @@ public class ChaveForm extends JFrame {
     	
         setTitle("Chaves de Jogos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 700);
+        setSize(1000, 600);
         
         IdPartidasDTO idPartidas = chaveController.getIdPartidasByIdEvento(idEvento);
 

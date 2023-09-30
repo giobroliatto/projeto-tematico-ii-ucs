@@ -16,10 +16,30 @@ public class PartidaPanel extends JPanel {
     private JLabel placarBLabel;
 
     public PartidaPanel(String equipeA, String equipeB, Long idPartida, boolean partidaFinal, PartidaController partidaController) {
+    	
+    	Integer placarEquipeA = partidaController.getPlacarEquipeAByIdPartida(idPartida);
+    	Integer placarEquipeB = partidaController.getPlacarEquipeBByIdPartida(idPartida);
+        placarALabel = new JLabel();
+        placarBLabel = new JLabel();
+    	
         equipeALabel = new JLabel(equipeA);
         equipeBLabel = new JLabel(equipeB);
-        placarALabel = new JLabel("0");
-        placarBLabel = new JLabel("0");
+        
+        if (placarEquipeA == null) {
+        	placarALabel.setText("");
+        } else if (placarEquipeA == -1) {
+        	placarALabel.setText("-");
+        } else {        	
+        	placarALabel.setText(placarEquipeA.toString());
+        }
+        
+        if (placarEquipeB == null) {
+        	placarBLabel.setText("");
+        } else if (placarEquipeB == -1) {
+        	placarBLabel.setText("-");
+        } else {        	
+        	placarBLabel.setText(placarEquipeB.toString());
+        }
 
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -68,14 +88,14 @@ public class PartidaPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 // Lógica a ser executada quando o painel for clicado
                 // Por exemplo, abrir detalhes da partida
-                abrirDetalhesPartida(equipeA, equipeB);
+                abrirDetalhesPartida(equipeA, equipeB, idPartida, partidaController);
             }
         });
     }
 
     // Método para abrir detalhes da partida
-    private void abrirDetalhesPartida(String equipeA, String equipeB) {
-    	RegistrarResultadoForm registrarResultadoForm = new RegistrarResultadoForm(equipeA, equipeB);
+    private void abrirDetalhesPartida(String equipeA, String equipeB, Long idPartida, PartidaController partidaController) {
+    	RegistrarResultadoForm registrarResultadoForm = new RegistrarResultadoForm(equipeA, equipeB, idPartida, partidaController);
     	registrarResultadoForm.setVisible(true);
     }
 }

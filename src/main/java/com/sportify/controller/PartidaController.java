@@ -20,6 +20,8 @@ public class PartidaController {
         Long idEquipeB = pair.get(1);
 
         Partida partida = new Partida();
+        partida.setPlacarEquipeA(-1);
+        partida.setPlacarEquipeB(-1);
         partida.setIdEvento(idEvento);
         partida.setIdEquipeA(idEquipeA);
         partida.setIdEquipeB(idEquipeB);
@@ -29,11 +31,28 @@ public class PartidaController {
         return partida.getId();
     }
     
+    public void atualizarPlacar(Long idPartida, Integer novoPlacarEquipeA, Integer novoPlacarEquipeB) {
+        Partida partida = partidaDAO.getPartidaById(idPartida);
+
+        partida.setPlacarEquipeA(novoPlacarEquipeA);
+        partida.setPlacarEquipeB(novoPlacarEquipeB);
+
+        partidaDAO.updatePartida(partida);
+    }
+    
     public String getNomeEquipeAByIdPartida(Long idPartida) {
         return partidaDAO.getNomeEquipeAByIdPartida(idPartida);
     }
 
     public String getNomeEquipeBByIdPartida(Long idPartida) {
         return partidaDAO.getNomeEquipeBByIdPartida(idPartida);
+    }
+    
+    public Integer getPlacarEquipeAByIdPartida(Long idPartida) {
+        return partidaDAO.getPlacarEquipeAByIdPartida(idPartida);
+    }
+
+    public Integer getPlacarEquipeBByIdPartida(Long idPartida) {
+        return partidaDAO.getPlacarEquipeBByIdPartida(idPartida);
     }
 }
