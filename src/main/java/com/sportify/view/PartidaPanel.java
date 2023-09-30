@@ -28,7 +28,7 @@ public class PartidaPanel extends JPanel {
 
         if (placarEquipeA != null && placarEquipeB != null) {        	
         	String equipeVencedora = partidaController.getEquipeVencedoraByIdPartida(idPartida);
-        	Color corVencedora = new Color(0, 204, 0); // Cor verde mais escura (RGB: 0, 128, 0)
+        	Color corVencedora = new Color(0, 204, 0);
             
             if (equipeVencedora.equals(equipeA)) {
                 equipeALabel.setFont(equipeALabel.getFont().deriveFont(Font.BOLD));

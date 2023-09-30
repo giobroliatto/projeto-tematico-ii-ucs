@@ -94,24 +94,23 @@ public class RegistrarResultadoForm extends JFrame {
                 String validarEquipe;
                 
                 if (Integer.parseInt(placarEquipeAText) > Integer.parseInt(placarEquipeBText)) {
-                	validarEquipe = equipeA;
+                    validarEquipe = equipeA;
+                } else if (Integer.parseInt(placarEquipeAText) < Integer.parseInt(placarEquipeBText)) {
+                    validarEquipe = equipeB;
                 } else {
-                	validarEquipe = equipeB;
+                    JOptionPane.showMessageDialog(RegistrarResultadoForm.this, "A partida não pode terminar em empate. Por favor, insira um placar válido.");
+                    return;
                 }
 
                 String mensagem = "Confirma o resultado da partida?\n\n";
                 mensagem += equipeA + "   " + placarEquipeAText + " x " + placarEquipeBText + "   " + equipeB + "\n\n";
-                if (Integer.parseInt(placarEquipeAText) != Integer.parseInt(placarEquipeBText)) {
-                	mensagem += "Equipe '" + validarEquipe + "' será a vencedora\n";
-                } else {
-                	mensagem += "O jogo acabará em empate\n";
-                }
+                mensagem += "Equipe '" + validarEquipe + "' será a vencedora\n";
                 mensagem += " ";
 
                 int resposta = JOptionPane.showConfirmDialog(RegistrarResultadoForm.this, mensagem, "Confirmação de Resultado", JOptionPane.YES_NO_OPTION);
 
                 if (resposta == JOptionPane.YES_OPTION) {
-                	partidaController.atualizarPlacar(idPartida, Integer.parseInt(placarEquipeAText), Integer.parseInt(placarEquipeBText));
+                    partidaController.atualizarPlacar(idPartida, Integer.parseInt(placarEquipeAText), Integer.parseInt(placarEquipeBText));
                     JOptionPane.showMessageDialog(RegistrarResultadoForm.this, "Resultado confirmado!");
                     placarEquipeA.setText("");
                     placarEquipeB.setText("");
