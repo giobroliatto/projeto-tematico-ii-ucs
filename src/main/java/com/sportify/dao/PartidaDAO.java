@@ -70,4 +70,28 @@ public class PartidaDAO {
 
         return query.uniqueResult();
     }
+    
+    public String getEquipeVencedoraByIdPartida(Long idPartida) {
+        int placarEquipeA = getPlacarEquipeAByIdPartida(idPartida);
+        int placarEquipeB = getPlacarEquipeBByIdPartida(idPartida);
+
+        String queryString;
+        String paramName;
+        if (placarEquipeA > placarEquipeB) {
+            queryString = "SELECT e.nome FROM Equipe e INNER JOIN Partida p ON e.id = p.idEquipeA WHERE p.id = :idPartida";
+            paramName = "idPartida";
+        } else if (placarEquipeB > placarEquipeA) {
+            queryString = "SELECT e.nome FROM Equipe e INNER JOIN Partida p ON e.id = p.idEquipeB WHERE p.id = :idPartida";
+            paramName = "idPartida";
+        } else {
+            return "Empate";
+        }
+
+        Query<String> query = session.createQuery(queryString, String.class);
+        query.setParameter(paramName, idPartida);
+
+        return query.uniqueResult();
+    }
+
+
 }

@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.Border;
 
+import com.sportify.controller.ChaveController;
 import com.sportify.controller.PartidaController;
 
 public class PartidaPanel extends JPanel {
@@ -15,7 +16,7 @@ public class PartidaPanel extends JPanel {
     private JLabel placarALabel;
     private JLabel placarBLabel;
 
-    public PartidaPanel(String equipeA, String equipeB, Long idPartida, boolean partidaFinal, PartidaController partidaController) {
+    public PartidaPanel(Long idEvento, String equipeA, String equipeB, Long idPartida, boolean partidaFinal, PartidaController partidaController, ChaveController chaveController, ChaveForm chaveForm) {
     	
     	Integer placarEquipeA = partidaController.getPlacarEquipeAByIdPartida(idPartida);
     	Integer placarEquipeB = partidaController.getPlacarEquipeBByIdPartida(idPartida);
@@ -82,20 +83,19 @@ public class PartidaPanel extends JPanel {
 
         setBorder(compoundBorder);
 
-        // Adicione um ouvinte de clique ao painel
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // Lógica a ser executada quando o painel for clicado
-                // Por exemplo, abrir detalhes da partida
-                abrirDetalhesPartida(equipeA, equipeB, idPartida, partidaController);
+                abrirDetalhesPartida(idEvento, equipeA, equipeB, idPartida, partidaController, chaveController, chaveForm);
             }
         });
     }
 
-    // Método para abrir detalhes da partida
-    private void abrirDetalhesPartida(String equipeA, String equipeB, Long idPartida, PartidaController partidaController) {
-    	RegistrarResultadoForm registrarResultadoForm = new RegistrarResultadoForm(equipeA, equipeB, idPartida, partidaController);
-    	registrarResultadoForm.setVisible(true);
+    private void abrirDetalhesPartida(Long idEvento, String equipeA, String equipeB, Long idPartida, PartidaController partidaController, ChaveController chaveController, ChaveForm chaveForm) {
+    	if (idPartida != null) {    		
+    		RegistrarResultadoForm registrarResultadoForm = new RegistrarResultadoForm(idEvento, equipeA, equipeB, idPartida, partidaController, chaveController, chaveForm);
+    		registrarResultadoForm.setVisible(true);
+    		chaveForm.setVisible(false);
+    	}
     }
 }

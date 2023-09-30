@@ -65,21 +65,21 @@ public class ChaveForm extends JFrame {
         String equipeAFinal = partidaController.getNomeEquipeAByIdPartida(idPartidas.getIdPartidaFinal());
         String equipeBFinal = partidaController.getNomeEquipeBByIdPartida(idPartidas.getIdPartidaFinal());
 
-        PartidaPanel partidaOitavas1 = new PartidaPanel(equipeAOitavas1, equipeBOitavas1, idPartidas.getIdPartida1Oitavas(), false, partidaController);
-        PartidaPanel partidaOitavas2 = new PartidaPanel(equipeAOitavas2, equipeBOitavas2, idPartidas.getIdPartida2Oitavas(), false, partidaController);
-        PartidaPanel partidaOitavas3 = new PartidaPanel(equipeAOitavas3, equipeBOitavas3, idPartidas.getIdPartida3Oitavas(), false, partidaController);
-        PartidaPanel partidaOitavas4 = new PartidaPanel(equipeAOitavas4, equipeBOitavas4, idPartidas.getIdPartida4Oitavas(), false, partidaController);
-        PartidaPanel partidaQuartas1 = new PartidaPanel(equipeAQuartas1, equipeBQuartas1, idPartidas.getIdPartida1Quartas(), false, partidaController);
-        PartidaPanel partidaQuartas2 = new PartidaPanel(equipeAQuartas2, equipeBQuartas2, idPartidas.getIdPartida2Quartas(), false, partidaController);
-        PartidaPanel partidaSemi1 = new PartidaPanel(equipeASemi1, equipeBSemi1, idPartidas.getIdPartida1Semi(), false, partidaController);
-        PartidaPanel partidaFinal = new PartidaPanel(equipeAFinal, equipeBFinal, idPartidas.getIdPartidaFinal(), true, partidaController);
-        PartidaPanel partidaSemi2 = new PartidaPanel(equipeASemi2, equipeBSemi2, idPartidas.getIdPartida2Semi(), false, partidaController);
-        PartidaPanel partidaQuartas3 = new PartidaPanel(equipeAQuartas3, equipeBQuartas3, idPartidas.getIdPartida3Quartas(), false, partidaController);
-        PartidaPanel partidaQuartas4 = new PartidaPanel(equipeAQuartas4, equipeBQuartas4, idPartidas.getIdPartida4Quartas(), false, partidaController);
-        PartidaPanel partidaOitavas5 = new PartidaPanel(equipeAOitavas5, equipeBOitavas5, idPartidas.getIdPartida5Oitavas(), false, partidaController);
-        PartidaPanel partidaOitavas6 = new PartidaPanel(equipeAOitavas6, equipeBOitavas6, idPartidas.getIdPartida6Oitavas(), false, partidaController);
-        PartidaPanel partidaOitavas7 = new PartidaPanel(equipeAOitavas7, equipeBOitavas7, idPartidas.getIdPartida7Oitavas(), false, partidaController);
-        PartidaPanel partidaOitavas8 = new PartidaPanel(equipeAOitavas8, equipeBOitavas8, idPartidas.getIdPartida8Oitavas(), false, partidaController);
+        PartidaPanel partidaOitavas1 = new PartidaPanel(idEvento, equipeAOitavas1, equipeBOitavas1, idPartidas.getIdPartida1Oitavas(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaOitavas2 = new PartidaPanel(idEvento, equipeAOitavas2, equipeBOitavas2, idPartidas.getIdPartida2Oitavas(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaOitavas3 = new PartidaPanel(idEvento, equipeAOitavas3, equipeBOitavas3, idPartidas.getIdPartida3Oitavas(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaOitavas4 = new PartidaPanel(idEvento, equipeAOitavas4, equipeBOitavas4, idPartidas.getIdPartida4Oitavas(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaQuartas1 = new PartidaPanel(idEvento, equipeAQuartas1, equipeBQuartas1, idPartidas.getIdPartida1Quartas(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaQuartas2 = new PartidaPanel(idEvento, equipeAQuartas2, equipeBQuartas2, idPartidas.getIdPartida2Quartas(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaSemi1 = new PartidaPanel(idEvento, equipeASemi1, equipeBSemi1, idPartidas.getIdPartida1Semi(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaFinal = new PartidaPanel(idEvento, equipeAFinal, equipeBFinal, idPartidas.getIdPartidaFinal(), true, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaSemi2 = new PartidaPanel(idEvento, equipeASemi2, equipeBSemi2, idPartidas.getIdPartida2Semi(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaQuartas3 = new PartidaPanel(idEvento, equipeAQuartas3, equipeBQuartas3, idPartidas.getIdPartida3Quartas(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaQuartas4 = new PartidaPanel(idEvento, equipeAQuartas4, equipeBQuartas4, idPartidas.getIdPartida4Quartas(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaOitavas5 = new PartidaPanel(idEvento, equipeAOitavas5, equipeBOitavas5, idPartidas.getIdPartida5Oitavas(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaOitavas6 = new PartidaPanel(idEvento, equipeAOitavas6, equipeBOitavas6, idPartidas.getIdPartida6Oitavas(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaOitavas7 = new PartidaPanel(idEvento, equipeAOitavas7, equipeBOitavas7, idPartidas.getIdPartida7Oitavas(), false, partidaController, chaveController, ChaveForm.this);
+        PartidaPanel partidaOitavas8 = new PartidaPanel(idEvento, equipeAOitavas8, equipeBOitavas8, idPartidas.getIdPartida8Oitavas(), false, partidaController, chaveController, ChaveForm.this);
 
         JPanel fase1Panel = new JPanel(new GridLayout(1, 4));
         fase1Panel.add(partidaOitavas1);

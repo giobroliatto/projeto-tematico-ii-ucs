@@ -19,11 +19,11 @@ public class MenuForm extends JFrame {
     private JButton listarEquipesButton;
     private JButton listarEventosButton;
     
-    // REMOVER: Adicionar input e botão de geração de chaves
+    // REALOCAR PARA DETALHES DO EVENTO: Adicionar input e botão de geração de chaves
     private JTextField idEventoInput;
     private JButton gerarChaveButton;
     
-    // REMOVER: Adicionar input e botão de visualização chaves
+    // REALOCAR PARA DETALHES DO EVENTO: Adicionar input e botão de visualização chaves
     private JTextField idEventoInput2;
     private JButton verChaveButton;
 
@@ -81,7 +81,7 @@ public class MenuForm extends JFrame {
         listarEventosButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(listarEventosButton);
 
-        // REMOVER: Adicionar input e botão de gerar chave
+        // REALOCAR PARA DETALHES DO EVENTO: Adicionar input e botão de gerar chave
         panel.add(Box.createRigidArea(new Dimension(0, 20)));
         idEventoInput = new JTextField(10);
         gerarChaveButton = new JButton("Gerar chave");
@@ -92,7 +92,7 @@ public class MenuForm extends JFrame {
         gerarChavePanel.add(gerarChaveButton);
         panel.add(gerarChavePanel);
         
-        // REMOVER: Adicionar input e botão de gerar chave
+        // REALOCAR PARA DETALHES DO EVENTO: Adicionar input e botão de gerar chave
         idEventoInput2 = new JTextField(10);
         verChaveButton = new JButton("Ver chave");
         
@@ -131,7 +131,7 @@ public class MenuForm extends JFrame {
             }
         });
         
-        // REMOVER: Adicionar ação para o botão de gerar chave
+        // REALOCAR PARA DETALHES DO EVENTO: Adicionar ação para o botão de gerar chave
         gerarChaveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Long idEvento = Long.valueOf(idEventoInput.getText());
@@ -147,18 +147,11 @@ public class MenuForm extends JFrame {
             }
         });
         
-        // REMOVER: Adicionar ação para o botão de ver chave
+        // REALOCAR PARA DETALHES DO EVENTO: Adicionar ação para o botão de ver chave
         verChaveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Long idEvento = Long.valueOf(idEventoInput2.getText());
-//                String mensagemErro = chaveController.validateChaveByIdEvento(idEvento);
- 
-//                if (mensagemErro != null) {
-//                    JOptionPane.showMessageDialog(null, mensagemErro);
-//                } else {
-//
-//                }
-                
+
                 ChaveForm chaveForm = new ChaveForm(idEvento, partidaController, chaveController);
                 chaveForm.setVisible(true);
             }

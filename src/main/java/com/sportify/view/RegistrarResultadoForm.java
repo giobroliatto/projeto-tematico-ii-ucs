@@ -2,6 +2,7 @@ package com.sportify.view;
 
 import javax.swing.*;
 
+import com.sportify.controller.ChaveController;
 import com.sportify.controller.PartidaController;
 
 import java.awt.*;
@@ -12,7 +13,7 @@ public class RegistrarResultadoForm extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public RegistrarResultadoForm(String equipeA, String equipeB, Long idPartida, PartidaController partidaController) {
+    public RegistrarResultadoForm(Long idEvento, String equipeA, String equipeB, Long idPartida, PartidaController partidaController, ChaveController chaveController, ChaveForm chaveForm) {
         setTitle("Registrar Resultado");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 250);
@@ -85,16 +86,26 @@ public class RegistrarResultadoForm extends JFrame {
         constraints.gridy++;
         panel.add(retornarButton, constraints);
 
-        // Adicionar ActionListener para o botão "Confirmar"
         confirmarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String placarEquipeAText = placarEquipeA.getText();
                 String placarEquipeBText = placarEquipeB.getText();
+                String validarEquipe;
+                
+                if (Integer.parseInt(placarEquipeAText) > Integer.parseInt(placarEquipeBText)) {
+                	validarEquipe = equipeA;
+                } else {
+                	validarEquipe = equipeB;
+                }
 
-                String mensagem = "  Confirma o resultado da partida?\n\n";
-                mensagem += "        Equipe A   " + placarEquipeAText + " x " + placarEquipeBText + "   Equipe B\n\n";
-                mensagem += "Equipe XXXXXXX será a vencedora\n";
+                String mensagem = "Confirma o resultado da partida?\n\n";
+                mensagem += equipeA + "   " + placarEquipeAText + " x " + placarEquipeBText + "   " + equipeB + "\n\n";
+                if (Integer.parseInt(placarEquipeAText) != Integer.parseInt(placarEquipeBText)) {
+                	mensagem += "Equipe '" + validarEquipe + "' será a vencedora\n";
+                } else {
+                	mensagem += "O jogo acabará em empate\n";
+                }
                 mensagem += " ";
 
                 int resposta = JOptionPane.showConfirmDialog(RegistrarResultadoForm.this, mensagem, "Confirmação de Resultado", JOptionPane.YES_NO_OPTION);
@@ -104,12 +115,25 @@ public class RegistrarResultadoForm extends JFrame {
                     JOptionPane.showMessageDialog(RegistrarResultadoForm.this, "Resultado confirmado!");
                     placarEquipeA.setText("");
                     placarEquipeB.setText("");
+                    System.out.println(partidaController.getEquipeVencedoraByIdPartida(idPartida));
                 }
             }
         });
+        
+        retornarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
 
+                placarEquipeA.setText("");
+                placarEquipeB.setText("");
+                
+                ChaveForm chaveForm = new ChaveForm(idEvento, partidaController, chaveController);
+                chaveForm.setVisible(true);
+            }
+        });
+        
         add(panel);
-
         setVisible(true);
     }
 }
