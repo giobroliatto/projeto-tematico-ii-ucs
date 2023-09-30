@@ -15,6 +15,7 @@ public class PartidaPanel extends JPanel {
     private JLabel equipeBLabel;
     private JLabel placarALabel;
     private JLabel placarBLabel;
+    private JLabel aDefinirLabel;
 
     public PartidaPanel(Long idEvento, String equipeA, String equipeB, Long idPartida, boolean partidaFinal, PartidaController partidaController, ChaveController chaveController, ChaveForm chaveForm) {
     	
@@ -37,6 +38,15 @@ public class PartidaPanel extends JPanel {
                 equipeBLabel.setFont(equipeBLabel.getFont().deriveFont(Font.BOLD));
                 equipeBLabel.setForeground(corVencedora);
             }    
+        }
+        
+        if (equipeA == null && equipeB == null) {
+            aDefinirLabel = new JLabel("A definir");
+            aDefinirLabel.setFont(new Font("Arial", Font.BOLD, 13));
+            aDefinirLabel.setForeground(Color.GRAY);
+            aDefinirLabel.setHorizontalAlignment(JLabel.CENTER);
+            aDefinirLabel.setVerticalAlignment(JLabel.CENTER);
+            add(aDefinirLabel);
         }
         
         if (placarEquipeA == null) {
