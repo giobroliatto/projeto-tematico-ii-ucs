@@ -19,6 +19,19 @@ public class ChaveDAO {
         session.getTransaction().commit();
 	}
 	
+	public void updateChave(Chave chave) {
+        session.beginTransaction();
+        session.update(chave);
+        session.getTransaction().commit();
+	}
+	
+    public Chave getChaveById(Long idChave) {
+        Query<Chave> query = session.createQuery("FROM Chave WHERE id = :id", Chave.class);
+        query.setParameter("id", idChave);
+
+        return query.uniqueResult();
+    }
+	
     public Long getIdChaveByIdEvento(Long idEvento) {
         Query<Long> query = session.createQuery(
             "SELECT c.id FROM Chave c WHERE c.idEvento = :idEvento", Long.class);

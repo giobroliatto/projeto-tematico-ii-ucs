@@ -7,6 +7,8 @@ import com.sportify.controller.PartidaController;
 import com.sportify.dto.IdPartidasDTO;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChaveForm extends JFrame {
 	
@@ -19,6 +21,64 @@ public class ChaveForm extends JFrame {
         setSize(1000, 600);
         
         IdPartidasDTO idPartidas = chaveController.getIdPartidasByIdEvento(idEvento);
+        
+        Long idVencedorOitavas1 = null;
+        Long idVencedorOitavas2 = null;
+        Long idVencedorOitavas3 = null;
+        Long idVencedorOitavas4 = null;
+        Long idVencedorOitavas5 = null;
+        Long idVencedorOitavas6 = null;
+        Long idVencedorOitavas7 = null;
+        Long idVencedorOitavas8 = null;
+        Long idVencedorQuartas1 = null;
+        Long idVencedorQuartas2 = null;
+        Long idVencedorQuartas3 = null;
+        Long idVencedorQuartas4 = null;
+        Long idVencedorSemi1 = null;
+        Long idVencedorSemi2 = null;
+
+        if (idPartidas.getIdPartida1Oitavas() != null) {
+            idVencedorOitavas1 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida1Oitavas());
+        }
+        if (idPartidas.getIdPartida2Oitavas() != null) {
+            idVencedorOitavas2 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida2Oitavas());
+        }
+        if (idPartidas.getIdPartida3Oitavas() != null) {
+            idVencedorOitavas3 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida3Oitavas());
+        }
+        if (idPartidas.getIdPartida4Oitavas() != null) {
+            idVencedorOitavas4 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida4Oitavas());
+        }
+        if (idPartidas.getIdPartida5Oitavas() != null) {
+            idVencedorOitavas5 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida5Oitavas());
+        }
+        if (idPartidas.getIdPartida6Oitavas() != null) {
+            idVencedorOitavas6 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida6Oitavas());
+        }
+        if (idPartidas.getIdPartida7Oitavas() != null) {
+            idVencedorOitavas7 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida7Oitavas());
+        }
+        if (idPartidas.getIdPartida8Oitavas() != null) {
+            idVencedorOitavas8 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida8Oitavas());
+        }
+        if (idPartidas.getIdPartida1Quartas() != null) {
+            idVencedorQuartas1 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida1Quartas());
+        }
+        if (idPartidas.getIdPartida2Quartas() != null) {
+            idVencedorQuartas2 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida2Quartas());
+        }
+        if (idPartidas.getIdPartida3Quartas() != null) {
+            idVencedorQuartas3 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida3Quartas());
+        }
+        if (idPartidas.getIdPartida4Quartas() != null) {
+            idVencedorQuartas4 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida4Quartas());
+        }
+        if (idPartidas.getIdPartida1Semi() != null) {
+            idVencedorSemi1 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida1Semi());
+        }
+        if (idPartidas.getIdPartida2Semi() != null) {
+            idVencedorSemi2 = partidaController.getIdEquipeVencedoraByIdPartida(idPartidas.getIdPartida2Semi());
+        }
 
         String equipeAOitavas1 = partidaController.getNomeEquipeAByIdPartida(idPartidas.getIdPartida1Oitavas());
         String equipeBOitavas1 = partidaController.getNomeEquipeBByIdPartida(idPartidas.getIdPartida1Oitavas());
@@ -64,6 +124,111 @@ public class ChaveForm extends JFrame {
         
         String equipeAFinal = partidaController.getNomeEquipeAByIdPartida(idPartidas.getIdPartidaFinal());
         String equipeBFinal = partidaController.getNomeEquipeBByIdPartida(idPartidas.getIdPartidaFinal());
+        
+        if (idVencedorOitavas1 != null && idVencedorOitavas2 != null && equipeAQuartas1 == null && equipeBQuartas1 == null) {
+            List<Long> equipesQuartas1 = new ArrayList<>();
+
+            equipesQuartas1.add(idVencedorOitavas1);
+            equipesQuartas1.add(idVencedorOitavas2);
+            
+            Long idPartidaQuartas1 = partidaController.createPartida(equipesQuartas1, idEvento);
+            Long idChave = chaveController.getIdChaveByIdEvento(idEvento);
+            
+            chaveController.updateChaveQuartas1(idPartidaQuartas1, idChave);
+            
+            equipeAQuartas1 = partidaController.getNomeEquipeAByIdPartida(idPartidaQuartas1);
+            equipeBQuartas1 = partidaController.getNomeEquipeBByIdPartida(idPartidaQuartas1);
+        }
+        
+        if (idVencedorOitavas3 != null && idVencedorOitavas4 != null && equipeAQuartas2 == null && equipeBQuartas2 == null) {
+            List<Long> equipesQuartas2 = new ArrayList<>();
+
+            equipesQuartas2.add(idVencedorOitavas3);
+            equipesQuartas2.add(idVencedorOitavas4);
+            
+            Long idPartidaQuartas2 = partidaController.createPartida(equipesQuartas2, idEvento);
+            Long idChave = chaveController.getIdChaveByIdEvento(idEvento);
+            
+            chaveController.updateChaveQuartas2(idPartidaQuartas2, idChave);
+            
+            equipeAQuartas2 = partidaController.getNomeEquipeAByIdPartida(idPartidaQuartas2);
+            equipeBQuartas2 = partidaController.getNomeEquipeBByIdPartida(idPartidaQuartas2);
+        }
+        
+        if (idVencedorOitavas5 != null && idVencedorOitavas6 != null && equipeAQuartas3 == null && equipeBQuartas3 == null) {
+            List<Long> equipesQuartas3 = new ArrayList<>();
+
+            equipesQuartas3.add(idVencedorOitavas5);
+            equipesQuartas3.add(idVencedorOitavas6);
+            
+            Long idPartidaQuartas3 = partidaController.createPartida(equipesQuartas3, idEvento);
+            Long idChave = chaveController.getIdChaveByIdEvento(idEvento);
+            
+            chaveController.updateChaveQuartas3(idPartidaQuartas3, idChave);
+            
+            equipeAQuartas3 = partidaController.getNomeEquipeAByIdPartida(idPartidaQuartas3);
+            equipeBQuartas3 = partidaController.getNomeEquipeBByIdPartida(idPartidaQuartas3);
+        }
+        
+        if (idVencedorOitavas7 != null && idVencedorOitavas8 != null && equipeAQuartas4 == null && equipeBQuartas4 == null) {
+            List<Long> equipesQuartas4 = new ArrayList<>();
+
+            equipesQuartas4.add(idVencedorOitavas7);
+            equipesQuartas4.add(idVencedorOitavas8);
+            
+            Long idPartidaQuartas4 = partidaController.createPartida(equipesQuartas4, idEvento);
+            Long idChave = chaveController.getIdChaveByIdEvento(idEvento);
+            
+            chaveController.updateChaveQuartas4(idPartidaQuartas4, idChave);
+            
+            equipeAQuartas4 = partidaController.getNomeEquipeAByIdPartida(idPartidaQuartas4);
+            equipeBQuartas4 = partidaController.getNomeEquipeBByIdPartida(idPartidaQuartas4);
+        }
+
+        if (idVencedorQuartas1 != null && idVencedorQuartas2 != null && equipeASemi1 == null && equipeBSemi1 == null) {
+            List<Long> equipesSemi1 = new ArrayList<>();
+
+            equipesSemi1.add(idVencedorQuartas1);
+            equipesSemi1.add(idVencedorQuartas2);
+            
+            Long idPartidaSemi1 = partidaController.createPartida(equipesSemi1, idEvento);
+            Long idChave = chaveController.getIdChaveByIdEvento(idEvento);
+            
+            chaveController.updateChaveSemi1(idPartidaSemi1, idChave);
+            
+            equipeASemi1 = partidaController.getNomeEquipeAByIdPartida(idPartidaSemi1);
+            equipeBSemi1 = partidaController.getNomeEquipeBByIdPartida(idPartidaSemi1);
+        }
+
+        if (idVencedorQuartas3 != null && idVencedorQuartas4 != null && equipeASemi2 == null && equipeBSemi2 == null) {
+            List<Long> equipesSemi2 = new ArrayList<>();
+
+            equipesSemi2.add(idVencedorQuartas3);
+            equipesSemi2.add(idVencedorQuartas4);
+            
+            Long idPartidaSemi2 = partidaController.createPartida(equipesSemi2, idEvento);
+            Long idChave = chaveController.getIdChaveByIdEvento(idEvento);
+            
+            chaveController.updateChaveSemi2(idPartidaSemi2, idChave);
+            
+            equipeASemi2 = partidaController.getNomeEquipeAByIdPartida(idPartidaSemi2);
+            equipeBSemi2 = partidaController.getNomeEquipeBByIdPartida(idPartidaSemi2);
+        }
+
+        if (idVencedorSemi1 != null && idVencedorSemi2 != null && equipeAFinal == null && equipeBFinal == null) {
+            List<Long> equipesFinal = new ArrayList<>();
+
+            equipesFinal.add(idVencedorSemi1);
+            equipesFinal.add(idVencedorSemi2);
+            
+            Long idPartidaFinal = partidaController.createPartida(equipesFinal, idEvento);
+            Long idChave = chaveController.getIdChaveByIdEvento(idEvento);
+            
+            chaveController.updateChaveFinal(idPartidaFinal, idChave);
+            
+            equipeAFinal = partidaController.getNomeEquipeAByIdPartida(idPartidaFinal);
+            equipeBFinal = partidaController.getNomeEquipeBByIdPartida(idPartidaFinal);
+        }
 
         PartidaPanel partidaOitavas1 = new PartidaPanel(idEvento, equipeAOitavas1, equipeBOitavas1, idPartidas.getIdPartida1Oitavas(), false, partidaController, chaveController, ChaveForm.this);
         PartidaPanel partidaOitavas2 = new PartidaPanel(idEvento, equipeAOitavas2, equipeBOitavas2, idPartidas.getIdPartida2Oitavas(), false, partidaController, chaveController, ChaveForm.this);

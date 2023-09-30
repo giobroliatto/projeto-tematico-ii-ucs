@@ -84,7 +84,7 @@ public class PartidaDAO {
             queryString = "SELECT e.nome FROM Equipe e INNER JOIN Partida p ON e.id = p.idEquipeB WHERE p.id = :idPartida";
             paramName = "idPartida";
         } else {
-            return "Empate";
+            return "A definir";
         }
 
         Query<String> query = session.createQuery(queryString, String.class);
@@ -92,6 +92,29 @@ public class PartidaDAO {
 
         return query.uniqueResult();
     }
+    
+    public Long getIdEquipeVencedoraByIdPartida(Long idPartida) {
+        int placarEquipeA = getPlacarEquipeAByIdPartida(idPartida);
+        int placarEquipeB = getPlacarEquipeBByIdPartida(idPartida);
+
+        String queryString;
+        String paramName;
+        if (placarEquipeA > placarEquipeB) {
+            queryString = "SELECT e.id FROM Equipe e INNER JOIN Partida p ON e.id = p.idEquipeA WHERE p.id = :idPartida";
+            paramName = "idPartida";
+        } else if (placarEquipeB > placarEquipeA) {
+            queryString = "SELECT e.id FROM Equipe e INNER JOIN Partida p ON e.id = p.idEquipeB WHERE p.id = :idPartida";
+            paramName = "idPartida";
+        } else {
+            return null; // Nenhum vencedor definido ainda
+        }
+
+        Query<Long> query = session.createQuery(queryString, Long.class);
+        query.setParameter(paramName, idPartida);
+
+        return query.uniqueResult();
+    }
+
 
 
 }

@@ -21,6 +21,48 @@ public class ChaveController {
     	partidaController = new PartidaController(session);
 	}
 	
+	public void updateChaveQuartas1(Long idPartida, Long idChave) {
+		Chave chave = chaveDAO.getChaveById(idChave);
+		chave.setIdPartida1Quartas(idPartida);
+		chaveDAO.updateChave(chave);
+	}
+	
+	public void updateChaveQuartas2(Long idPartida, Long idChave) {
+		Chave chave = chaveDAO.getChaveById(idChave);
+		chave.setIdPartida2Quartas(idPartida);
+		chaveDAO.updateChave(chave);
+	}
+	
+	public void updateChaveQuartas3(Long idPartida, Long idChave) {
+		Chave chave = chaveDAO.getChaveById(idChave);
+		chave.setIdPartida3Quartas(idPartida);
+		chaveDAO.updateChave(chave);
+	}
+	
+	public void updateChaveQuartas4(Long idPartida, Long idChave) {
+		Chave chave = chaveDAO.getChaveById(idChave);
+		chave.setIdPartida4Quartas(idPartida);
+		chaveDAO.updateChave(chave);
+	}
+	
+	public void updateChaveSemi1(Long idPartida, Long idChave) {
+		Chave chave = chaveDAO.getChaveById(idChave);
+		chave.setIdPartida1Semi(idPartida);
+		chaveDAO.updateChave(chave);
+	}
+	
+	public void updateChaveSemi2(Long idPartida, Long idChave) {
+		Chave chave = chaveDAO.getChaveById(idChave);
+		chave.setIdPartida2Semi(idPartida);
+		chaveDAO.updateChave(chave);
+	}
+	
+	public void updateChaveFinal(Long idPartida, Long idChave) {
+		Chave chave = chaveDAO.getChaveById(idChave);
+		chave.setIdPartidaFinal(idPartida);
+		chaveDAO.updateChave(chave);
+	}
+	
     public List<List<Long>> gerarParesDeEquipes(List<Long> idEquipes) {
         Collections.shuffle(idEquipes);
         List<List<Long>> pairs = new ArrayList<List<Long>>();
@@ -65,6 +107,10 @@ public class ChaveController {
         }
 
         chaveDAO.saveChave(chave);
+    }
+    
+    public Long getIdChaveByIdEvento(Long idEvento) {
+    	return chaveDAO.getIdChaveByIdEvento(idEvento);
     }
     
     public String validateChaveByIdEvento(Long idEvento) {

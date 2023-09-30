@@ -59,4 +59,8 @@ public class PartidaController {
     public String getEquipeVencedoraByIdPartida(Long idPartida) {
     	return partidaDAO.getEquipeVencedoraByIdPartida(idPartida);
     }
+    
+    public Long getIdEquipeVencedoraByIdPartida(Long idPartida) {
+    	return partidaDAO.getIdEquipeVencedoraByIdPartida(idPartida);
+    }
 }
