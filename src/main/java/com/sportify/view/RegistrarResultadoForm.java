@@ -115,7 +115,9 @@ public class RegistrarResultadoForm extends JFrame {
                     JOptionPane.showMessageDialog(RegistrarResultadoForm.this, "Resultado confirmado!");
                     placarEquipeA.setText("");
                     placarEquipeB.setText("");
-                    System.out.println(partidaController.getEquipeVencedoraByIdPartida(idPartida));
+                    setVisible(false);
+                    ChaveForm chaveForm = new ChaveForm(idEvento, partidaController, chaveController);
+                    chaveForm.setVisible(true);
                 }
             }
         });

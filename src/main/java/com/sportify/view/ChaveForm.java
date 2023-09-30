@@ -126,7 +126,28 @@ public class ChaveForm extends JFrame {
         chavesPanel.add(fase3Panel2);
         chavesPanel.add(fase2Panel2);
         chavesPanel.add(fase1Panel2);
- 
+        
+        if (idPartidas.getIdPartida1Oitavas() == null && idPartidas.getIdPartida1Quartas() != null) {
+            PartidaPanel[] oitavasPartidas = {partidaOitavas1, partidaOitavas2, partidaOitavas3, partidaOitavas4, partidaOitavas5, partidaOitavas6, partidaOitavas7, partidaOitavas8};
+            for (PartidaPanel partida : oitavasPartidas) {
+                partida.setVisible(false);
+            }
+        }
+
+        if (idPartidas.getIdPartida1Quartas() == null && idPartidas.getIdPartida1Semi() != null) {
+            PartidaPanel[] oitavasQuartasPartidas = {partidaOitavas1, partidaOitavas2, partidaOitavas3, partidaOitavas4, partidaOitavas5, partidaOitavas6, partidaOitavas7, partidaOitavas8, partidaQuartas1, partidaQuartas2, partidaQuartas3, partidaQuartas4};
+            for (PartidaPanel partida : oitavasQuartasPartidas) {
+                partida.setVisible(false);
+            }
+        }
+
+        if (idPartidas.getIdPartida1Semi() == null && idPartidas.getIdPartidaFinal() != null) {
+            PartidaPanel[] todasPartidas = {partidaOitavas1, partidaOitavas2, partidaOitavas3, partidaOitavas4, partidaOitavas5, partidaOitavas6, partidaOitavas7, partidaOitavas8, partidaQuartas1, partidaQuartas2, partidaQuartas3, partidaQuartas4, partidaSemi1, partidaSemi2};
+            for (PartidaPanel partida : todasPartidas) {
+                partida.setVisible(false);
+            }
+        }
+
         add(chavesPanel);
 
         setLocationRelativeTo(null);
