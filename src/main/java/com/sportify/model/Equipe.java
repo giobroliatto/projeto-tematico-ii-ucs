@@ -13,7 +13,11 @@ public class Equipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-   
+    
+    public void setId(Long id) {
+    	this.id = id;
+    }
+    
 	public String getNome() {
 		return nome;
 	}
@@ -21,4 +25,9 @@ public class Equipe {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public Long getId() {
+		return id;
+	}
+	
 }

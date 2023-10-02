@@ -4,6 +4,7 @@ import com.sportify.dao.EventoDAO;
 import com.sportify.model.Evento;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.Session;
 
@@ -23,6 +24,10 @@ public class EventoController {
         evento.setEsporte(esporte);
 
         return eventoDAO.saveEvento(evento);
+    }
+    
+    public List<Evento> getEventos(){
+    	return eventoDAO.getEventos();
     }
     
     public Long getIdByNome(String nome) {

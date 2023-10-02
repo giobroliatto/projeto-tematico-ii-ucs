@@ -1,0 +1,67 @@
+package com.sportify.view;
+
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
+import com.sportify.controller.EquipeController;
+import com.sportify.tableModel.EquipeTableModel;
+
+public class DialogRemoveForm {
+	private MenuForm menuForm;
+	private String id;
+	
+	private EquipeController equipeController;
+	
+	public DialogRemoveForm(MenuForm menuForm, String id, EquipeController equipeController) {
+		this.menuForm = menuForm;
+		this.id = id;
+		this.equipeController = equipeController;
+	}
+	
+	public JDialog factoryRemoveDialgo() {
+		JDialog dialog = new JDialog(this.menuForm, "Remover registro");
+		dialog.setSize(300, 100);
+		dialog.setLayout(new FlowLayout());
+		
+		JButton buttonEditDialog = new JButton();
+		buttonEditDialog.setText("Confirmar Remoção?");
+		
+		JButton buttonCancelDialog = new JButton();
+		buttonCancelDialog.setText("Cancelar");
+		
+		dialog.add(buttonEditDialog);
+		dialog.add(buttonCancelDialog);
+		
+		dialog.setLocationRelativeTo(this.menuForm);
+		
+		buttonEditDialog.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				equipeController.removeEquipe(Long.parseLong(id));
+				
+				JOptionPane.showMessageDialog(
+				menuForm, 
+				"Equipe removida com sucesso", 
+				"Sucess",
+				JOptionPane.INFORMATION_MESSAGE);
+				
+				dialog.setVisible(false);
+			}
+		});
+		
+		buttonCancelDialog.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dialog.setVisible(false);				
+			}
+		});
+		
+		return dialog;
+	}
+}

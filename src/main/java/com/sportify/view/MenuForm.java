@@ -5,11 +5,13 @@ import com.sportify.controller.EquipeController;
 import com.sportify.controller.EquipeEventoController;
 import com.sportify.controller.EventoController;
 import com.sportify.controller.PartidaController;
+import com.sportify.model.Equipe;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class MenuForm extends JFrame {
 
@@ -120,14 +122,18 @@ public class MenuForm extends JFrame {
         });
 
         listarEquipesButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // TO DO lógica para listar equipes
+            public void actionPerformed(ActionEvent e) { 
+            	ListagemEquipeForm listagemEquipeForm = new ListagemEquipeForm(equipeController, MenuForm.this);
+            	setVisible(false);
+            	listagemEquipeForm.setVisible(true);
             }
         });
 
         listarEventosButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TO DO lógica para listar eventos
+                ListagemEventoForm listagemEventoForm = new ListagemEventoForm(eventoController, MenuForm.this);
+                setVisible(false);
+                listagemEventoForm.setVisible(true);
             }
         });
         

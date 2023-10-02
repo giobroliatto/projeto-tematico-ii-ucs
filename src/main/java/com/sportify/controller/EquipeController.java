@@ -20,6 +20,21 @@ public class EquipeController {
         equipeDAO.saveEquipe(equipe);
     }
     
+    public void updateEquipe(Long id, String nome) {
+    	Equipe equipe = equipeDAO.getEquipeById(id);
+    	if(equipe != null) {
+    		equipe.setNome(nome);
+    		equipeDAO.updateEquipe(equipe);
+    	}
+    }
+    
+    public void removeEquipe(Long id) {
+    	System.out.println(id);
+    	if(id != null) {
+    		equipeDAO.removeEquipe(id);
+    	}
+    }
+    
     public List<Equipe> getEquipes() {
         return equipeDAO.getEquipes();
     }

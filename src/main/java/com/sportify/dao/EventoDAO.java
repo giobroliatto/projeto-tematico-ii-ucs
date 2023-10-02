@@ -1,6 +1,7 @@
 package com.sportify.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -24,7 +25,12 @@ public class EventoDAO {
     public Evento getEvento(long id) {
         return session.get(Evento.class, id);
     }
-
+    
+    public List<Evento> getEventos(){
+    	Query<Evento> query = session.createQuery("FROM Evento", Evento.class);
+    	return query.list();
+    }
+    
     public void updateEvento(Evento evento) {
         session.beginTransaction();
         session.update(evento);
@@ -48,4 +54,5 @@ public class EventoDAO {
         query.setParameter("id", id);
         return query.uniqueResult();
     }
+    
 }

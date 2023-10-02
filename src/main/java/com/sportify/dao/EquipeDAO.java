@@ -26,6 +26,16 @@ public class EquipeDAO {
         session.update(equipe);
         session.getTransaction().commit();
     }
+    
+    public void removeEquipe(Long id) {
+        session.beginTransaction();
+        Equipe equipe = session.get(Equipe.class, id); // Carrega a entidade a ser removida
+        if (equipe != null) {
+            session.delete(equipe); // Remove a entidade
+        }
+        session.getTransaction().commit();
+    }
+
 
     public List<Equipe> getEquipes() {
         Query<Equipe> query = session.createQuery("FROM Equipe", Equipe.class);
@@ -59,5 +69,9 @@ public class EquipeDAO {
         Query<Long> query = session.createQuery("SELECT id FROM Equipe WHERE nome = :nome", Long.class);
         query.setParameter("nome", nome);
         return query.uniqueResult();
+    }
+    
+    public Equipe getEquipeById(Long id) {
+        return session.get(Equipe.class, id);
     }
 }
