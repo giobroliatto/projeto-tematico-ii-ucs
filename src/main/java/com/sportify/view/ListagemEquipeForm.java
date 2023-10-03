@@ -23,6 +23,7 @@ import com.sportify.tableModel.EquipeTableModel;
 
 public class ListagemEquipeForm extends JFrame {
 	
+	private static final long serialVersionUID = 1L;
 	private EquipeController equipeController;
 	private MenuForm menuForm;
 	

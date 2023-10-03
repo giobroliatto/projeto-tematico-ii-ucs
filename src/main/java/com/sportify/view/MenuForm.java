@@ -5,13 +5,11 @@ import com.sportify.controller.EquipeController;
 import com.sportify.controller.EquipeEventoController;
 import com.sportify.controller.EventoController;
 import com.sportify.controller.PartidaController;
-import com.sportify.model.Equipe;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class MenuForm extends JFrame {
 

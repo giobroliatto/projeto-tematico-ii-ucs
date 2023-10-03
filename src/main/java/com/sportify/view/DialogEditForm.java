@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.sportify.controller.EquipeController;
-import com.sportify.model.Equipe;
 
 public class DialogEditForm {
 	private MenuForm menuForm;

@@ -14,6 +14,8 @@ import com.sportify.model.Evento;
 import com.sportify.tableModel.EventoTableModel;
 
 public class ListagemEventoForm extends JFrame{
+
+	private static final long serialVersionUID = 1L;
 	private EventoController eventoController;
 	private MenuForm menuForm;
 	List<Evento> listEventos = new ArrayList<>();
