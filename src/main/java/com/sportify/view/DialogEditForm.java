@@ -10,6 +10,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.sportify.controller.EquipeController;
+import com.sportify.model.Equipe;
+import com.sportify.util.FactoryComponents;
+
 
 public class DialogEditForm {
 	private MenuForm menuForm;
@@ -20,6 +23,12 @@ public class DialogEditForm {
 	private JButton buttonConfirmDialog;
 	private JButton buttonCancelDialog;
 	
+	private JDialog dialog;
+	
+	private JTextField tfNome;
+	
+	private FactoryComponents factory;
+	
 	private EquipeController equipeController;
 	
 	public DialogEditForm(MenuForm menuForm, String id, String name, EquipeController equipeController) {
@@ -27,25 +36,19 @@ public class DialogEditForm {
 		this.id = id;
 		this.name = name;
 		this.equipeController = equipeController;
-	}
+		
+		factory = new FactoryComponents();
 	
-	public JDialog factoryEditDialog() {
-		JDialog dialog = new JDialog(this.menuForm, "Editar equipe");
+		dialog = factory.createJDialog(menuForm, "Editar equipe");
 		dialog.setSize(300, 100);
 		dialog.setLayout(new FlowLayout());
 		
-		this.buttonConfirmDialog = new JButton();
-		this.buttonConfirmDialog.setText("Confirmar");
+		buttonConfirmDialog = factory.createButtonList("Editar");
+		buttonCancelDialog = factory.createButtonList("Cancelar");
 		
-		this.buttonCancelDialog = new JButton();
-		this.buttonCancelDialog.setText("Cancelar");
-		
-		
-		JTextField tfNome = new JTextField();
+		tfNome = factory.createTextFieldDialog("Nome", this.name);
 		tfNome.setLayout(new FlowLayout());
 		tfNome.setColumns(25);
-		tfNome.setName("Nome");
-		tfNome.setText(this.name);
 		
 		dialog.add(tfNome);
 		
@@ -53,6 +56,8 @@ public class DialogEditForm {
 		dialog.add(buttonCancelDialog);
 		
 		dialog.setLocationRelativeTo(this.menuForm);
+		
+		dialog.setVisible(true);
 		
 		this.buttonConfirmDialog.addActionListener(new ActionListener() {
 			@Override
@@ -71,7 +76,6 @@ public class DialogEditForm {
 					"Equipe salva com sucesso", 
 					"Sucess", 
 					JOptionPane.INFORMATION_MESSAGE);
-					
 					dialog.setVisible(false);
 				}
 			}
@@ -82,9 +86,6 @@ public class DialogEditForm {
 			public void actionPerformed(ActionEvent e) {
 				dialog.setVisible(false);
 			}
-		});
-		
-		return dialog;
-		
+		});	
 	}
 }

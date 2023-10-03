@@ -20,6 +20,7 @@ import javax.swing.table.TableColumnModel;
 import com.sportify.controller.EquipeController;
 import com.sportify.model.Equipe;
 import com.sportify.tableModel.EquipeTableModel;
+import com.sportify.util.FactoryComponents;
 
 public class ListagemEquipeForm extends JFrame {
 	
@@ -29,6 +30,16 @@ public class ListagemEquipeForm extends JFrame {
 	
 	private String idAux;
 	private String nameAux;
+	private FactoryComponents factory;
+	
+	private JButton buttonEdit;
+	private JButton buttonRemove;
+	private JButton buttonVoltar;
+	
+	private JPanel panel;
+	private JPanel panelButtons;
+	
+	private JTable table;
 	
 	List<Equipe> listNomes;
 	
@@ -40,85 +51,84 @@ public class ListagemEquipeForm extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(350, 220);
         
-        JPanel panel = new JPanel();
+        factory = new FactoryComponents();
+        
+    	panel = factory.createPanelList();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-          
+    	  
         EquipeTableModel equipeTModel = new EquipeTableModel(this.equipeController.getEquipes());
-        JTable jTable = new JTable(equipeTModel); 
+        table = factory.createTableList(equipeTModel);
         
-        JPanel panelButtons = new JPanel();
+        panelButtons = factory.createPanelList();
         panelButtons.setLayout(new FlowLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
-        JButton buttonEdit = new JButton();
-        buttonEdit.setText("Editar");
+        buttonEdit 	 = factory.createButtonList("Editar");
+        buttonRemove = factory.createButtonList("Remover");
+        buttonVoltar = factory.createButtonList("Voltar");
+         
+        panelButtons.add(buttonEdit);
+        panelButtons.add(buttonRemove);
+        panelButtons.add(buttonVoltar);
         
-        JButton buttonRemove = new JButton();
-        buttonRemove.setText("Remover");
+        panel.add(new JScrollPane(table), BorderLayout.CENTER);
+        panel.add(panelButtons, BorderLayout.SOUTH);
         
-        JButton buttonVoltar = new JButton();
-        buttonVoltar.setText("Voltar");
-       
+        add(panel);
+        setLocationRelativeTo(null);
+        
         /* Esconder coluna ID */
-        this.hideColumnID(jTable);
+        this.hideColumnID(table);
         
+        /* EDITAR */
         buttonEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	if(jTable.getSelectedRow() == -1) {
+            	if(table.getSelectedRow() == -1) {
             		JOptionPane.showMessageDialog(
     				menuForm, 
     				"Nenhuma equipe selecionada", 
     				"Error", 
     				JOptionPane.ERROR_MESSAGE);
             	} else {
-            		idAux = jTable.getValueAt(jTable.getSelectedRow(), 0).toString();
-            		nameAux = jTable.getValueAt(jTable.getSelectedRow(), 1).toString();
+            		idAux = table.getValueAt(table.getSelectedRow(), 0).toString();
+            		nameAux = table.getValueAt(table.getSelectedRow(), 1).toString();
             		
             		DialogEditForm editDialog = new DialogEditForm(menuForm, idAux, nameAux, equipeController);
-                	editDialog.factoryEditDialog().setVisible(true);
             	}
         	}
         });
         
+        /* REMOVER */
         buttonRemove.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	if(jTable.getSelectedRow() == -1) {
-            		JOptionPane.showMessageDialog(
-    				menuForm, 
-    				"Nenhuma equipe selecionada", 
-    				"Error", 
-    				JOptionPane.ERROR_MESSAGE);
+            	
+            	if(table.getSelectedRow() == -1) {
+            		/* CRIAR MÉTODO EM OUTRA CLASSE */
+	            		JOptionPane.showMessageDialog(
+	    				menuForm, 
+	    				"Nenhuma equipe selecionada", 
+	    				"Error", 
+	    				JOptionPane.ERROR_MESSAGE);
+            		/* CRIAR MÉTODO EM OUTRA CLASSE */
             	} else {
-            		idAux = jTable.getValueAt(jTable.getSelectedRow(), 0).toString();
+            		idAux = table.getValueAt(table.getSelectedRow(), 0).toString();
             		
                 	DialogRemoveForm removeDialog = new DialogRemoveForm(menuForm, idAux, equipeController);
                 	removeDialog.factoryRemoveDialgo().setVisible(true);
-                	
-                	System.out.println("TESTE");
-                	
             	}
             }
         });
-        
+        	
+        /* VOLTAR */
         buttonVoltar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				returnToMenu();
 			}
 		});
-        
-        panelButtons.add(buttonEdit);
-        panelButtons.add(buttonRemove);
-        panelButtons.add(buttonVoltar);
-        
-        panel.add(new JScrollPane(jTable), BorderLayout.CENTER);
-        panel.add(panelButtons, BorderLayout.SOUTH);
-        
-        add(panel);
-        setLocationRelativeTo(null);
 	}	
 	
 	private void returnToMenu() {
