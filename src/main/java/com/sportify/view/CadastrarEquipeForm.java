@@ -59,7 +59,7 @@ public class CadastrarEquipeForm extends JFrame {
         panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento
 
         // Botão Retornar ao Menu
-        retornarMenuButton = new JButton("Retornar ao menu");
+        retornarMenuButton = new JButton("Voltar");
         retornarMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(retornarMenuButton);
 
