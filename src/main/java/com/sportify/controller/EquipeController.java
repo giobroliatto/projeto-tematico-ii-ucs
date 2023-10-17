@@ -29,7 +29,6 @@ public class EquipeController {
     }
     
     public void removeEquipe(Long id) {
-    	System.out.println(id);
     	if(id != null) {
     		equipeDAO.removeEquipe(id);
     	}

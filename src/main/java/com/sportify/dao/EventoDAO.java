@@ -37,6 +37,15 @@ public class EventoDAO {
         session.getTransaction().commit();
     }
     
+    public void removeEvento(Long id) {
+    	session.beginTransaction();
+    	Evento evento = session.get(Evento.class, id); /* CARREGA A ENTIDADE A SER REMOVIDA */
+    	if(evento != null) {
+    		session.delete(evento); /* REMOVE A ENTIDADE */
+    	}
+    	session.getTransaction().commit();
+    }
+    
     public Long getIdByNome(String nome) {
         Query<Long> query = session.createQuery("SELECT id FROM Evento WHERE nome = :nome", Long.class);
         query.setParameter("nome", nome);

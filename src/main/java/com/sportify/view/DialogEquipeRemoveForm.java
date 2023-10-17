@@ -10,19 +10,19 @@ import javax.swing.JOptionPane;
 
 import com.sportify.controller.EquipeController;
 
-public class DialogRemoveForm {
+public class DialogEquipeRemoveForm {
 	private MenuForm menuForm;
 	private String id;
 	
 	private EquipeController equipeController;
 	
-	public DialogRemoveForm(MenuForm menuForm, String id, EquipeController equipeController) {
+	public DialogEquipeRemoveForm(MenuForm menuForm, String id, EquipeController equipeController) {
 		this.menuForm = menuForm;
 		this.id = id;
 		this.equipeController = equipeController;
 	}
 	
-	public JDialog factoryRemoveDialgo() {
+	public JDialog factoryRemoveDialog() {
 		JDialog dialog = new JDialog(this.menuForm, "Remover registro");
 		dialog.setSize(300, 100);
 		dialog.setLayout(new FlowLayout());

@@ -62,7 +62,7 @@ public class ListagemEquipeForm extends JFrame {
         
         panelButtons = factory.createPanelList();
         panelButtons.setLayout(new FlowLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panelButtons.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         
         buttonEdit 	 = factory.createButtonList("Editar");
         buttonRemove = factory.createButtonList("Remover");
@@ -78,11 +78,11 @@ public class ListagemEquipeForm extends JFrame {
         add(panel);
         setLocationRelativeTo(null);
         
-        /* Esconder coluna ID */
+        /* ESCONDER COLUNA ID */
         this.hideColumnID(table);
         
         /* EDITAR */
-        buttonEdit.addActionListener(new ActionListener() {
+        buttonEdit.addActionListener(new ActionListener() {	
             @Override
             public void actionPerformed(ActionEvent e) {
             	if(table.getSelectedRow() == -1) {
@@ -95,7 +95,7 @@ public class ListagemEquipeForm extends JFrame {
             		idAux = table.getValueAt(table.getSelectedRow(), 0).toString();
             		nameAux = table.getValueAt(table.getSelectedRow(), 1).toString();
             		
-            		DialogEditForm editDialog = new DialogEditForm(menuForm, idAux, nameAux, equipeController);
+            		DialogEquipeEditForm editDialog = new DialogEquipeEditForm(menuForm, idAux, nameAux, equipeController);
             	}
         	}
         });
@@ -106,18 +106,16 @@ public class ListagemEquipeForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
             	
             	if(table.getSelectedRow() == -1) {
-            		/* CRIAR MÉTODO EM OUTRA CLASSE */
-	            		JOptionPane.showMessageDialog(
-	    				menuForm, 
-	    				"Nenhuma equipe selecionada", 
-	    				"Error", 
-	    				JOptionPane.ERROR_MESSAGE);
-            		/* CRIAR MÉTODO EM OUTRA CLASSE */
+            		JOptionPane.showMessageDialog(
+    				menuForm, 
+    				"Nenhuma equipe selecionada", 
+    				"Error", 
+    				JOptionPane.ERROR_MESSAGE);
             	} else {
             		idAux = table.getValueAt(table.getSelectedRow(), 0).toString();
             		
-                	DialogRemoveForm removeDialog = new DialogRemoveForm(menuForm, idAux, equipeController);
-                	removeDialog.factoryRemoveDialgo().setVisible(true);
+            		DialogEquipeRemoveForm removeDialog = new DialogEquipeRemoveForm(menuForm, idAux, equipeController);
+                	removeDialog.factoryRemoveDialog().setVisible(true);
             	}
             }
         });

@@ -1,12 +1,13 @@
 package com.sportify.controller;
 
-import com.sportify.dao.EventoDAO;
-import com.sportify.model.Evento;
-
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
+
+import com.sportify.dao.EventoDAO;
+import com.sportify.model.Evento;
 
 public class EventoController {
     private EventoDAO eventoDAO;
@@ -24,6 +25,24 @@ public class EventoController {
         evento.setEsporte(esporte);
 
         return eventoDAO.saveEvento(evento);
+    }
+    
+    public void updateEvento(Long id, String nome, String local, Date dataInicio, Date dataFim, String esporte) {
+    	Evento evento = eventoDAO.getEvento(id);
+    	if(evento != null) {
+    		evento.setNome(nome);
+    		evento.setLocal(local);
+    		evento.setDataInicio(dataInicio);
+    		evento.setDataFim(dataFim);
+    		evento.setEsporte(esporte);
+    		eventoDAO.updateEvento(evento);
+    	}
+    }
+    
+    public void removeEvento(Long id) {
+    	if(id != null) {
+    		eventoDAO.removeEvento(id);
+    	}
     }
     
     public List<Evento> getEventos(){
@@ -66,12 +85,7 @@ public class EventoController {
         if (dataFim.before(dataInicio)) {
             return "A data final não pode ser anterior à data de início.";
         }
-        
-        Long id = getIdByNome(nome);
-        if (id != null) {
-            return "Evento '" + nome + "' já cadastrado.";
-        }
-
+      
         return null;
     }
 

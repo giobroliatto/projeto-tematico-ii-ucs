@@ -14,7 +14,7 @@ import com.sportify.model.Equipe;
 import com.sportify.util.FactoryComponents;
 
 
-public class DialogEditForm {
+public class DialogEquipeEditForm {
 	private MenuForm menuForm;
 	
 	private String id;
@@ -31,7 +31,7 @@ public class DialogEditForm {
 	
 	private EquipeController equipeController;
 	
-	public DialogEditForm(MenuForm menuForm, String id, String name, EquipeController equipeController) {
+	public DialogEquipeEditForm(MenuForm menuForm, String id, String name, EquipeController equipeController) {
 		this.menuForm = menuForm;
 		this.id = id;
 		this.name = name;
@@ -74,7 +74,7 @@ public class DialogEditForm {
 					JOptionPane.showMessageDialog(
 					menuForm, 
 					"Equipe salva com sucesso", 
-					"Sucess", 
+					"Sucesso", 
 					JOptionPane.INFORMATION_MESSAGE);
 					dialog.setVisible(false);
 				}

@@ -29,9 +29,9 @@ public class EquipeDAO {
     
     public void removeEquipe(Long id) {
         session.beginTransaction();
-        Equipe equipe = session.get(Equipe.class, id); // Carrega a entidade a ser removida
+        Equipe equipe = session.get(Equipe.class, id); /* CARREGA A ENTIDADE A SER REMOVIDA */
         if (equipe != null) {
-            session.delete(equipe); // Remove a entidade
+            session.delete(equipe); /* REMOVE A ENTIDADE */
         }
         session.getTransaction().commit();
     }

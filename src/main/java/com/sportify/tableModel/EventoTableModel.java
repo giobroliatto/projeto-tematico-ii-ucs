@@ -8,7 +8,7 @@ import com.sportify.model.Evento;
 
 public class EventoTableModel extends AbstractTableModel {
     private List<Evento> eventos;
-    private String[] colunas = {"Nome", "Local", "Data de início", "Data final", "Esporte"};
+    private String[] colunas = {"Id", "Nome", "Local", "Data de início", "Data final", "Esporte"};
 
     public EventoTableModel(List<Evento> eventos) {
         this.eventos = eventos;
@@ -28,15 +28,17 @@ public class EventoTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Evento evento = eventos.get(rowIndex);
         switch (columnIndex) {
-            case 0:
-                return evento.getNome();
+        	case 0:
+        		return evento.getId();
             case 1:
-                return evento.getLocal();
+                return evento.getNome();
             case 2:
-                return evento.getDataInicio();
+                return evento.getLocal();
             case 3:
-                return evento.getDataFim();
+                return evento.getDataInicio();
             case 4:
+                return evento.getDataFim();
+            case 5:
                 return evento.getEsporte();
             default:
                 return null;
