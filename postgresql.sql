@@ -1,9 +1,10 @@
-<<<<<<< Updated upstream
+-- Tabela "equipes"
 CREATE TABLE equipes (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL
 );
 
+-- Tabela "eventos"
 CREATE TABLE eventos (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -11,24 +12,11 @@ CREATE TABLE eventos (
     dataInicio DATE,
 	dataFim DATE,
     esporte VARCHAR(50)
-=======
--- Tabela "esporte"
-CREATE TABLE esporte (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL
 );
 
--- Tabela "evento"
-CREATE TABLE evento (
+-- Tabela "equipes_eventos"
+CREATE TABLE equipes_eventos (
     id SERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL
->>>>>>> Stashed changes
-);
-
--- Tabela "esporte_evento" 
-CREATE TABLE esporte_evento (
-    id SERIAL PRIMARY KEY,
-<<<<<<< Updated upstream
     idEquipe INT,
     idEvento INT,
     dataInicio DATE,
@@ -37,6 +25,7 @@ CREATE TABLE esporte_evento (
     FOREIGN KEY (idEvento) REFERENCES eventos(id)
 );
 
+-- Tabela "chaves"
 CREATE TABLE chaves (
     id SERIAL PRIMARY KEY,
     idEvento INT NOT NULL,
@@ -58,6 +47,7 @@ CREATE TABLE chaves (
 	FOREIGN KEY (idEvento) REFERENCES eventos(id)
 );
 
+-- Tabela "partidas"
 CREATE TABLE partidas (
     id SERIAL PRIMARY KEY,
     idEvento INT,
@@ -147,24 +137,3 @@ drop table partidas;
 drop table chaves;
 drop table equipes;
 drop table eventos;
-=======
-    esporte_id INT REFERENCES esporte(id),
-    evento_id INT REFERENCES evento(id)
-);
-
-INSERT INTO esporte (nome) VALUES
-    ('Futebol'),
-    ('Basquete'),
-    ('Vôlei');
-
-INSERT INTO evento (nome) VALUES
-    ('Copa do Mundo'),
-    ('Olimpíadas'),
-    ('Final de Basquete');
-
-INSERT INTO esporte_evento (esporte_id, evento_id) VALUES
-    (1, 1),  
-    (2, 1), 
-    (2, 3),  
-    (3, 2);
->>>>>>> Stashed changes
