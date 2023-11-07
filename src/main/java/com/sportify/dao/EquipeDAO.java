@@ -74,4 +74,10 @@ public class EquipeDAO {
     public Equipe getEquipeById(Long id) {
         return session.get(Equipe.class, id);
     }
+    
+    public List<Long> buscaRelacionamento(long idEquipe) {
+    	Query<Long> query = session.createQuery("SELECT id FROM EquipeEvento WHERE idequipe = :idequipe", Long.class);
+    	query.setParameter("idequipe", idEquipe);
+    	return query.list();
+    }
 }

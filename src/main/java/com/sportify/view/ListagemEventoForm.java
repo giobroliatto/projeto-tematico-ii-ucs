@@ -41,6 +41,9 @@ public class ListagemEventoForm extends JFrame{
 	private String esporteAux;
 	
 	private ArrayList<Evento> eventoValues = new ArrayList<Evento>();
+	
+	private List<Long> relacionamentos;
+	
 	private Evento evento = new Evento();
 	
 	private FactoryComponents factory;
@@ -55,6 +58,8 @@ public class ListagemEventoForm extends JFrame{
 	private JButton buttonVoltar;
 	
 	private DialogEventoEditForm editDialog;
+	
+	
 	
 	List<Evento> listEventos = new ArrayList<>();
 	
@@ -138,9 +143,17 @@ public class ListagemEventoForm extends JFrame{
     				JOptionPane.ERROR_MESSAGE);
 				} else {
 					idAux = table.getValueAt(table.getSelectedRow(), 0).toString();
-					
-					DialogEventoRemoveForm removeDialog = new DialogEventoRemoveForm(menuForm, idAux, eventoController);
-					removeDialog.factoryRemoveDialog().setVisible(true);
+					relacionamentos = eventoController.buscaRelacionamento(Long.parseLong(idAux));
+					if(relacionamentos.size() > 0) {
+	            		JOptionPane.showMessageDialog(
+        				menuForm, 
+        				"Não é possível excluir este evento, pois existem equipes vinculadas", 
+        				"Error", 
+        				JOptionPane.ERROR_MESSAGE);
+					} else {
+						DialogEventoRemoveForm removeDialog = new DialogEventoRemoveForm(menuForm, idAux, eventoController);
+						removeDialog.factoryRemoveDialog().setVisible(true);
+					}
 				}
 			}
 		});

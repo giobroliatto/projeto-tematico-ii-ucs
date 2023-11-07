@@ -49,6 +49,10 @@ public class EventoController {
     	return eventoDAO.getEventos();
     }
     
+    public Evento getEveto(long id) {
+    	return eventoDAO.getEvento(id);
+    }
+    
     public Long getIdByNome(String nome) {
         return eventoDAO.getIdByNome(nome);
     }
@@ -85,8 +89,11 @@ public class EventoController {
         if (dataFim.before(dataInicio)) {
             return "A data final não pode ser anterior à data de início.";
         }
-      
+        
         return null;
     }
-
+    
+    public List<Long> buscaRelacionamento(long id) {
+    	return this.eventoDAO.buscaRelacionamento(id);
+    }
 }

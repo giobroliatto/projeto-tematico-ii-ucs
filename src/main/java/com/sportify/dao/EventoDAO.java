@@ -64,4 +64,10 @@ public class EventoDAO {
         return query.uniqueResult();
     }
     
+    public List<Long> buscaRelacionamento(long idEvento) {
+    	Query<Long> query = session.createQuery("SELECT id FROM EquipeEvento WHERE idevento = :idevento", Long.class);
+    	query.setParameter("idevento", idEvento);
+    	return query.list();
+    }
+    
 }

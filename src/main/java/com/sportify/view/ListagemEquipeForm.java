@@ -43,6 +43,8 @@ public class ListagemEquipeForm extends JFrame {
 	
 	List<Equipe> listNomes;
 	
+	private List<Long> relacionamentos;
+	
 	public ListagemEquipeForm(EquipeController equipeController, MenuForm menuForm) {
 		this.equipeController = equipeController;
 		this.menuForm = menuForm;
@@ -114,8 +116,18 @@ public class ListagemEquipeForm extends JFrame {
             	} else {
             		idAux = table.getValueAt(table.getSelectedRow(), 0).toString();
             		
-            		DialogEquipeRemoveForm removeDialog = new DialogEquipeRemoveForm(menuForm, idAux, equipeController);
-                	removeDialog.factoryRemoveDialog().setVisible(true);
+            		relacionamentos = equipeController.buscaRelacionamento(Long.parseLong(idAux));
+            		
+            		if(relacionamentos.size() > 0) {
+                		JOptionPane.showMessageDialog(
+        				menuForm, 
+        				"Não é possível excluir esta equipe, pois ela está vinculada com um ou mais eventos", 
+        				"Error", 
+        				JOptionPane.ERROR_MESSAGE);
+            		} else {
+                		DialogEquipeRemoveForm removeDialog = new DialogEquipeRemoveForm(menuForm, idAux, equipeController);
+                    	removeDialog.factoryRemoveDialog().setVisible(true);
+            		}
             	}
             }
         });

@@ -58,4 +58,8 @@ public class EquipeController {
 
         return null;
     }
+
+    public List<Long> buscaRelacionamento(long id) {
+    	return this.equipeDAO.buscaRelacionamento(id);
+    }
 }
