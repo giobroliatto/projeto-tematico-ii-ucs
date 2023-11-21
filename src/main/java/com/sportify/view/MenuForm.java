@@ -19,14 +19,6 @@ public class MenuForm extends JFrame {
     private JButton listarEquipesButton;
     private JButton listarEventosButton;
     
-    // REALOCAR PARA DETALHES DO EVENTO: Adicionar input e botão de geração de chaves
-    private JTextField idEventoInput;
-    private JButton gerarChaveButton;
-    
-    // REALOCAR PARA DETALHES DO EVENTO: Adicionar input e botão de visualização chaves
-    private JTextField idEventoInput2;
-    private JButton verChaveButton;
-
     public MenuForm(
     		EquipeController equipeController, 
     		EventoController eventoController, 
@@ -81,28 +73,6 @@ public class MenuForm extends JFrame {
         listarEventosButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(listarEventosButton);
 
-        // REALOCAR PARA DETALHES DO EVENTO: Adicionar input e botão de gerar chave
-        panel.add(Box.createRigidArea(new Dimension(0, 20)));
-        idEventoInput = new JTextField(10);
-        gerarChaveButton = new JButton("Gerar chave");
-        
-        JPanel gerarChavePanel = new JPanel();
-        gerarChavePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        gerarChavePanel.add(idEventoInput);
-        gerarChavePanel.add(gerarChaveButton);
-        panel.add(gerarChavePanel);
-        
-        // REALOCAR PARA DETALHES DO EVENTO: Adicionar input e botão de gerar chave
-        idEventoInput2 = new JTextField(10);
-        verChaveButton = new JButton("Ver chave");
-        
-        JPanel verChavePanel = new JPanel();
-        verChavePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        verChavePanel.add(idEventoInput2);
-        verChavePanel.add(verChaveButton);
-        panel.add(verChavePanel);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento
-
         cadastrarEquipeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CadastrarEquipeForm equipeForm = new CadastrarEquipeForm(equipeController, MenuForm.this);
@@ -129,38 +99,12 @@ public class MenuForm extends JFrame {
 
         listarEventosButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ListagemEventoForm listagemEventoForm = new ListagemEventoForm(eventoController, MenuForm.this);
+                ListagemEventoForm listagemEventoForm = new ListagemEventoForm(MenuForm.this, eventoController, partidaController, chaveController);
                 setVisible(false);
                 listagemEventoForm.setVisible(true);
             }
         });
         
-        // REALOCAR PARA DETALHES DO EVENTO: Adicionar ação para o botão de gerar chave
-        gerarChaveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Long idEvento = Long.valueOf(idEventoInput.getText());
-                String mensagemErro = chaveController.validateChaveByIdEvento(idEvento);
-                
-                if (mensagemErro != null) {
-                    JOptionPane.showMessageDialog(null, mensagemErro);
-                } else {
-	                chaveController.createChave(idEvento);
-	                JOptionPane.showMessageDialog(null, "Partidas e chave gerados com sucesso");
-	                idEventoInput.setText("");
-                }
-            }
-        });
-        
-        // REALOCAR PARA DETALHES DO EVENTO: Adicionar ação para o botão de ver chave
-        verChaveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Long idEvento = Long.valueOf(idEventoInput2.getText());
-
-                ChaveForm chaveForm = new ChaveForm(idEvento, partidaController, chaveController);
-                chaveForm.setVisible(true);
-            }
-        });
-
         add(panel);
         setLocationRelativeTo(null); 
     }

@@ -4,12 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.activation.DataSource;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -21,8 +19,9 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import com.sportify.controller.ChaveController;
 import com.sportify.controller.EventoController;
-import com.sportify.model.Equipe;
+import com.sportify.controller.PartidaController;
 import com.sportify.model.Evento;
 import com.sportify.tableModel.EventoTableModel;
 import com.sportify.util.FactoryComponents;
@@ -56,14 +55,15 @@ public class ListagemEventoForm extends JFrame{
 	private JButton buttonEdit;
 	private JButton buttonRemove;
 	private JButton buttonVoltar;
+	private JButton buttonDetalhar;
 	
 	private DialogEventoEditForm editDialog;
-	
-	
+	private DialogEventoRemoveForm removeDialog;
+	private DialogEventoDetailForm detailDialog;
 	
 	List<Evento> listEventos = new ArrayList<>();
 	
-	public ListagemEventoForm(EventoController eventoController, MenuForm menuForm) {
+	public ListagemEventoForm(MenuForm menuForm, EventoController eventoController, PartidaController partidaController, ChaveController chaveController) {
 		this.eventoController = eventoController;
 		this.menuForm = menuForm;
 		
@@ -86,10 +86,12 @@ public class ListagemEventoForm extends JFrame{
 		
         buttonEdit 	 = factory.createButtonList("Editar");
         buttonRemove = factory.createButtonList("Remover");
+        buttonDetalhar = factory.createButtonList("Detalhar");
         buttonVoltar = factory.createButtonList("Voltar");
         
         panelButtons.add(buttonEdit);
         panelButtons.add(buttonRemove);
+        panelButtons.add(buttonDetalhar);
         panelButtons.add(buttonVoltar);
         
         panel.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -151,9 +153,26 @@ public class ListagemEventoForm extends JFrame{
         				"Error", 
         				JOptionPane.ERROR_MESSAGE);
 					} else {
-						DialogEventoRemoveForm removeDialog = new DialogEventoRemoveForm(menuForm, idAux, eventoController);
+						removeDialog = new DialogEventoRemoveForm(menuForm, idAux, eventoController);
 						removeDialog.factoryRemoveDialog().setVisible(true);
 					}
+				}
+			}
+		});
+		
+		/* DETALHAR */
+		this.buttonDetalhar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRow() == -1) {
+            		JOptionPane.showMessageDialog(
+    				menuForm, 
+    				"Nenhum evento selecionado", 
+    				"Error", 
+    				JOptionPane.ERROR_MESSAGE);
+				} else {
+					idAux = table.getValueAt(table.getSelectedRow(), 0).toString();
+					detailDialog = new DialogEventoDetailForm(menuForm, Long.parseLong(idAux), eventoController, partidaController, chaveController);
 				}
 			}
 		});

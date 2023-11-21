@@ -1,5 +1,6 @@
 package com.sportify.util;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -21,6 +23,7 @@ public class FactoryComponents {
 	private JTextField textField;
 	private MaskFormatter dateMask;
 	private JFormattedTextField dateField;
+	private JLabel jLabel;
 	
 	
 	public JButton createButtonList(String name) {
@@ -67,6 +70,6 @@ public class FactoryComponents {
 
 	    return dateField;
 	}
-
 	
+
 }	

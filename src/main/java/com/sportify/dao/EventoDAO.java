@@ -70,4 +70,10 @@ public class EventoDAO {
     	return query.list();
     }
     
+    public List<Long> buscaRelacionamentoComChave(long idEvento) {
+    	Query<Long> query = session.createQuery("SELECT id FROM Chave WHERE idevento = :idevento", Long.class);
+    	query.setParameter("idevento", idEvento);
+    	return query.list();
+    }
+    
 }

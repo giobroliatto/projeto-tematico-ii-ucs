@@ -96,4 +96,10 @@ public class EventoController {
     public List<Long> buscaRelacionamento(long id) {
     	return this.eventoDAO.buscaRelacionamento(id);
     }
+    
+    public List<Long> buscaRelacionamentoComChave(long id) {
+    	return this.eventoDAO.buscaRelacionamentoComChave(id);
+    }
+    
+    
 }
