@@ -1,34 +1,38 @@
 package com.sportify.util;
 
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.FlowLayout;
-import java.text.ParseException;
-import java.time.LocalDate;
+import java.awt.Font;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.text.MaskFormatter;
 
 public class FactoryComponents {
 	private JButton button;
 	private JTable table;
 	private JDialog dialog;
 	private JTextField textField;
-	private MaskFormatter dateMask;
-	private JFormattedTextField dateField;
-	private JLabel jLabel;
+	private JLabel label;
 	
+	private SimpleDateFormat format;
+	private String dateFormattedStr;
 	
 	public JButton createButtonList(String name) {
 		button = new JButton();
 		button.setText(name);
+		button.setFont(new Font("Arial", Font.BOLD, 15));
+		button.setBackground(new Color(81, 85, 81));
+		button.setForeground(new Color(255, 255, 255));
+        button.setBorderPainted(false); /* REMOVE A BORDA */
+        button.setFocusPainted(false); /* REMOVE O FOCO */
 		return button;
 	}
 	
@@ -38,6 +42,9 @@ public class FactoryComponents {
 	
 	public JTable createTableList(AbstractTableModel model) {
 		table = new JTable(model);		
+		table.setBackground(new Color(255, 255, 255));
+		table.setForeground(new Color(0, 0, 0));
+		table.setFont(new Font("Arial", Font.BOLD, 15));
 		return table;
 	}	
 	
@@ -56,20 +63,24 @@ public class FactoryComponents {
 		return textField;
 	}
 	
-	public JFormattedTextField createDatePicker(String name, LocalDate value) {
-	    try {
-	        dateMask = new MaskFormatter("####/##/##");
-	        dateField = new JFormattedTextField(dateMask);
-	        dateField.setColumns(25);
-
-	        String formattedDate = String.format("%04d/%02d/%02d", value.getYear(), value.getMonthValue(), value.getDayOfMonth());
-	        dateField.setText(formattedDate);
-	    } catch (ParseException e) {
-	        e.printStackTrace();
-	    }
-
-	    return dateField;
+	public JLabel createJLabel(String nome) {
+		label = new JLabel();
+		label.setText(nome);
+		label.setFont(new Font("Arial", Font.BOLD, 16));
+		
+		return label;
 	}
+	
+	public String dateFieldFormatting(Date dateAux) {
+
+		format = new SimpleDateFormat("dd/MM/yyyy");
+		
+		dateFormattedStr = format.format(dateAux);
+		
+		return dateFormattedStr;
+	}
+	
+	
 	
 
 }	

@@ -1,6 +1,7 @@
 package com.sportify.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,53 +36,28 @@ public class ListagemEquipeForm extends JFrame {
 	private JButton buttonEdit;
 	private JButton buttonRemove;
 	private JButton buttonVoltar;
+	private JButton buttonAtualizar;
 	
 	private JPanel panel;
 	private JPanel panelButtons;
 	
 	private JTable table;
 	
+	private EquipeTableModel equipeTModel;
+	
 	List<Equipe> listNomes;
 	
 	private List<Long> relacionamentos;
+	
+	public ListagemEquipeForm() {
+		
+	}
 	
 	public ListagemEquipeForm(EquipeController equipeController, MenuForm menuForm) {
 		this.equipeController = equipeController;
 		this.menuForm = menuForm;
 		
-		setTitle("Listagem de Equipes");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(350, 220);
-        
-        factory = new FactoryComponents();
-        
-    	panel = factory.createPanelList();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-    	  
-        EquipeTableModel equipeTModel = new EquipeTableModel(this.equipeController.getEquipes());
-        table = factory.createTableList(equipeTModel);
-        
-        panelButtons = factory.createPanelList();
-        panelButtons.setLayout(new FlowLayout());
-        panelButtons.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        
-        buttonEdit 	 = factory.createButtonList("Editar");
-        buttonRemove = factory.createButtonList("Remover");
-        buttonVoltar = factory.createButtonList("Voltar");
-         
-        panelButtons.add(buttonEdit);
-        panelButtons.add(buttonRemove);
-        panelButtons.add(buttonVoltar);
-        
-        panel.add(new JScrollPane(table), BorderLayout.CENTER);
-        panel.add(panelButtons, BorderLayout.SOUTH);
-        
-        add(panel);
-        setLocationRelativeTo(null);
-        
-        /* ESCONDER COLUNA ID */
-        this.hideColumnID(table);
+        createTable();
         
         /* EDITAR */
         buttonEdit.addActionListener(new ActionListener() {	
@@ -131,7 +107,7 @@ public class ListagemEquipeForm extends JFrame {
             	}
             }
         });
-        	
+        
         /* VOLTAR */
         buttonVoltar.addActionListener(new ActionListener() {
 			@Override
@@ -139,11 +115,70 @@ public class ListagemEquipeForm extends JFrame {
 				returnToMenu();
 			}
 		});
+        	
+        /* ATUALIZAR */
+        buttonAtualizar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				equipeTModel = new EquipeTableModel(equipeController.getEquipes());
+				table.setModel(equipeTModel);
+				
+		        /* ESCONDER COLUNA ID */
+		        hideColumnID(table);
+			}
+		});
 	}	
 	
 	private void returnToMenu() {
 		menuForm.setVisible(true);
 		dispose();
+	}
+	
+	/**
+	 * 
+	 */
+	public void createTable() {		
+		setTitle("Listagem de Equipes");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500, 400);
+        
+        factory = new FactoryComponents();
+        
+    	panel = factory.createPanelList();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+    	  
+        equipeTModel = new EquipeTableModel(this.equipeController.getEquipes());
+        table = factory.createTableList(equipeTModel);
+        
+        panelButtons = factory.createPanelList();
+        panelButtons.setLayout(new FlowLayout());
+        panelButtons.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        
+        buttonEdit = factory.createButtonList("Editar");
+        
+        buttonRemove = factory.createButtonList("Remover");
+        buttonRemove.setBackground(new Color(134, 22, 20));
+
+        buttonVoltar = factory.createButtonList("Voltar");
+  
+        buttonAtualizar = factory.createButtonList("Atualizar");
+
+        
+        
+        panelButtons.add(buttonEdit);
+        panelButtons.add(buttonRemove);
+        panelButtons.add(buttonAtualizar);
+        panelButtons.add(buttonVoltar);
+        
+        panel.add(new JScrollPane(table), BorderLayout.CENTER);
+        panel.add(panelButtons, BorderLayout.SOUTH);
+        
+        add(panel);
+        setLocationRelativeTo(null);
+        
+        /* ESCONDER COLUNA ID */
+        this.hideColumnID(table);
 	}
 	
 	public void hideColumnID(JTable table) {
@@ -155,7 +190,14 @@ public class ListagemEquipeForm extends JFrame {
         
         table.getTableHeader().resizeAndRepaint();
         table.repaint();
-
+	}
+	
+	public void updateTable() {
+		equipeTModel = new EquipeTableModel(equipeController.getEquipes());
+		table.setModel(equipeTModel);
+		
+        /* ESCONDER COLUNA ID */
+        hideColumnID(table);
 	}
 }
 

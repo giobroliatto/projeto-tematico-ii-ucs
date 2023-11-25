@@ -1,6 +1,5 @@
 package com.sportify.tableModel;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -8,14 +7,18 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import com.sportify.model.Evento;
+import com.sportify.util.FactoryComponents;
 
 public class EventoTableModel extends AbstractTableModel {
+	private static final long serialVersionUID = 1L;
+	
 	private List<Evento> eventos;
-    private Date dataAux;
-    private String[] colunas = {"Id", "Nome", "Local", "Data de início", "Data final", "Esporte"};
+    private String[] colunas = {"Id", "NOME", "LOCAL", "DATA DE INÍCIO", "DATA FINAL", "ESPORTE"};
+    private FactoryComponents factory;
 
     public EventoTableModel(List<Evento> eventos) {
         this.eventos = eventos;
+        this.factory = new FactoryComponents();
     }
 
     @Override
@@ -39,11 +42,9 @@ public class EventoTableModel extends AbstractTableModel {
             case 2:
                 return evento.getLocal();
             case 3:
-//                return formatDate(evento.getDataInicio());
-                return evento.getDataInicio();
+            	return this.factory.dateFieldFormatting(evento.getDataInicio());
             case 4:
-//                return formatDate(evento.getDataInicio());
-                return evento.getDataFim();
+                return this.factory.dateFieldFormatting(evento.getDataFim());
             case 5:
                 return evento.getEsporte();
             default:

@@ -3,6 +3,7 @@ package com.sportify.view;
 import javax.swing.*;
 
 import com.sportify.controller.EquipeController;
+import com.sportify.util.FactoryComponents;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,10 +17,14 @@ public class CadastrarEquipeForm extends JFrame {
     private JButton retornarMenuButton;
     private EquipeController equipeController;
     private MenuForm menuForm;
+    
+	private FactoryComponents factory;
 
     public CadastrarEquipeForm(EquipeController equipeController, MenuForm menuForm) {
         this.equipeController = equipeController;
         this.menuForm = menuForm;
+        
+        factory = new FactoryComponents();
 
         setTitle("Cadastro de Equipe");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,15 +33,15 @@ public class CadastrarEquipeForm extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        // Título
+        
+        /* TÍTULO */
         JLabel titleLabel = new JLabel("Cadastrar equipe");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(titleLabel);
         panel.add(Box.createRigidArea(new Dimension(0, 20))); // Espaçamento
 
-        // Campo de Nome
+        /* CAMPO DE NOME */
         JPanel nomePanel = new JPanel();
         nomePanel.setLayout(new BoxLayout(nomePanel, BoxLayout.X_AXIS));
         nomePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -52,14 +57,14 @@ public class CadastrarEquipeForm extends JFrame {
         panel.add(nomePanel);
         panel.add(Box.createRigidArea(new Dimension(0, 20))); // Espaçamento
 
-        // Botão Criar Equipe
-        criarEquipeButton = new JButton("Criar equipe");
+        /* BOTÃO CRIAR EQUIPE */
+        criarEquipeButton = factory.createButtonList("Criar equipe");
         criarEquipeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(criarEquipeButton);
         panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento
 
-        // Botão Retornar ao Menu
-        retornarMenuButton = new JButton("Voltar");
+        /* BOTÃO RETORNAR AO MENU */
+        retornarMenuButton = factory.createButtonList("Voltar");
         retornarMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(retornarMenuButton);
 

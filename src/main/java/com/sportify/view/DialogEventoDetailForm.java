@@ -52,16 +52,16 @@ public class DialogEventoDetailForm {
 		
 		factory = new FactoryComponents();
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		
-		_dataInicio = dateFormat.format(evento.getDataInicio());
-		_dataFim = dateFormat.format(evento.getDataFim());
-		
 		dialog = factory.createJDialog(menuForm, "Detalhar evento");
 		dialog.setSize(300, 200);
 		dialog.setLayout(new FlowLayout());
 		
 		panel = new JPanel(new GridLayout(0, 1));
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		
+		_dataInicio = dateFormat.format(evento.getDataInicio());
+		_dataFim = dateFormat.format(evento.getDataFim());
 		 
 		nomeLabel = new JLabel("Nome: " + evento.getNome());
 		localLabel = new JLabel("Local: " + evento.getLocal());
@@ -87,7 +87,8 @@ public class DialogEventoDetailForm {
 		}
 		
         dialog.add(panel);
-	
+        
+        dialog.setLocationRelativeTo(menuForm);
 		dialog.setVisible(true);
 		
 		/* VER CHAVE */
@@ -95,6 +96,7 @@ public class DialogEventoDetailForm {
             public void actionPerformed(ActionEvent e) {
                 ChaveForm chaveForm = new ChaveForm(idEvento, partidaController, chaveController);
                 chaveForm.setVisible(true);
+                dialog.setVisible(false);
             }
         });
 		
@@ -108,6 +110,7 @@ public class DialogEventoDetailForm {
 	                chaveController.createChave(idEvento);
 	                JOptionPane.showMessageDialog(null, "Partidas e chave gerados com sucesso");
                 }
+                dialog.setVisible(false);
             }
         });
 	}

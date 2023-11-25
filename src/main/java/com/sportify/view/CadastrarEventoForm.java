@@ -4,6 +4,8 @@ import javax.swing.*;
 import com.sportify.controller.EquipeController;
 import com.sportify.controller.EquipeEventoController;
 import com.sportify.controller.EventoController;
+import com.sportify.util.FactoryComponents;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,12 +28,16 @@ public class CadastrarEventoForm extends JFrame {
     private EquipeController equipeController;
     private EquipeEventoController equipeEventoController;
     private MenuForm menuForm;
+    
+    private FactoryComponents factory;
 
     public CadastrarEventoForm(EventoController eventoController, EquipeController equipeController, EquipeEventoController equipeEventoController, MenuForm menuForm) {
         this.eventoController = eventoController;
         this.equipeController = equipeController;
         this.equipeEventoController = equipeEventoController;
         this.menuForm = menuForm;
+        
+        factory = new FactoryComponents();
 
         setTitle("Cadastro de Evento");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,14 +70,14 @@ public class CadastrarEventoForm extends JFrame {
         panel.add(quantidadeEquipesPanel);
         panel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        // Botão Criar Evento
-        criarEventoButton = new JButton("Selecionar equipes");
+        /* BOTÃO CRIAR EVENTO */
+        criarEventoButton = factory.createButtonList("Selecionar equipes");
         criarEventoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(criarEventoButton);
         panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento
 
-        // Botão Retornar ao Menu
-        retornarMenuButton = new JButton("Voltar");
+        /* BOTÃO RETORNAR MENU */
+        retornarMenuButton = factory.createButtonList("Voltar");
         retornarMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(retornarMenuButton);
 

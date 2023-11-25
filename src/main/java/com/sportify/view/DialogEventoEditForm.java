@@ -5,29 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.sportify.controller.EventoController;
-import com.sportify.model.Evento;
 import com.sportify.util.FactoryComponents;
 
 public class DialogEventoEditForm {
 	private MenuForm menuForm;
-	private Long id;
-	private String nome;
-	private String local;
-	private String dataInicio;
-	private String dataFim;
-	private String esporte;
 	private String validateFields;
 	
 	private JDialog dialog;
@@ -39,24 +28,18 @@ public class DialogEventoEditForm {
 	private JTextField tfLocal;
 	private JTextField tfEsporte;
 	
-	private JFormattedTextField tfDataInicio;
-	private JFormattedTextField tfDataFim;
+	private JTextField tfDataInicio;
+	private JTextField tfDataFim;
 	
 	private Date _dataInicio;
 	private Date _dataFim;
 	
+	private boolean isError;
+	
 	FactoryComponents factory;
 	
-	public DialogEventoEditForm(MenuForm menuForm, Evento fieldValues, EventoController eventoController) {
+	public DialogEventoEditForm(MenuForm menuForm, EventoController eventoController, String id, String nome, String local, String dataInicio, String dataFim, String esporte) {
 		this.menuForm = menuForm;
-		
-		this.id 		= fieldValues.getId();
-		this.nome 		= fieldValues.getNome().toString();
-		this.local 		= fieldValues.getLocal().toString();
-		this.dataInicio = fieldValues.getDataInicio().toString();
-		this.dataFim 	= fieldValues.getDataFim().toString();
-		this.esporte 	= fieldValues.getEsporte().toString();
-		
 		
 		factory = new FactoryComponents();
 		
@@ -67,11 +50,11 @@ public class DialogEventoEditForm {
 		buttonConfirmDialog = factory.createButtonList("Editar");
 		buttonCancelDialog = factory.createButtonList("Cancelar");
 				
-		tfNome 		 = factory.createTextFieldDialog("Nome", this.nome);
-		tfLocal  	 = factory.createTextFieldDialog("Local", this.local);
-		tfDataInicio = factory.createDatePicker("Data de inicio", getDateFormatterLabel(this.dataInicio));
-		tfDataFim    = factory.createDatePicker("Data final", getDateFormatterLabel(this.dataFim));
-		tfEsporte	 = factory.createTextFieldDialog("Esporte", this.esporte);
+		tfNome 		 = factory.createTextFieldDialog("Nome", nome);
+		tfLocal  	 = factory.createTextFieldDialog("Local", local);
+		tfDataInicio = factory.createTextFieldDialog("Data de incio", dataInicio);
+		tfDataFim 	 = factory.createTextFieldDialog("Data final", dataFim);
+		tfEsporte	 = factory.createTextFieldDialog("Esporte", esporte);
 		
 		dialog.add(tfNome);
 		dialog.add(tfLocal);
@@ -86,32 +69,26 @@ public class DialogEventoEditForm {
 		
 		dialog.setVisible(true);
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			_dataInicio = dateFormat.parse(tfDataInicio.getText());
-			_dataFim    = dateFormat.parse(tfDataFim.getText());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
+		/* CONFIRMAR */
 		this.buttonConfirmDialog.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				convertDate();
 				validateFields = eventoController.validateEvento(tfNome.getText(), tfLocal.getText(), _dataInicio, _dataFim, tfEsporte.getText());
-				if(validateFields != null) {
+				if(validateFields != null && !isError) {
 					JOptionPane.showMessageDialog(
 					menuForm,
 					validateFields, 
 					"ERRO", 
 					JOptionPane.ERROR_MESSAGE);
-				} else {
-					eventoController.updateEvento(id, tfNome.getText(), local, _dataInicio, _dataFim, esporte);
+				} else if(!isError){
+					eventoController.updateEvento(Long.parseLong(id), tfNome.getText(), tfLocal.getText(), _dataInicio, _dataFim, tfEsporte.getText());
 					JOptionPane.showMessageDialog(
 					menuForm, 
 					"Evento salvo com sucesso",
 					"Sucesso",
 					JOptionPane.INFORMATION_MESSAGE);
-					dialog.setVisible(true);
+					dialog.setVisible(false);
 				}
 			}
 		});	
@@ -124,22 +101,18 @@ public class DialogEventoEditForm {
 		});
 	}
 	
-	/* MÉTODO PARA FORMATAR A DATA PARA MOSTRAR CORRETAMENTE NA LABEL DO DIALOG */
-	public LocalDate getDateFormatterLabel(String data) {
-		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
-		
-		LocalDate date = LocalDate.parse(data, dateFormatter);
-		
-		return date;
-	}
-	
-	public LocalDate getDateFormatter(String data) {
-		String unmaskedText = data.replaceAll("[^0-9]", "");
-        int year = Integer.parseInt(unmaskedText.substring(0, 4));
-        int month = Integer.parseInt(unmaskedText.substring(4, 6));
-        int day = Integer.parseInt(unmaskedText.substring(6, 8));
-        
-        return LocalDate.of(year, month, day);
-		
+	public void convertDate() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			_dataInicio = dateFormat.parse(tfDataInicio.getText());
+			_dataFim    = dateFormat.parse(tfDataFim.getText());
+		} catch (ParseException e) {
+			JOptionPane.showMessageDialog(
+					menuForm, 
+					"Formato de data inválido. Use dd/mm/aaaa.", 
+					"ERRO",
+					JOptionPane.ERROR_MESSAGE);
+			isError = true;
+		}
 	}
 }

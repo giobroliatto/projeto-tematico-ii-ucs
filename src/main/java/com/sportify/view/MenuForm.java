@@ -5,6 +5,7 @@ import com.sportify.controller.EquipeController;
 import com.sportify.controller.EquipeEventoController;
 import com.sportify.controller.EventoController;
 import com.sportify.controller.PartidaController;
+import com.sportify.util.FactoryComponents;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,12 +20,17 @@ public class MenuForm extends JFrame {
     private JButton listarEquipesButton;
     private JButton listarEventosButton;
     
+    private FactoryComponents factory;
+    
     public MenuForm(
     		EquipeController equipeController, 
     		EventoController eventoController, 
     		EquipeEventoController equipeEventoController, 
     		PartidaController partidaController,
     		ChaveController chaveController) {
+    	
+    	factory = new FactoryComponents();
+    	
         setTitle("SPORTIFY");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(350, 410);
@@ -47,12 +53,12 @@ public class MenuForm extends JFrame {
         panel.add(cadastrosLabel);
         panel.add(Box.createRigidArea(new Dimension(0, 10))); /* ESPAÇAMENTO */
 
-        cadastrarEquipeButton = new JButton("Cadastrar equipe");
+        cadastrarEquipeButton = factory.createButtonList("Cadastrar equipe");
         cadastrarEquipeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(cadastrarEquipeButton);
         panel.add(Box.createRigidArea(new Dimension(0, 10))); /* ESPAÇAMENTO */
 
-        cadastrarEventoButton = new JButton("Cadastrar evento");
+        cadastrarEventoButton = factory.createButtonList("Cadastrar evento");
         cadastrarEventoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(cadastrarEventoButton);
         panel.add(Box.createRigidArea(new Dimension(0, 20))); /* ESPAÇAMENTO */
@@ -64,12 +70,12 @@ public class MenuForm extends JFrame {
         panel.add(listagemLabel);
         panel.add(Box.createRigidArea(new Dimension(0, 10))); /* ESPAÇAMENTO */
 
-        listarEquipesButton = new JButton("Listar equipes");
+        listarEquipesButton = factory.createButtonList("Lista equipes");
         listarEquipesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(listarEquipesButton);
         panel.add(Box.createRigidArea(new Dimension(0, 10))); /* ESPAÇAMENTO */
 
-        listarEventosButton = new JButton("Listar eventos");
+        listarEventosButton = factory.createButtonList("Listar eventos");
         listarEventosButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(listarEventosButton);
 
