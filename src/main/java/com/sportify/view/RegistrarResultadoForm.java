@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import com.sportify.controller.ChaveController;
 import com.sportify.controller.PartidaController;
+import com.sportify.util.FactoryComponents;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,13 +13,16 @@ import java.awt.event.ActionListener;
 public class RegistrarResultadoForm extends JFrame {
 
     private static final long serialVersionUID = 1L;
+    FactoryComponents factory;
 
     public RegistrarResultadoForm(Long idEvento, String equipeA, String equipeB, Long idPartida, PartidaController partidaController, ChaveController chaveController, ChaveForm chaveForm, boolean placarJaDefinido, Integer resultadoEquipeA, Integer resultadoEquipeB) {
         setTitle("Registrar Resultado");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 250);
+        setSize(400, 350);
         setLocationRelativeTo(null);
-
+        
+        factory = new FactoryComponents();
+        
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(5, 5, 5, 5);
@@ -90,7 +94,7 @@ public class RegistrarResultadoForm extends JFrame {
 
         // Botão "Confirmar"
         if (!placarJaDefinido) {
-            JButton confirmarButton = new JButton("Confirmar");
+            JButton confirmarButton = factory.createButtonList("Confirmar");
             constraints.gridx = 0;
             constraints.gridwidth = 3;
             constraints.anchor = GridBagConstraints.CENTER;
@@ -134,7 +138,7 @@ public class RegistrarResultadoForm extends JFrame {
 
         // Botão "Confirmar"
         if (!placarJaDefinido) {
-            JButton confirmarButton = new JButton("Confirmar");
+        	JButton confirmarButton = factory.createButtonList("Confirmar");
             constraints.gridx = 0;
             constraints.gridwidth = 3;
             constraints.anchor = GridBagConstraints.CENTER;
@@ -142,13 +146,12 @@ public class RegistrarResultadoForm extends JFrame {
         }
 
         // Botão "Retornar"
-        JButton retornarButton = new JButton("Retornar");
+        JButton retornarButton = factory.createButtonList("Retornar");
         constraints.gridy++;
         constraints.gridx = 0;
         constraints.gridwidth = 3;
         constraints.anchor = GridBagConstraints.CENTER;
         panel.add(retornarButton, constraints);
-
         
         retornarButton.addActionListener(new ActionListener() {
             @Override

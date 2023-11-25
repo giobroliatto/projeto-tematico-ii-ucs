@@ -53,7 +53,7 @@ public class DialogEventoDetailForm {
 		factory = new FactoryComponents();
 		
 		dialog = factory.createJDialog(menuForm, "Detalhar evento");
-		dialog.setSize(300, 200);
+		dialog.setSize(500, 250);
 		dialog.setLayout(new FlowLayout());
 		
 		panel = new JPanel(new GridLayout(0, 1));
@@ -63,11 +63,12 @@ public class DialogEventoDetailForm {
 		_dataInicio = dateFormat.format(evento.getDataInicio());
 		_dataFim = dateFormat.format(evento.getDataFim());
 		 
-		nomeLabel = new JLabel("Nome: " + evento.getNome());
-		localLabel = new JLabel("Local: " + evento.getLocal());
-		dataInicioLabel = new JLabel("Data de início: " + _dataInicio);
-		dataFimLabel = new JLabel("Data final: " + _dataFim);
-		esporteLabel = new JLabel("Esporte: " + evento.getEsporte());
+		
+		nomeLabel = factory.createJLabel("Nome: " + evento.getNome());
+		localLabel = factory.createJLabel("Local: " + evento.getLocal());
+		dataInicioLabel = factory.createJLabel("Data de início: " + _dataInicio);
+		dataFimLabel = factory.createJLabel("Data final: " + _dataFim);
+		esporteLabel = factory.createJLabel("Esporte: " + evento.getEsporte());
 		
 		panel.add(nomeLabel);
 		panel.add(localLabel);
@@ -79,11 +80,12 @@ public class DialogEventoDetailForm {
 		
 		buttonVerChave = factory.createButtonList("Ver chave");	
 		
+		
 		verificaChave = eventoController.buscaRelacionamentoComChave(idEvento);
 		if(verificaChave.size() > 0) {
-			dialog.add(buttonVerChave);
+			panel.add(buttonVerChave);
 		} else if(verificaChave.size() == 0) {
-			dialog.add(buttonGerarChave);
+			panel.add(buttonGerarChave);
 		}
 		
         dialog.add(panel);
