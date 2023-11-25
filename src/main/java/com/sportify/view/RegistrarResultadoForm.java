@@ -73,6 +73,7 @@ public class RegistrarResultadoForm extends JFrame {
         if (placarJaDefinido) {
             placarEquipeA.setText(String.valueOf(resultadoEquipeA));
         }
+        placarEquipeA.setDisabledTextColor(Color.BLACK);
         
         panel.add(placarEquipeA, constraints);
 
@@ -85,6 +86,7 @@ public class RegistrarResultadoForm extends JFrame {
 	    if (placarJaDefinido) {
 	        placarEquipeB.setText(String.valueOf(resultadoEquipeB));
 	    }
+	    placarEquipeB.setDisabledTextColor(Color.BLACK);
 	
 	    panel.add(placarEquipeB, constraints);
 
