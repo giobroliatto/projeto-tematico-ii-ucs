@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -122,8 +123,17 @@ public class ListagemEventoForm extends JFrame{
 					evento.setNome(nameAux);
 					evento.setLocal(localAux);
 					evento.setEsporte(esporteAux);
-
+					evento.setDataInicio(new Date());
+					evento.setDataFim(new Date());
+					
 					SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+					
+					try {
+						evento.setDataInicio(formato.parse(dataInicioAux));
+						evento.setDataFim(formato.parse(dataFimAux));
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
 					
 					new DialogEventoEditForm(menuForm, evento, eventoController);
 				}

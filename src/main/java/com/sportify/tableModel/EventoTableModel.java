@@ -39,9 +39,11 @@ public class EventoTableModel extends AbstractTableModel {
             case 2:
                 return evento.getLocal();
             case 3:
-                return formatDate(evento.getDataInicio());
+//                return formatDate(evento.getDataInicio());
+                return evento.getDataInicio();
             case 4:
-                return formatDate(evento.getDataInicio());
+//                return formatDate(evento.getDataInicio());
+                return evento.getDataFim();
             case 5:
                 return evento.getEsporte();
             default:
