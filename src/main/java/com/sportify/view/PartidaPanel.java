@@ -109,14 +109,18 @@ public class PartidaPanel extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                abrirDetalhesPartida(idEvento, equipeA, equipeB, idPartida, partidaController, chaveController, chaveForm);
+            	if (placarEquipeA == -1 && placarEquipeB == -1) {            		
+            		abrirDetalhesPartida(idEvento, equipeA, equipeB, idPartida, partidaController, chaveController, chaveForm, false, 0, 0);
+            	} else {
+            		abrirDetalhesPartida(idEvento, equipeA, equipeB, idPartida, partidaController, chaveController, chaveForm, true, placarEquipeA, placarEquipeB);
+            	}
             }
         });
     }
 
-    private void abrirDetalhesPartida(Long idEvento, String equipeA, String equipeB, Long idPartida, PartidaController partidaController, ChaveController chaveController, ChaveForm chaveForm) {
+    private void abrirDetalhesPartida(Long idEvento, String equipeA, String equipeB, Long idPartida, PartidaController partidaController, ChaveController chaveController, ChaveForm chaveForm, boolean placarJaDefinido, Integer resultadoEquipeA, Integer resultadoEquipeB) {
     	if (idPartida != null) {    		
-    		RegistrarResultadoForm registrarResultadoForm = new RegistrarResultadoForm(idEvento, equipeA, equipeB, idPartida, partidaController, chaveController, chaveForm);
+    		RegistrarResultadoForm registrarResultadoForm = new RegistrarResultadoForm(idEvento, equipeA, equipeB, idPartida, partidaController, chaveController, chaveForm, placarJaDefinido, resultadoEquipeA, resultadoEquipeB);
     		registrarResultadoForm.setVisible(true);
     		chaveForm.setVisible(false);
     	}

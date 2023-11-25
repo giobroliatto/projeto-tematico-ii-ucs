@@ -13,7 +13,7 @@ public class RegistrarResultadoForm extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
-    public RegistrarResultadoForm(Long idEvento, String equipeA, String equipeB, Long idPartida, PartidaController partidaController, ChaveController chaveController, ChaveForm chaveForm) {
+    public RegistrarResultadoForm(Long idEvento, String equipeA, String equipeB, Long idPartida, PartidaController partidaController, ChaveController chaveController, ChaveForm chaveForm, boolean placarJaDefinido, Integer resultadoEquipeA, Integer resultadoEquipeB) {
         setTitle("Registrar Resultado");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 250);
@@ -63,63 +63,92 @@ public class RegistrarResultadoForm extends JFrame {
         constraints.gridy = 3;
         constraints.gridwidth = 1;
         constraints.anchor = GridBagConstraints.WEST;
+        placarEquipeA.setEnabled(!placarJaDefinido);
+        
+        // Alimenta o valor se placarJaDefinido for true
+        if (placarJaDefinido) {
+            placarEquipeA.setText(String.valueOf(resultadoEquipeA));
+        }
+        
         panel.add(placarEquipeA, constraints);
 
         JTextField placarEquipeB = new JTextField(5);
         constraints.gridx = 1;
         constraints.anchor = GridBagConstraints.EAST;
-        panel.add(placarEquipeB, constraints);
+        placarEquipeB.setEnabled(!placarJaDefinido);
+
+	    // Alimenta o valor se placarJaDefinido for true
+	    if (placarJaDefinido) {
+	        placarEquipeB.setText(String.valueOf(resultadoEquipeB));
+	    }
+	
+	    panel.add(placarEquipeB, constraints);
 
         // Espaço abaixo dos inputs
         constraints.gridy++;
         panel.add(new JLabel(), constraints);
 
         // Botão "Confirmar"
-        JButton confirmarButton = new JButton("Confirmar");
-        constraints.gridx = 0;
-        constraints.gridwidth = 3;
-        constraints.anchor = GridBagConstraints.CENTER;
-        panel.add(confirmarButton, constraints);
+        if (!placarJaDefinido) {
+            JButton confirmarButton = new JButton("Confirmar");
+            constraints.gridx = 0;
+            constraints.gridwidth = 3;
+            constraints.anchor = GridBagConstraints.CENTER;
+            panel.add(confirmarButton, constraints);
+            
+            confirmarButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String placarEquipeAText = placarEquipeA.getText();
+                    String placarEquipeBText = placarEquipeB.getText();
+                    String validarEquipe;
+                    
+                    if (Integer.parseInt(placarEquipeAText) > Integer.parseInt(placarEquipeBText)) {
+                        validarEquipe = equipeA;
+                    } else if (Integer.parseInt(placarEquipeAText) < Integer.parseInt(placarEquipeBText)) {
+                        validarEquipe = equipeB;
+                    } else {
+                        JOptionPane.showMessageDialog(RegistrarResultadoForm.this, "A partida não pode terminar em empate. Por favor, insira um placar válido.");
+                        return;
+                    }
+
+                    String mensagem = "Confirma o resultado da partida?\n\n";
+                    mensagem += equipeA + "   " + placarEquipeAText + " x " + placarEquipeBText + "   " + equipeB + "\n\n";
+                    mensagem += "Equipe '" + validarEquipe + "' será a vencedora\n";
+                    mensagem += " ";
+
+                    int resposta = JOptionPane.showConfirmDialog(RegistrarResultadoForm.this, mensagem, "Confirmação de Resultado", JOptionPane.YES_NO_OPTION);
+
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        partidaController.atualizarPlacar(idPartida, Integer.parseInt(placarEquipeAText), Integer.parseInt(placarEquipeBText));
+                        JOptionPane.showMessageDialog(RegistrarResultadoForm.this, "Resultado confirmado!");
+                        placarEquipeA.setText("");
+                        placarEquipeB.setText("");
+                        setVisible(false);
+                        ChaveForm chaveForm = new ChaveForm(idEvento, partidaController, chaveController);
+                        chaveForm.setVisible(true);
+                    }
+                }
+            });
+        }
+
+        // Botão "Confirmar"
+        if (!placarJaDefinido) {
+            JButton confirmarButton = new JButton("Confirmar");
+            constraints.gridx = 0;
+            constraints.gridwidth = 3;
+            constraints.anchor = GridBagConstraints.CENTER;
+            panel.add(confirmarButton, constraints);
+        }
 
         // Botão "Retornar"
         JButton retornarButton = new JButton("Retornar");
         constraints.gridy++;
+        constraints.gridx = 0;
+        constraints.gridwidth = 3;
+        constraints.anchor = GridBagConstraints.CENTER;
         panel.add(retornarButton, constraints);
 
-        confirmarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String placarEquipeAText = placarEquipeA.getText();
-                String placarEquipeBText = placarEquipeB.getText();
-                String validarEquipe;
-                
-                if (Integer.parseInt(placarEquipeAText) > Integer.parseInt(placarEquipeBText)) {
-                    validarEquipe = equipeA;
-                } else if (Integer.parseInt(placarEquipeAText) < Integer.parseInt(placarEquipeBText)) {
-                    validarEquipe = equipeB;
-                } else {
-                    JOptionPane.showMessageDialog(RegistrarResultadoForm.this, "A partida não pode terminar em empate. Por favor, insira um placar válido.");
-                    return;
-                }
-
-                String mensagem = "Confirma o resultado da partida?\n\n";
-                mensagem += equipeA + "   " + placarEquipeAText + " x " + placarEquipeBText + "   " + equipeB + "\n\n";
-                mensagem += "Equipe '" + validarEquipe + "' será a vencedora\n";
-                mensagem += " ";
-
-                int resposta = JOptionPane.showConfirmDialog(RegistrarResultadoForm.this, mensagem, "Confirmação de Resultado", JOptionPane.YES_NO_OPTION);
-
-                if (resposta == JOptionPane.YES_OPTION) {
-                    partidaController.atualizarPlacar(idPartida, Integer.parseInt(placarEquipeAText), Integer.parseInt(placarEquipeBText));
-                    JOptionPane.showMessageDialog(RegistrarResultadoForm.this, "Resultado confirmado!");
-                    placarEquipeA.setText("");
-                    placarEquipeB.setText("");
-                    setVisible(false);
-                    ChaveForm chaveForm = new ChaveForm(idEvento, partidaController, chaveController);
-                    chaveForm.setVisible(true);
-                }
-            }
-        });
         
         retornarButton.addActionListener(new ActionListener() {
             @Override
