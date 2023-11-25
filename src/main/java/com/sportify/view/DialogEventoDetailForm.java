@@ -53,7 +53,7 @@ public class DialogEventoDetailForm {
 		factory = new FactoryComponents();
 		
 		dialog = factory.createJDialog(menuForm, "Detalhar evento");
-		dialog.setSize(500, 250);
+		dialog.setSize(380, 250);
 		dialog.setLayout(new FlowLayout());
 		
 		panel = new JPanel(new GridLayout(0, 1));

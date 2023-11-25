@@ -33,7 +33,7 @@ public class MenuForm extends JFrame {
     	
         setTitle("SPORTIFY");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(350, 410);
+        setSize(350, 350);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
