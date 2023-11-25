@@ -18,7 +18,7 @@ public class RegistrarResultadoForm extends JFrame {
     public RegistrarResultadoForm(Long idEvento, String equipeA, String equipeB, Long idPartida, PartidaController partidaController, ChaveController chaveController, ChaveForm chaveForm, boolean placarJaDefinido, Integer resultadoEquipeA, Integer resultadoEquipeB) {
         setTitle("Registrar Resultado");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 350);
+        setSize(350, 290);
         setLocationRelativeTo(null);
         
         factory = new FactoryComponents();
