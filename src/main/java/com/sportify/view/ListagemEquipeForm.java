@@ -97,7 +97,7 @@ public class ListagemEquipeForm extends JFrame {
             		idAux = table.getValueAt(table.getSelectedRow(), 0).toString();
             		nameAux = table.getValueAt(table.getSelectedRow(), 1).toString();
             		
-            		DialogEquipeEditForm editDialog = new DialogEquipeEditForm(menuForm, idAux, nameAux, equipeController);
+            		new DialogEquipeEditForm(menuForm, idAux, nameAux, equipeController);
             	}
         	}
         });

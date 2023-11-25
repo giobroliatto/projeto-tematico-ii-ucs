@@ -20,7 +20,6 @@ import com.sportify.model.Evento;
 import com.sportify.util.FactoryComponents;
 
 public class DialogEventoDetailForm {
-	private MenuForm menuForm;
 	
 	private EventoController eventoController;
 	
@@ -47,7 +46,6 @@ public class DialogEventoDetailForm {
 	FactoryComponents factory;
 	
 	public DialogEventoDetailForm(MenuForm menuForm, Long idEvento, EventoController eventoController, PartidaController partidaController, ChaveController chaveController) {
-		this.menuForm = menuForm;
 		this.eventoController = eventoController;
 		
 		evento = this.eventoController.getEveto(idEvento);
@@ -77,8 +75,6 @@ public class DialogEventoDetailForm {
 		panel.add(dataFimLabel);
 		panel.add(esporteLabel);
 		
-		System.out.println(idEvento);
-		
 		buttonGerarChave = factory.createButtonList("Gerar chave");
 		
 		buttonVerChave = factory.createButtonList("Ver chave");	
@@ -102,7 +98,7 @@ public class DialogEventoDetailForm {
             }
         });
 		
-//		/* GERAR CHAVE */
+		/* GERAR CHAVE */
 		buttonGerarChave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String mensagemErro = chaveController.validateChaveByIdEvento(idEvento);

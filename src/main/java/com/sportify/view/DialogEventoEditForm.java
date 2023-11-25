@@ -3,7 +3,6 @@ package com.sportify.view;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -31,8 +30,6 @@ public class DialogEventoEditForm {
 	private String esporte;
 	private String validateFields;
 	
-	private EventoController eventoController;
-	
 	private JDialog dialog;
 	
 	private JButton buttonConfirmDialog;
@@ -48,7 +45,6 @@ public class DialogEventoEditForm {
 	private Date _dataInicio;
 	private Date _dataFim;
 	
-	
 	FactoryComponents factory;
 	
 	public DialogEventoEditForm(MenuForm menuForm, Evento fieldValues, EventoController eventoController) {
@@ -61,7 +57,6 @@ public class DialogEventoEditForm {
 		this.dataFim 	= fieldValues.getDataFim().toString();
 		this.esporte 	= fieldValues.getEsporte().toString();
 		
-		this.eventoController = eventoController;
 		
 		factory = new FactoryComponents();
 		
@@ -75,7 +70,7 @@ public class DialogEventoEditForm {
 		tfNome 		 = factory.createTextFieldDialog("Nome", this.nome);
 		tfLocal  	 = factory.createTextFieldDialog("Local", this.local);
 		tfDataInicio = factory.createDatePicker("Data de inicio", getDateFormatterLabel(this.dataInicio));
-		tfDataFim    = factory.createDatePicker("Data final", getDateFormatterLabel(this.dataInicio));
+		tfDataFim    = factory.createDatePicker("Data final", getDateFormatterLabel(this.dataFim));
 		tfEsporte	 = factory.createTextFieldDialog("Esporte", this.esporte);
 		
 		dialog.add(tfNome);
@@ -110,7 +105,6 @@ public class DialogEventoEditForm {
 					"ERRO", 
 					JOptionPane.ERROR_MESSAGE);
 				} else {
-					/* TESTAR PARA VER SE NAO VAI QUEBRAR ALGO DO BANCO DEVIDO AO FORMATO DAS DATAS */
 					eventoController.updateEvento(id, tfNome.getText(), local, _dataInicio, _dataFim, esporte);
 					JOptionPane.showMessageDialog(
 					menuForm, 
@@ -145,7 +139,7 @@ public class DialogEventoEditForm {
         int month = Integer.parseInt(unmaskedText.substring(4, 6));
         int day = Integer.parseInt(unmaskedText.substring(6, 8));
         
-        return LocalDate.of(year, month, month);
+        return LocalDate.of(year, month, day);
 		
 	}
 }

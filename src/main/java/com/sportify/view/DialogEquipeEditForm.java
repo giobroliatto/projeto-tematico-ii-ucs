@@ -10,14 +10,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.sportify.controller.EquipeController;
-import com.sportify.model.Equipe;
 import com.sportify.util.FactoryComponents;
 
 
 public class DialogEquipeEditForm {
 	private MenuForm menuForm;
 	
-	private String id;
 	private String name;
 	
 	private JButton buttonConfirmDialog;
@@ -29,13 +27,9 @@ public class DialogEquipeEditForm {
 	
 	private FactoryComponents factory;
 	
-	private EquipeController equipeController;
-	
 	public DialogEquipeEditForm(MenuForm menuForm, String id, String name, EquipeController equipeController) {
 		this.menuForm = menuForm;
-		this.id = id;
 		this.name = name;
-		this.equipeController = equipeController;
 		
 		factory = new FactoryComponents();
 	

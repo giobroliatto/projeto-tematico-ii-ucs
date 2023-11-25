@@ -4,8 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -39,8 +40,6 @@ public class ListagemEventoForm extends JFrame{
 	private String dataFimAux;
 	private String esporteAux;
 	
-	private ArrayList<Evento> eventoValues = new ArrayList<Evento>();
-	
 	private List<Long> relacionamentos;
 	
 	private Evento evento = new Evento();
@@ -57,9 +56,7 @@ public class ListagemEventoForm extends JFrame{
 	private JButton buttonVoltar;
 	private JButton buttonDetalhar;
 	
-	private DialogEventoEditForm editDialog;
 	private DialogEventoRemoveForm removeDialog;
-	private DialogEventoDetailForm detailDialog;
 	
 	List<Evento> listEventos = new ArrayList<>();
 	
@@ -124,11 +121,11 @@ public class ListagemEventoForm extends JFrame{
 					evento.setId(Long.parseLong(idAux));
 					evento.setNome(nameAux);
 					evento.setLocal(localAux);
-					evento.setDataInicio(new Date());
-					evento.setDataFim(new Date());
 					evento.setEsporte(esporteAux);
 
-					editDialog = new DialogEventoEditForm(menuForm, evento, eventoController);
+					SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+					
+					new DialogEventoEditForm(menuForm, evento, eventoController);
 				}
 			}
 		});
@@ -172,7 +169,7 @@ public class ListagemEventoForm extends JFrame{
     				JOptionPane.ERROR_MESSAGE);
 				} else {
 					idAux = table.getValueAt(table.getSelectedRow(), 0).toString();
-					detailDialog = new DialogEventoDetailForm(menuForm, Long.parseLong(idAux), eventoController, partidaController, chaveController);
+					new DialogEventoDetailForm(menuForm, Long.parseLong(idAux), eventoController, partidaController, chaveController);
 				}
 			}
 		});

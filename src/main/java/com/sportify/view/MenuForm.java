@@ -33,41 +33,41 @@ public class MenuForm extends JFrame {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // Título
+        /* TÍTULO */
         JLabel titleLabel = new JLabel("SPORTIFY");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(titleLabel);
-        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Espaçamento
+        panel.add(Box.createRigidArea(new Dimension(0, 20))); /* ESPAÇAMENTO */
 
-        // Seção "Cadastros"
+        /* SEÇÃO CADASTROS */
         JLabel cadastrosLabel = new JLabel("Cadastros");
         cadastrosLabel.setFont(new Font("Arial", Font.BOLD, 16));
         cadastrosLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(cadastrosLabel);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); /* ESPAÇAMENTO */
 
         cadastrarEquipeButton = new JButton("Cadastrar equipe");
         cadastrarEquipeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(cadastrarEquipeButton);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); /* ESPAÇAMENTO */
 
         cadastrarEventoButton = new JButton("Cadastrar evento");
         cadastrarEventoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(cadastrarEventoButton);
-        panel.add(Box.createRigidArea(new Dimension(0, 20))); // Espaçamento
+        panel.add(Box.createRigidArea(new Dimension(0, 20))); /* ESPAÇAMENTO */
 
-        // Seção "Listagens"
+        /* SEÇÃO LISTAGENS */
         JLabel listagemLabel = new JLabel("Listagens");
         listagemLabel.setFont(new Font("Arial", Font.BOLD, 16));
         listagemLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(listagemLabel);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); /* ESPAÇAMENTO */
 
         listarEquipesButton = new JButton("Listar equipes");
         listarEquipesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(listarEquipesButton);
-        panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espaçamento
+        panel.add(Box.createRigidArea(new Dimension(0, 10))); /* ESPAÇAMENTO */
 
         listarEventosButton = new JButton("Listar eventos");
         listarEventosButton.setAlignmentX(Component.CENTER_ALIGNMENT);
