@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/icon.svg" width="72" alt="Logo do Sportify" />
+
 # Sportify
 
 **Aplicação desktop para organizar torneios eliminatórios, feita com Java Swing, Hibernate e PostgreSQL.**

@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/icon.svg" width="72" alt="Sportify logo" />
+
 # Sportify
 
 **Desktop app for organizing knockout tournaments, built with Java Swing, Hibernate and PostgreSQL.**
