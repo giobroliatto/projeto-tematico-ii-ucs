@@ -62,8 +62,8 @@ view (Swing)  →  controller  →  DAO  →  Hibernate  →  PostgreSQL
 Requirements: JDK 11+, Maven and PostgreSQL.
 
 ```bash
-git clone https://github.com/giobroliatto/projeto-tematico-ii-ucs.git
-cd projeto-tematico-ii-ucs
+git clone https://github.com/giobroliatto/sportify.git
+cd sportify
 
 # Create the database and tables
 createdb sportify
