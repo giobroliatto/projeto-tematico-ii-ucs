@@ -12,6 +12,8 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-C71A36?logo=apachemaven&logoColor=white)
 
+[![MIT License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 </div>
 
 **English** · [Português](README.pt-BR.md)
@@ -100,6 +102,12 @@ src/main/java/com/sportify/
 └── view/              # Forms, listings, bracket and results
 postgresql.sql         # Database schema
 ```
+
+---
+
+## License
+
+[MIT](LICENSE)
 
 ---
 
