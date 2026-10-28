@@ -121,19 +121,3 @@ INSERT INTO equipes_eventos (idEquipe, idEvento, dataInicio, dataFim) VALUES
 INSERT INTO equipes_eventos (idEquipe, idEvento, dataInicio, dataFim) VALUES
     (1, 4, '2023-10-26', '2023-10-30'),
     (2, 4, '2023-10-26', '2023-10-30');
-
-select * from eventos;
-
-select * from equipes;
-
-select * from equipes_eventos;
-
-select * from partidas;
-
-select * from chaves;
-
-drop table equipes_eventos;
-drop table partidas;
-drop table chaves;
-drop table equipes;
-drop table eventos;
