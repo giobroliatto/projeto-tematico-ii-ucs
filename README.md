@@ -19,6 +19,8 @@
 > [!NOTE]
 > Built as a team for the **Projeto Temático II** course at the [Universidade de Caxias do Sul](https://www.ucs.br/) (UCS) in 2023. The UI and code are in Portuguese.
 
+![Sportify bracket view for a 16-team event, with winners highlighted in green](docs/bracket.png)
+
 ---
 
 ## About
@@ -33,6 +35,14 @@ Sportify helps organize sports tournaments in a single-elimination format. You r
 - **Bracket draw:** teams are shuffled and paired up, and the first matches are created in the right round (round of 16, quarterfinals, semifinals or final, depending on the event size).
 - **Results:** scores are entered match by match, draws are rejected, and once a pair of matches is decided the next-round match is created automatically.
 - **Bracket view** showing every round of the event.
+
+<table>
+<tr>
+<td width="33%" align="center"><img src="docs/menu.png" alt="Main menu" /><p><sub>Main menu</sub></p></td>
+<td width="33%" align="center"><img src="docs/new-event.png" alt="Creating an event" /><p><sub>Creating an event</sub></p></td>
+<td width="33%" align="center"><img src="docs/match-result.png" alt="Entering a match result" /><p><sub>Entering a match result</sub></p></td>
+</tr>
+</table>
 
 ## Architecture
 
@@ -65,7 +75,7 @@ Requirements: JDK 11+, Maven and PostgreSQL.
 git clone https://github.com/giobroliatto/sportify.git
 cd sportify
 
-# Create the database and tables
+# Create the database, the tables and sample data
 createdb sportify
 psql -d sportify -f postgresql.sql
 ```

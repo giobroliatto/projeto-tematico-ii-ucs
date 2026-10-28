@@ -19,6 +19,8 @@
 > [!NOTE]
 > Projeto feito em equipe para a disciplina de **Projeto Temático II** da [Universidade de Caxias do Sul](https://www.ucs.br/) (UCS), em 2023.
 
+![Chave do Sportify para um evento de 16 equipes, com os vencedores destacados em verde](docs/bracket.png)
+
 ---
 
 ## Sobre
@@ -33,6 +35,14 @@ O Sportify ajuda a organizar torneios esportivos no formato mata-mata. O usuári
 - **Sorteio da chave:** as equipes são embaralhadas e emparelhadas, e as primeiras partidas são criadas na fase certa (oitavas, quartas, semifinal ou final, conforme o tamanho do evento).
 - **Resultados:** o placar é registrado partida a partida, empates são recusados e, quando um par de partidas se resolve, a partida da fase seguinte é criada automaticamente.
 - **Visualização da chave** com todas as fases do evento.
+
+<table>
+<tr>
+<td width="33%" align="center"><img src="docs/menu.png" alt="Menu principal" /><p><sub>Menu principal</sub></p></td>
+<td width="33%" align="center"><img src="docs/new-event.png" alt="Cadastro de evento" /><p><sub>Cadastro de evento</sub></p></td>
+<td width="33%" align="center"><img src="docs/match-result.png" alt="Registro de resultado" /><p><sub>Registro de resultado</sub></p></td>
+</tr>
+</table>
 
 ## Arquitetura
 
@@ -65,7 +75,7 @@ Pré-requisitos: JDK 11+, Maven e PostgreSQL.
 git clone https://github.com/giobroliatto/sportify.git
 cd sportify
 
-# Cria o banco e as tabelas
+# Cria o banco, as tabelas e dados de exemplo
 createdb sportify
 psql -d sportify -f postgresql.sql
 ```
